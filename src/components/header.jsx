@@ -1,8 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import { AlignJustifyIcon } from "lucide-react";
 
-import { Button } from "./ui/button";
 import { useMediaQuery } from "@/hooks";
+
+import { Button } from "./ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 
 export default function Header() {
