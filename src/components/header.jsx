@@ -1,9 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { AlignJustifyIcon } from "lucide-react";
 
-import { useMediaQuery } from "@/hooks";
-
 import { Button } from "./ui/button";
+import { useMediaQuery } from "@/hooks";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 
 export default function Header() {
@@ -60,7 +59,7 @@ const links = [
   },
   {
     id: "kalkulator",
-    path: "/kalculator",
+    path: "/kalkulator",
     name: "Kalkulator",
   },
   {
