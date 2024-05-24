@@ -5,6 +5,7 @@ import ForumPage from "@/pages/forum/forum-page";
 import AboutPage from "@/pages/about/about-page";
 import LoginPage from "@/pages/login/login-page";
 import RegisterPage from "@/pages/register/register-page";
+import ArticlePage from "./pages/article/article-page";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/forum" element={<ForumPage />} />
         <Route path="/tentang" element={<AboutPage />} />
+        <Route path="/artikel" element={<ArticlePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
