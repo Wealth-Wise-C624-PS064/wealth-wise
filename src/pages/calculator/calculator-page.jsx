@@ -5,7 +5,7 @@ function CalculatorPage() {
   return (
     <BaseLayout>
       <div>
-        <Link to="kalkulator/investasi">Kalkulator Investasi</Link>
+        <Link to="/kalkulator/investasi">Kalkulator Investasi</Link>
         <Link to="/kalkulator/dana-pensiun">Dana Pensiun</Link>
         <Link to="/kalkulator/dana-darurat">Dana Darurat</Link>
       </div>
