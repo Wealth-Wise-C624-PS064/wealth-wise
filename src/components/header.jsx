@@ -59,7 +59,7 @@ const links = [
   },
   {
     id: "kalkulator",
-    path: "/kalculator",
+    path: "/kalkulator",
     name: "Kalkulator",
   },
   {
