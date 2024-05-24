@@ -27,6 +27,7 @@ module.exports = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          blue: "rgba(44, 156, 242, 1)",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -73,6 +74,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    fontFamily: {
+      sans: ["Plus Jakarta Sans Variable", "sans-serif"],
+    },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
