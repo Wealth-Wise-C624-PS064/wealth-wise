@@ -3,6 +3,18 @@ import content from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 export default function ArticlePage() {
+  const tipsMenabungData = content.filter(
+    (data) => data.category === "tips-menabung"
+  );
+
+  const dasarInvestasiData = content.filter(
+    (data) => data.category === "dasar-investasi"
+  );
+  const lifestyleData = content.filter((data) => data.category === "lifestyle");
+
+  const rumahTanggaData = content.filter(
+    (data) => data.category === "rumah-tangga"
+  );
   return (
     <BaseLayout>
       <section className="bg-primary-blue">
@@ -26,30 +38,135 @@ export default function ArticlePage() {
         </div>
       </section>
       <section className="max-w-6xl px-4 mx-auto my-20">
-        <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {content.map((data) => (
-            <div
-              key={data.id}
-              className="p-4 border min-h-[300px] rounded-lg shadow-md flex flex-col justify-between"
-            >
-              <div>
-                <h1 className="text-lg font-bold">{data.title}</h1>
-                <p className="line-clamp-3 mt-3 text-gray-700">{data.desc}</p>
-              </div>
-              <div className="mt-4 w-full flex flex-col justify-center items-center">
-                <Link
-                  to={`${data.link}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full"
+        <div className="flex flex-col space-y-12">
+          <div>
+            <h1 className="font-semibold text-xl mb-4">Tips Menabung</h1>
+            <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {tipsMenabungData.map((data) => (
+                <div
+                  key={data.id}
+                  className="p-4 border min-h-[300px] rounded-lg shadow-md flex flex-col justify-between"
                 >
-                  <Button className="font-semibold w-full bg-primary-blue hover:bg-primary-blue/80">
-                    Baca Selengkapnya
-                  </Button>
-                </Link>
-              </div>
+                  <div>
+                    <h1 className="text-lg font-bold">{data.title}</h1>
+                    <p className="line-clamp-3 mt-3 text-gray-700">
+                      {data.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 w-full flex flex-col justify-center items-center">
+                    <Link
+                      to={`${data.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <Button className="font-semibold w-full bg-primary-blue hover:bg-primary-blue/80">
+                        Baca Selengkapnya
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* dasar investasi */}
+          <div>
+            <h1 className="font-semibold text-xl mb-4">Dasar Investasi</h1>
+            <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {dasarInvestasiData.map((data) => (
+                <div
+                  key={data.id}
+                  className="p-4 border min-h-[300px] rounded-lg shadow-md flex flex-col justify-between"
+                >
+                  <div>
+                    <h1 className="text-lg font-bold">{data.title}</h1>
+                    <p className="line-clamp-3 mt-3 text-gray-700">
+                      {data.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 w-full flex flex-col justify-center items-center">
+                    <Link
+                      to={`${data.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <Button className="font-semibold w-full bg-primary-blue hover:bg-primary-blue/80">
+                        Baca Selengkapnya
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* lifestyle */}
+          <div>
+            <h1 className="font-semibold text-xl mb-4">Gaya Hidup</h1>
+            <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {lifestyleData.map((data) => (
+                <div
+                  key={data.id}
+                  className="p-4 border min-h-[300px] rounded-lg shadow-md flex flex-col justify-between"
+                >
+                  <div>
+                    <h1 className="text-lg font-bold">{data.title}</h1>
+                    <p className="line-clamp-3 mt-3 text-gray-700">
+                      {data.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 w-full flex flex-col justify-center items-center">
+                    <Link
+                      to={`${data.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <Button className="font-semibold w-full bg-primary-blue hover:bg-primary-blue/80">
+                        Baca Selengkapnya
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* rumah tangga */}
+          <div>
+            <h1 className="font-semibold text-xl mb-4">
+              Keuangan Rumah Tangga
+            </h1>
+            <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {rumahTanggaData.map((data) => (
+                <div
+                  key={data.id}
+                  className="p-4 border min-h-[300px] rounded-lg shadow-md flex flex-col justify-between"
+                >
+                  <div>
+                    <h1 className="text-lg font-bold">{data.title}</h1>
+                    <p className="line-clamp-3 mt-3 text-gray-700">
+                      {data.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 w-full flex flex-col justify-center items-center">
+                    <Link
+                      to={`${data.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <Button className="font-semibold w-full bg-primary-blue hover:bg-primary-blue/80">
+                        Baca Selengkapnya
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </BaseLayout>
