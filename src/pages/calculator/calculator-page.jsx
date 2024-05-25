@@ -1,5 +1,10 @@
 import BaseLayout from "@/layouts/base-layout";
 import { Link, Outlet } from "react-router-dom";
+import {
+  FaMoneyBillTrendUp,
+  FaPersonCane,
+  FaTriangleExclamation,
+} from "react-icons/fa6";
 
 function CalculatorPage() {
   return (
@@ -32,10 +37,27 @@ function CalculatorPage() {
           </div>
         </div>
       </section>
-      <section className="max-w-6xl mx-auto px-4">
-        <Link to="/kalkulator/investasi">Kalkulator Investasi</Link>
-        <Link to="/kalkulator/dana-pensiun">Dana Pensiun</Link>
-        <Link to="/kalkulator/dana-darurat">Dana Darurat</Link>
+      <section className="max-w-6xl mx-auto px-3 flex pt-8">
+        <div className="flex space-x-2">
+          <Link to="/kalkulator/investasi">
+            <div className="border-2 border-primary-blue rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
+              <FaMoneyBillTrendUp className="text-4xl pb-1" />
+              <p className="text-base font-bold text-center">Investasi</p>
+            </div>
+          </Link>
+          <Link to="/kalkulator/dana-pensiun">
+            <div className="border-2 border-primary-blue rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
+              <FaTriangleExclamation className="text-4xl pb-1" />
+              <p className="text-base font-bold text-center">Dana Darurat</p>
+            </div>
+          </Link>
+          <Link to="/kalkulator/dana-darurat">
+            <div className="border-2 border-primary-blue rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
+              <FaPersonCane className="text-4xl pb-1" />
+              <p className="text-base font-bold text-center">Dana Pensiun</p>
+            </div>
+          </Link>
+        </div>
       </section>
       <section className="max-w-6xl mx-auto px-4">
         <Outlet />
