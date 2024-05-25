@@ -3,11 +3,15 @@ import { Drawer as DrawerPrimitive } from "vaul";
 
 import { cn } from "@/lib/utils";
 
+const DrawContext = React.createContext({});
+
 const Drawer = ({ shouldScaleBackground = true, ...props }) => (
-  <DrawerPrimitive.Root
-    shouldScaleBackground={shouldScaleBackground}
-    {...props}
-  />
+  <DrawContext.Provider value={{ direction: props.direction }}>
+    <DrawerPrimitive.Root
+      shouldScaleBackground={shouldScaleBackground}
+      {...props}
+    />
+  </DrawContext.Provider>
 );
 Drawer.displayName = "Drawer";
 
@@ -27,22 +31,31 @@ const DrawerOverlay = React.forwardRef(({ className, ...props }, ref) => (
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const DrawerContent = React.forwardRef(
-  ({ className, children, ...props }, ref) => (
-    <DrawerPortal>
-      <DrawerOverlay />
-      <DrawerPrimitive.Content
-        ref={ref}
-        className={cn(
-          "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
-          className
-        )}
-        {...props}
-      >
-        <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
-        {children}
-      </DrawerPrimitive.Content>
-    </DrawerPortal>
-  )
+  ({ className, children, ...props }, ref) => {
+    const { direction } = React.useContext(DrawContext);
+
+    return (
+      <DrawerPortal>
+        <DrawerOverlay />
+        <DrawerPrimitive.Content
+          ref={ref}
+          className={cn(
+            "fixed z-50 flex h-auto flex-col border bg-background",
+            (!direction || direction === "bottom") &&
+              "inset-x-0 bottom-0 mt-24",
+            direction === "right" && "top-0 right-0 w-screen max-w-80 h-full",
+            className
+          )}
+          {...props}
+        >
+          {(!direction || direction === "bottom") && (
+            <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+          )}
+          {children}
+        </DrawerPrimitive.Content>
+      </DrawerPortal>
+    );
+  }
 );
 DrawerContent.displayName = "DrawerContent";
 
