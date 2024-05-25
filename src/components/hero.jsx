@@ -30,7 +30,7 @@ export default function Hero() {
           src="assets/financial-freedom.svg"
           alt="financial-freedom"
           loading="lazy"
-          className="object-cover w-[500px] md:w-[600px] h-fit"
+          className="object-cover w-[500px] md:w-[780px] h-fit"
         />
       </div>
     </section>
