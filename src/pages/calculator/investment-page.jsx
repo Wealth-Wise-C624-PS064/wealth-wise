@@ -1,11 +1,5 @@
-import BaseLayout from "@/layouts/base-layout";
-
 function InvestmentPage() {
-  return (
-    <BaseLayout>
-      <div>InvestmentPage</div>
-    </BaseLayout>
-  );
+  return <div>Investment Page</div>;
 }
 
 export default InvestmentPage;

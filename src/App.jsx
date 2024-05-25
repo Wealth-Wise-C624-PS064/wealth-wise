@@ -15,8 +15,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/kalkulator">
-          <Route index={true} element={<CalculatorPage />} />
+        <Route path="/kalkulator" element={<CalculatorPage />}>
           <Route path="investasi" element={<InvestmentPage />} />
           <Route path="dana-pensiun" element={<PensionFundPage />} />
           <Route path="dana-darurat" element={<EmergencyFundPage />} />
