@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 
 function CalculatorPage() {
   return (
-    <BaseLayout>
+   <BaseLayout>
       <section className="bg-primary-blue ">
         <div className="flex flex-col items-center justify-center h-full max-w-6xl px-4 md:px-16 py-12 mx-auto md:gap-20 md:flex-row min-h-96">
           <div className="space-y-4">
