@@ -1,11 +1,5 @@
-import BaseLayout from "@/layouts/base-layout";
-
 function PensionFundPage() {
-  return (
-    <BaseLayout>
-      <div>Pension Fund Page</div>
-    </BaseLayout>
-  );
+  return <div>Pension Fund Page</div>;
 }
 
 export default PensionFundPage;
