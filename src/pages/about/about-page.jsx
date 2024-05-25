@@ -124,7 +124,7 @@ export default function AboutPage() {
               <div className="p-4 space-y-3">
                 <div>
                   <h3 className="font-semibold">Nelan</h3>
-                  <h4 className="prose">Fullstuk Developer</h4>
+                  <h4 className="prose">Fullstack Developer</h4>
                 </div>
                 <div className="font-medium">STT Terpadu Nurul Fikri</div>
                 <div className="flex space-x-3">

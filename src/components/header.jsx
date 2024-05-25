@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { AlignJustifyIcon } from "lucide-react";
+import { AlignJustifyIcon, XIcon } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { useMediaQuery } from "@/hooks";
@@ -43,7 +43,34 @@ export default function Header() {
                 <AlignJustifyIcon className="w-5 h-5" />
               </Button>
             </DrawerTrigger>
-            <DrawerContent>Hello</DrawerContent>
+            <DrawerContent className="p-4">
+              <DrawerTrigger className="text-right">
+                <Button size="icon" variant="outline">
+                  <XIcon className="w-5 h-5" />
+                </Button>
+              </DrawerTrigger>
+              <div className="flex flex-col gap-4">
+                {links.map((link) => (
+                  <NavLink
+                    key={link.id}
+                    to={`${link.path}`}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-primary-blue font-semibold"
+                        : "font-semibold hover:text-primary-blue transition-all duration-150"
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                ))}
+                <Button
+                  asChild
+                  className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
+                >
+                  <Link to="/login">Masuk</Link>
+                </Button>
+              </div>
+            </DrawerContent>
           </Drawer>
         )}
       </nav>
