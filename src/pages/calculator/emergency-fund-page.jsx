@@ -10,6 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useState } from "react";
+import useInput from "@/hooks/useInput";
+import { toRupiah } from "@/lib/toRupiah";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -44,6 +47,35 @@ const descFormulaHandler = (event) => {
 };
 
 function EmergencyFundPage() {
+  // Menyimpan status pengguna (menikah/belum menikah)
+  const [status, setStatus] = useState("");
+  // Menyimpan tanggungan pengguna (punya/tidak punya)
+  const [dependents, setDependents] = useState("");
+  // Menyimpan pengeluaran bulanan pengguna
+  const [monthlyExpenses, onChangeMonthlyExpensesHandler] = useInput("");
+  // Menyimpan hasil perhitungan dana darurat
+  const [emergencyFund, setEmergencyFund] = useState(null);
+
+  const calculateEmergencyFund = (event) => {
+    event.preventDefault();
+    let fundMultiplier = 0;
+    // Set the fundMultiplier based on status and dependents
+    if (status === "belumMenikah" && dependents === "tidakPunya") {
+      fundMultiplier = 6;
+    } else if (status === "belumMenikah" && dependents === "punya") {
+      fundMultiplier = 9;
+    } else if (status === "sudahMenikah" && dependents === "tidakPunya") {
+      fundMultiplier = 9;
+    } else if (status === "sudahMenikah" && dependents === "punya") {
+      fundMultiplier = 12;
+    }
+
+    // Calculating emergencyFund
+    const emergencyFundAmount = monthlyExpenses * fundMultiplier;
+
+    setEmergencyFund(emergencyFundAmount);
+  };
+
   return (
     <div className="sm:border-2 p-4 sm:p-8 lg:p-16 rounded-2xl mb-8">
       <h1 className="text-2xl font-bold mb-8">
@@ -56,10 +88,26 @@ function EmergencyFundPage() {
             Apa status Anda?
           </label>
           <div className="flex items-center">
-            <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setStatus("belumMenikah");
+              }}
+              className={`px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ${
+                status === "belumMenikah" ? "bg-blue-800" : "bg-primary-blue"
+              }`}
+            >
               Tidak/ Belum Menikah
             </button>
-            <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setStatus("sudahMenikah");
+              }}
+              className={`px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ${
+                status === "sudahMenikah" ? "bg-blue-800" : "bg-primary-blue"
+              }`}
+            >
               Sudah Menikah
             </button>
           </div>
@@ -71,10 +119,26 @@ function EmergencyFundPage() {
             ataupun kerabat?
           </label>
           <div className="flex items-center">
-            <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setDependents("tidakPunya");
+              }}
+              className={`px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ${
+                dependents === "tidakPunya" ? "bg-blue-800" : "bg-primary-blue"
+              }`}
+            >
               Tidak/ Belum Punya
             </button>
-            <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setDependents("punya");
+              }}
+              className={`px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 ${
+                dependents === "punya" ? "bg-blue-800" : "bg-primary-blue"
+              }`}
+            >
               Punya
             </button>
           </div>
@@ -88,6 +152,8 @@ function EmergencyFundPage() {
             <p className="font-bold text-xl mr-4">Rp</p>
             <input
               type="text"
+              value={monthlyExpenses}
+              onChange={onChangeMonthlyExpensesHandler}
               placeholder="Contoh: 3.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
@@ -95,7 +161,10 @@ function EmergencyFundPage() {
         </div>
 
         <div className="mb-4">
-          <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-4">
+          <button
+            onClick={calculateEmergencyFund}
+            className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-4"
+          >
             Hitung
           </button>
           <button
@@ -107,9 +176,11 @@ function EmergencyFundPage() {
         </div>
       </form>
 
-      <h1 className="font-bold text-2xl mb-12">
-        Dana Darurat Minimal Anda adalah Rp 18.000.000{" "}
-      </h1>
+      {emergencyFund && (
+        <h1 className="font-bold text-2xl mb-12">
+          Dana Darurat Minimal Anda adalah {toRupiah(emergencyFund.toFixed(2))}
+        </h1>
+      )}
 
       <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-8">
         Simpan ke Tabel

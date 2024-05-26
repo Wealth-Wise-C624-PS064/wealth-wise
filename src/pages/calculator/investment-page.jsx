@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import useInput from "@/hooks/useInput";
+import { toRupiah } from "@/lib/toRupiah";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -58,13 +59,6 @@ function InvestmentPage() {
   const [annualReturn, onChangeAnnualReturnHandler] = useInput("");
   const [years, onChangeYearsHandler] = useInput("");
   const [futureValue, setFutureValue] = useState(null);
-
-  const toRupiah = (number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    }).format(number);
-  };
 
   const calculateFutureValue = (event) => {
     event.preventDefault();
