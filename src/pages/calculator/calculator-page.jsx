@@ -47,7 +47,7 @@ function CalculatorPage() {
               </p>
             </div>
           </Link>
-          <Link to="/kalkulator/dana-pensiun">
+          <Link to="/kalkulator/dana-darurat">
             <div className="border-2 border-black  rounded-2xl w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40 flex flex-col items-center justify-center px-1 md:px-4">
               <FaTriangleExclamation className="text-4xl md:text-5xl lg:text-6xl pb-1" />
               <p className="text-base md:text-lg lg:text-xl font-bold text-center">
@@ -55,7 +55,7 @@ function CalculatorPage() {
               </p>
             </div>
           </Link>
-          <Link to="/kalkulator/dana-darurat">
+          <Link to="/kalkulator/dana-pensiun">
             <div className="border-2 border-black  rounded-2xl w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40 flex flex-col items-center justify-center px-1 md:px-4">
               <FaPersonCane className="text-4xl md:text-5xl lg:text-6xl pb-1" />
               <p className="text-base md:text-lg lg:text-xl font-bold text-center">
