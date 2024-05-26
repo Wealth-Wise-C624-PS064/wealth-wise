@@ -8,9 +8,9 @@ import {
 
 function CalculatorPage() {
   return (
-   <BaseLayout>
+    <BaseLayout>
       <section className="bg-primary-blue ">
-        <div className="flex flex-col items-center justify-center h-full max-w-6xl px-4 md:px-16 py-12 mx-auto md:gap-20 md:flex-row min-h-96">
+        <div className="mx-auto flex flex-col items-center justify-center h-full max-w-6xl px-4 md:px-16 py-12 md:gap-20 md:flex-row min-h-96">
           <div className="space-y-4">
             <h2 className="text-5xl font-bold leading-snug text-white xl:text-6xl">
               Kalkulator
@@ -38,21 +38,21 @@ function CalculatorPage() {
         </div>
       </section>
       <section className="max-w-6xl mx-auto px-3 flex pt-8">
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 mb-8 mx-auto">
           <Link to="/kalkulator/investasi">
-            <div className="border-2 border-primary-blue rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
+            <div className="border-2 border-black  rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
               <FaMoneyBillTrendUp className="text-4xl pb-1" />
               <p className="text-base font-bold text-center">Investasi</p>
             </div>
           </Link>
           <Link to="/kalkulator/dana-pensiun">
-            <div className="border-2 border-primary-blue rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
+            <div className="border-2 border-black  rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
               <FaTriangleExclamation className="text-4xl pb-1" />
               <p className="text-base font-bold text-center">Dana Darurat</p>
             </div>
           </Link>
           <Link to="/kalkulator/dana-darurat">
-            <div className="border-2 border-primary-blue rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
+            <div className="border-2 border-black rounded-2xl w-28 h-28 flex flex-col items-center justify-center px-1">
               <FaPersonCane className="text-4xl pb-1" />
               <p className="text-base font-bold text-center">Dana Pensiun</p>
             </div>
