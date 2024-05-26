@@ -18,28 +18,31 @@ const descFormulaHandler = (event) => {
     background: "rgba(255,255,255, 0.95)",
     backdrop: `rgba(42,157,242,0.4)`,
     confirmButtonColor: "#16db3d",
-    title: `<strong>Formula Hitung <span style="color:#2A9DF2;">Investasi</span></strong>`,
+    title: `<strong>Formula Hitung <span style="color:#2A9DF2;">Dana Pensiun</span></strong>`,
     icon: "info",
     html: `
       <b>
-      Total = A + B
-      </b>
-      <br />
-      <br />
-      <b>
-      A: Future Value dari Aset Awal
+      Pertama, ketahui M sebagai Future Value dari Pengeluaran Bulanan
       </b>
       <h2>
-      A = P (1 + <sup>r</sup>&frasl;<sub>12</sub>)<sup>12t</sup>
+      M = P * (1 + i)<sup>t</sup>
+      </h2>
+      
+      <br />
+      <b>
+      Kedua, ketahui Y sebagai Pengeluaran Tahunan
+      </b>
+      <h2>
+      Y = M * 12 
       </h2>
 
       <br />
 
       <b>
-      B: Future Value dari Tabungan Bulanan
+      Berdasarkan Aturan 4% Rule, maka
       </b>
       <h2>
-      B = PMT  * ((1 + <sup>r</sup>&frasl;<sub>12</sub>)<sup>12t</sup> - 1)/ (<sup>r</sup>&frasl;<sub>12</sub>)
+      Dana Pensiun = [100/(r- i)] * Y  
       </h2>
       
       `,
@@ -147,9 +150,9 @@ function PensionFundPage() {
             <TableRow>
               <TableHead className="w-[100px]">No.</TableHead>
               <TableHead>P</TableHead>
-              <TableHead>PMT</TableHead>
-              <TableHead>r</TableHead>
               <TableHead>t</TableHead>
+              <TableHead>i</TableHead>
+              <TableHead>r</TableHead>
               <TableHead className="text-right">Hasil</TableHead>
             </TableRow>
           </TableHeader>
@@ -157,10 +160,10 @@ function PensionFundPage() {
             <TableRow>
               <TableCell className="font-medium">1</TableCell>
               <TableCell>Rp 5.000.000</TableCell>
-              <TableCell>Rp 1.000.000</TableCell>
-              <TableCell>5%</TableCell>
               <TableCell>2 tahun</TableCell>
-              <TableCell className="text-right">Rp 52.556.993</TableCell>
+              <TableCell>7%</TableCell>
+              <TableCell>4%</TableCell>
+              <TableCell className="text-right">Rp 13.147.001.734</TableCell>
             </TableRow>
           </TableBody>
         </Table>
