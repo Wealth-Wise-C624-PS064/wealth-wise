@@ -125,7 +125,9 @@ function EmergencyFundPage() {
       <div className="mb-8">
         <h1 className="font-bold text-2xl mb-4">Tabel Penyimpanan Data</h1>
         <Table>
-          <TableCaption>Daftar tersimpan perhitungan investasi.</TableCaption>
+          <TableCaption>
+            Daftar tersimpan perhitungan dana darurat.
+          </TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">No.</TableHead>
