@@ -22,25 +22,18 @@ const descFormulaHandler = (event) => {
     icon: "info",
     html: `
       <b>
-      Total = A + B
+      Berikut ini adalah semua kemungkinan yang dapat terjadi:
       </b>
       <br />
       <br />
-      <b>
-      A: Future Value dari Aset Awal
-      </b>
-      <h2>
-      A = P (1 + <sup>r</sup>&frasl;<sub>12</sub>)<sup>12t</sup>
-      </h2>
-
+      <h2>1. Anda hanya menanggung diri sendiri. Dana Darurat Anda adalah 6 kali pengeluaran bulanan.</h2>
       <br />
-
-      <b>
-      B: Future Value dari Tabungan Bulanan
-      </b>
-      <h2>
-      B = PMT  * ((1 + <sup>r</sup>&frasl;<sub>12</sub>)<sup>12t</sup> - 1)/ (<sup>r</sup>&frasl;<sub>12</sub>)
-      </h2>
+      <h2>2. Anda belum menikah, tetapi punya tanggungan lain. Dana Darurat Anda adalah 9 kali pengeluaran bulanan.</h2>
+      <br />
+      <h2>3. Anda sudah menikah, tetapi tidak punya tanggungan lain. Dana Darurat Anda adalah 9 kali pengeluaran bulanan.</h2>
+      <br />
+      <h2>4. Anda sudah menikah dan punya tanggungan lain. Dana Darurat Anda adalah 12 kali pengeluaran bulanan.</h2>
+      <br />
       
       `,
     focusConfirm: false,
@@ -125,7 +118,9 @@ function EmergencyFundPage() {
       <div className="mb-8">
         <h1 className="font-bold text-2xl mb-4">Tabel Penyimpanan Data</h1>
         <Table>
-          <TableCaption>Daftar tersimpan perhitungan investasi.</TableCaption>
+          <TableCaption>
+            Daftar tersimpan perhitungan dana darurat.
+          </TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">No.</TableHead>

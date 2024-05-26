@@ -1,5 +1,6 @@
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import { useState } from "react";
 
 import {
   Table,
@@ -10,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useInput from "@/hooks/useInput";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -51,6 +53,51 @@ const descFormulaHandler = (event) => {
 };
 
 function InvestmentPage() {
+  const [currentAmount, onChangeCurrentAmountHandler] = useInput("");
+  const [monthlySaving, onChangeMonthlySavingHandler] = useInput("");
+  const [annualReturn, onChangeAnnualReturnHandler] = useInput("");
+  const [years, onChangeYearsHandler] = useInput("");
+  const [futureValue, setFutureValue] = useState(null);
+
+  const toRupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
+  };
+
+  const calculateFutureValue = (event) => {
+    event.preventDefault();
+
+    // removing the comma from the numbers and giving declarations
+    const P_value = parseFloat(currentAmount.replace(/[,.]/g, ""));
+    const PMT_value = parseFloat(monthlySaving.replace(/[,.]/g, ""));
+    const r_value = parseFloat(annualReturn) / 100;
+    const t_value = parseFloat(years);
+
+    if (
+      isNaN(P_value) ||
+      isNaN(PMT_value) ||
+      isNaN(r_value) ||
+      isNaN(t_value)
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silakan masukkan semua nilai dengan benar!",
+      });
+      return;
+    }
+
+    const A = P_value * Math.pow(1 + r_value / 12, 12 * t_value);
+    const B =
+      (PMT_value * (Math.pow(1 + r_value / 12, 12 * t_value) - 1)) /
+      (r_value / 12);
+    const futureValue = A + B;
+
+    setFutureValue(futureValue.toFixed(2));
+  };
+
   return (
     <div className="sm:border-2 p-4 sm:p-8 lg:p-16 rounded-2xl mb-8">
       <h1 className="text-2xl font-bold mb-8">
@@ -58,7 +105,7 @@ function InvestmentPage() {
         <span className="text-primary-blue"> Investasi</span> yang Anda Telah
         Terapkan
       </h1>
-      <form>
+      <form onSubmit={calculateFutureValue}>
         <div className="flex flex-col mb-8">
           <label htmlFor="" className="font-bold text-xl mb-3">
             Uang yang Anda miliki saat ini sebesar?{" "}
@@ -68,6 +115,8 @@ function InvestmentPage() {
             <p className="font-bold text-xl mr-4">Rp</p>
             <input
               type="text"
+              value={currentAmount}
+              onChange={onChangeCurrentAmountHandler}
               placeholder="Contoh: 5.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
@@ -83,6 +132,8 @@ function InvestmentPage() {
             <p className="font-bold text-xl mr-4">Rp</p>
             <input
               type="text"
+              value={monthlySaving}
+              onChange={onChangeMonthlySavingHandler}
               placeholder="Contoh: 1.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
@@ -96,8 +147,10 @@ function InvestmentPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="5"
+              value={annualReturn}
+              onChange={onChangeAnnualReturnHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
             />
             <p className="font-bold text-xl ">%/ tahun</p>
@@ -111,8 +164,10 @@ function InvestmentPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="2"
+              value={years}
+              onChange={onChangeYearsHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
             />
             <p className="font-bold text-xl ">tahun</p>
@@ -131,9 +186,12 @@ function InvestmentPage() {
         </div>
       </form>
 
-      <h1 className="font-bold text-2xl mb-12">
-        Uang yang akan Anda miliki pada 2 tahun lagi sebesar Rp 52.556.993
-      </h1>
+      {futureValue && (
+        <h1 className="font-bold text-2xl mb-12">
+          Uang yang akan Anda miliki pada {years} tahun lagi sebesar{" "}
+          {toRupiah(futureValue)}
+        </h1>
+      )}
 
       <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-8">
         Simpan ke Tabel
