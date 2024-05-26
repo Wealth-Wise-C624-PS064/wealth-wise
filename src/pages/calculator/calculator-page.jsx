@@ -8,7 +8,7 @@ import {
 
 function CalculatorPage() {
   return (
- <BaseLayout>
+    <BaseLayout>
       <section className="bg-primary-blue ">
         <div className="mx-auto flex flex-col items-center justify-center h-full max-w-6xl px-4 md:px-16 py-12 md:gap-20 md:flex-row min-h-96">
           <div className="space-y-4">
