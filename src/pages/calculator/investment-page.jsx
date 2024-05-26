@@ -118,7 +118,7 @@ function InvestmentPage() {
             <p className="font-bold text-xl ">tahun</p>
           </div>
         </div>
-        <div className="">
+        <div className="mb-4">
           <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-4">
             Hitung
           </button>
