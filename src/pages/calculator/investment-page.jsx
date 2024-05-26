@@ -1,6 +1,16 @@
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 const descFormulaHandler = (event) => {
   event.preventDefault();
   Swal.fire({
@@ -42,15 +52,15 @@ const descFormulaHandler = (event) => {
 
 function InvestmentPage() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-5">
+    <div className="sm:border-2 p-4 sm:p-8 lg:p-16 rounded-2xl mb-8">
+      <h1 className="text-2xl font-bold mb-8">
         Hitung Aset Masa Depan Anda dengan Nilai
         <span className="text-primary-blue"> Investasi</span> yang Anda Telah
         Terapkan
       </h1>
       <form>
-        <div className="flex flex-col mb-4">
-          <label htmlFor="" className="font-bold text-xl mb-2">
+        <div className="flex flex-col mb-8">
+          <label htmlFor="" className="font-bold text-xl mb-3">
             Uang yang Anda miliki saat ini sebesar?{" "}
             <span className="text-primary-blue">(P)</span>
           </label>
@@ -58,14 +68,14 @@ function InvestmentPage() {
             <p className="font-bold text-xl mr-4">Rp</p>
             <input
               type="text"
-              placeholder="Contoh 5.000.000"
+              placeholder="Contoh: 5.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
         </div>
 
-        <div className="flex flex-col mb-4">
-          <label htmlFor="" className="font-bold text-xl mb-2">
+        <div className="flex flex-col mb-8">
+          <label htmlFor="" className="font-bold text-xl mb-3">
             Uang yang dapat Anda tabung per bulan?{" "}
             <span className="text-primary-blue">(PMT)</span>
           </label>
@@ -73,14 +83,14 @@ function InvestmentPage() {
             <p className="font-bold text-xl mr-4">Rp</p>
             <input
               type="text"
-              placeholder="Contoh 1.000.000"
+              placeholder="Contoh: 1.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
         </div>
 
-        <div className="flex flex-col mb-4">
-          <label htmlFor="" className="font-bold text-xl mb-2">
+        <div className="flex flex-col mb-8">
+          <label htmlFor="" className="font-bold text-xl mb-3">
             Persen-an return investasi Anda per tahun?{" "}
             <span className="text-primary-blue">(r)</span>
           </label>
@@ -94,8 +104,8 @@ function InvestmentPage() {
           </div>
         </div>
 
-        <div className="flex flex-col mb-4">
-          <label htmlFor="" className="font-bold text-xl mb-2">
+        <div className="flex flex-col mb-8">
+          <label htmlFor="" className="font-bold text-xl mb-3">
             Berapa lama Anda konsisten menabung dan berinvestasi?{" "}
             <span className="text-primary-blue">(t)</span>
           </label>
@@ -108,26 +118,53 @@ function InvestmentPage() {
             <p className="font-bold text-xl ">tahun</p>
           </div>
         </div>
-        <div className="mb-4">
-          <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4">
+        <div className="">
+          <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-4">
             Hitung
           </button>
           <button
             onClick={descFormulaHandler}
-            className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold"
+            className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mb-4"
           >
             Cara Kami Menghitung?
           </button>
         </div>
       </form>
 
-      <h1 className="font-bold text-xl">
+      <h1 className="font-bold text-2xl mb-12">
         Uang yang akan Anda miliki pada 2 tahun lagi sebesar Rp 52.556.993
       </h1>
 
-      <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4">
+      <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-8">
         Simpan ke Tabel
       </button>
+
+      <div className="mb-8">
+        <h1 className="font-bold text-2xl mb-4">Tabel Penyimpanan Data</h1>
+        <Table>
+          <TableCaption>Daftar tersimpan perhitungan investasi.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">No.</TableHead>
+              <TableHead>P</TableHead>
+              <TableHead>PMT</TableHead>
+              <TableHead>r</TableHead>
+              <TableHead>t</TableHead>
+              <TableHead className="text-right">Hasil</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">1</TableCell>
+              <TableCell>Rp 5.000.000</TableCell>
+              <TableCell>Rp 1.000.000</TableCell>
+              <TableCell>5%</TableCell>
+              <TableCell>2 tahun</TableCell>
+              <TableCell className="text-right">Rp 52.556.993</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }
