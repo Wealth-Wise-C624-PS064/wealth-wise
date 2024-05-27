@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import useInput from "@/hooks/useInput";
 import { toRupiah } from "@/lib/toRupiah";
+import { addInvestMent } from "@/services/calculator-service";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -60,7 +61,7 @@ function InvestmentPage() {
   const [years, onChangeYearsHandler] = useInput("");
   const [futureValue, setFutureValue] = useState(null);
 
-  const calculateFutureValue = (event) => {
+  const calculateFutureValue = async (event) => {
     event.preventDefault();
 
     // removing the comma from the numbers and giving declarations
@@ -90,6 +91,15 @@ function InvestmentPage() {
     const futureValue = A + B;
 
     setFutureValue(futureValue.toFixed(2));
+
+    // function add to firestore
+    await addInvestMent({
+      P: P_value,
+      PMT: PMT_value,
+      r: r_value,
+      t: t_value,
+      hasil: futureValue,
+    });
   };
 
   return (
