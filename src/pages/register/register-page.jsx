@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
+
+import { useLoginWithGoogle } from "@/hooks/authentication";
 
 import AuthLayout from "@/layouts/auth-layout";
 
@@ -7,14 +9,22 @@ import RegisterForm from "@/components/register-form";
 import { Button } from "@/components/ui/button";
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
+  const { loginWithGoogle } = useLoginWithGoogle();
+
   return (
     <AuthLayout>
       <div className="mb-4">
-        <Button asChild variant="outline" className="cursor-pointer">
-          <Link to="/" className="flex items-center gap-3">
+        <Button
+          asChild
+          variant="outline"
+          className="cursor-pointer"
+          onClick={() => navigate(-1)}
+        >
+          <div className="flex items-center gap-3">
             <ArrowLeftIcon className="w-4 h-4" />
             <span>Back</span>
-          </Link>
+          </div>
         </Button>
       </div>
       <div className="space-y-4">
@@ -26,7 +36,11 @@ export default function RegisterPage() {
           </p>
         </div>
         <div className="flex flex-col">
-          <Button variant="outline" className="w-full">
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => loginWithGoogle()}
+          >
             <div className="flex flex-row items-center justify-center gap-1">
               <img
                 src="/assets/google.svg"
