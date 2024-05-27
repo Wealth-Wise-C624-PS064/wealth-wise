@@ -110,7 +110,7 @@ function PensionFundPage() {
             <p className="font-bold text-xl mr-4">Rp</p>
             <input
               type="text"
-              placeholder="Contoh: 5.000.000"
+              placeholder="Contoh: 5000000"
               value={monthlyExpensesLater}
               onChange={onChangeMonthlyExpensesLaterHandler}
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"

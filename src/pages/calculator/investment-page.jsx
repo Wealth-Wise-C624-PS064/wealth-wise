@@ -111,7 +111,7 @@ function InvestmentPage() {
               type="text"
               value={currentAmount}
               onChange={onChangeCurrentAmountHandler}
-              placeholder="Contoh: 5.000.000"
+              placeholder="Contoh: 5000000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
@@ -128,7 +128,7 @@ function InvestmentPage() {
               type="text"
               value={monthlySaving}
               onChange={onChangeMonthlySavingHandler}
-              placeholder="Contoh: 1.000.000"
+              placeholder="Contoh: 1000000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
