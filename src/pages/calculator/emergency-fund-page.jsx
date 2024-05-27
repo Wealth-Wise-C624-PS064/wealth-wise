@@ -154,7 +154,7 @@ function EmergencyFundPage() {
               type="text"
               value={monthlyExpenses}
               onChange={onChangeMonthlyExpensesHandler}
-              placeholder="Contoh: 3.000.000"
+              placeholder="Contoh: 3000000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
