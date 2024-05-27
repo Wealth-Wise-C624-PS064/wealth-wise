@@ -12,6 +12,7 @@ import CalculatorPage from "@/pages/calculator/calculator-page";
 import InvestmentPage from "@/pages/calculator/investment-page";
 import PensionFundPage from "./pages/calculator/pension-fund-page";
 import EmergencyFundPage from "./pages/calculator/emergency-fund-page";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
+      <Toaster position="top-right" />
     </Router>
   );
 }
