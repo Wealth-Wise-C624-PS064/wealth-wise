@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import useInput from "@/hooks/useInput";
 import { toRupiah } from "@/lib/toRupiah";
+import { addEmergencyFund } from "@/services/calculator-service";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -56,7 +57,7 @@ function EmergencyFundPage() {
   // Menyimpan hasil perhitungan dana darurat
   const [emergencyFund, setEmergencyFund] = useState(null);
 
-  const calculateEmergencyFund = (event) => {
+  const calculateEmergencyFund = async (event) => {
     event.preventDefault();
     let fundMultiplier = 0;
     // Set the fundMultiplier based on status and dependents
@@ -74,6 +75,14 @@ function EmergencyFundPage() {
     const emergencyFundAmount = monthlyExpenses * fundMultiplier;
 
     setEmergencyFund(emergencyFundAmount);
+
+    // function add to firestore
+    await addEmergencyFund({
+      menikah: status,
+      tanggungan: dependents,
+      bulanan: Number(monthlyExpenses),
+      hasil: emergencyFundAmount,
+    });
   };
 
   return (

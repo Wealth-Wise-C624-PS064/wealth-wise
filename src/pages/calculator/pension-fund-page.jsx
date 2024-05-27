@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import useInput from "@/hooks/useInput";
 import { toRupiah } from "@/lib/toRupiah";
+import { addPensionFund } from "@/services/calculator-service";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -64,7 +65,7 @@ function PensionFundPage() {
   const [annualReturn, onChangeAnnualReturnHandler] = useInput("");
   const [pensionFund, setPensionFund] = useState(null);
 
-  const calculatePensionFund = (event) => {
+  const calculatePensionFund = async (event) => {
     event.preventDefault();
 
     // removing the comma from the numbers and giving declarations
@@ -90,8 +91,17 @@ function PensionFundPage() {
     const M_value = MEL_value * Math.pow(1 + i_value, t_value);
     const Y_value = M_value * 12;
     const pensionFundAmount = (100 / (r_value * 100 - i_value * 100)) * Y_value;
-
+    console.log(pensionFundAmount);
     setPensionFund(pensionFundAmount.toFixed(2));
+
+    // function add to firebase firestore
+    await addPensionFund({
+      P: MEL_value,
+      t: t_value,
+      i: i_value,
+      r: r_value,
+      hasil: pensionFundAmount,
+    });
   };
 
   return (
