@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 
+import { useLoginWithGoogle } from "@/hooks/authentication";
+
 import AuthLayout from "@/layouts/auth-layout";
 
 import LoginForm from "@/components/login-form";
 import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
+  const { loginWithGoogle } = useLoginWithGoogle();
+
   return (
     <AuthLayout>
       <div className="mb-4">
@@ -25,7 +29,11 @@ export default function LoginPage() {
           </p>
         </div>
         <div className="flex flex-col">
-          <Button variant="outline" className="w-full">
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => loginWithGoogle()}
+          >
             <div className="flex flex-row items-center justify-center gap-1">
               <img
                 src="/assets/google.svg"

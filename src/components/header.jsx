@@ -1,12 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import { AlignJustifyIcon, XIcon } from "lucide-react";
 
-import { Button } from "./ui/button";
+import auth from "@/lib/firebase/auth";
+
 import { useMediaQuery } from "@/hooks";
+
+import { Button } from "./ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 
 export default function Header() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const currentUser = auth.currentUser;
 
   return (
     <header className="sticky top-0 z-30 bg-white border-b">
@@ -29,12 +34,19 @@ export default function Header() {
                 {link.name}
               </NavLink>
             ))}
-            <Button
-              asChild
-              className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
-            >
-              <Link to="/login">Masuk</Link>
-            </Button>
+
+            {currentUser ? (
+              <div>
+                <p>{currentUser.displayName}</p>
+              </div>
+            ) : (
+              <Button
+                asChild
+                className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
+              >
+                <Link to="/login">Masuk</Link>
+              </Button>
+            )}
           </div>
         ) : (
           <Drawer direction="right">
@@ -63,12 +75,19 @@ export default function Header() {
                     {link.name}
                   </NavLink>
                 ))}
-                <Button
-                  asChild
-                  className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
-                >
-                  <Link to="/login">Masuk</Link>
-                </Button>
+
+                {currentUser ? (
+                  <div>
+                    <p>{currentUser.displayName}</p>
+                  </div>
+                ) : (
+                  <Button
+                    asChild
+                    className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
+                  >
+                    <Link to="/login">Masuk</Link>
+                  </Button>
+                )}
               </div>
             </DrawerContent>
           </Drawer>
