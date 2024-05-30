@@ -4,6 +4,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
 } from "@firebase/firestore";
 
@@ -36,7 +37,7 @@ export const createPost = async ({ title, body }) => {
 export const getAllPosts = async () => {
   try {
     const postsRef = collection(db, "posts");
-    const q = query(postsRef);
+    const q = query(postsRef, orderBy("createdAt", "desc"));
 
     const postsSnapshot = await getDocs(q);
 
@@ -53,13 +54,48 @@ export const getPost = async (postId) => {
   try {
     const postRef = doc(db, "posts", postId);
 
-    const post = await getDoc(postRef);
+    const postSnapshot = await getDoc(postRef);
 
-    if (!post.exists()) {
+    if (!postSnapshot.exists()) {
       throw new Error("Post not found");
     }
 
-    return post.data();
+    const commentsRef = collection(db, "posts", postId, "comments");
+
+    const commentsSnapshot = await getDocs(commentsRef);
+
+    const comments = commentsSnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+
+    return {
+      post: { id: postSnapshot.id, ...postSnapshot.data() },
+      comments,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const createPostComment = async ({ postId, text }) => {
+  try {
+    const commentRef = collection(db, "posts", postId, "comments");
+
+    const createdAt = new Date().toISOString();
+
+    const { uid, displayName, email, photoURL } = auth.currentUser;
+
+    await addDoc(commentRef, {
+      text,
+      createdAt,
+      author: {
+        id: uid,
+        displayName,
+        email,
+        photoURL,
+      },
+    });
   } catch (error) {
     throw new Error(error);
   }
