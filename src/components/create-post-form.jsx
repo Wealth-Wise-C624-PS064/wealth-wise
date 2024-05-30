@@ -8,18 +8,28 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreatePost } from "@/hooks";
+import { useCategory, useCreatePost } from "@/hooks";
 
 const formSchema = z.object({
   title: z
     .string({ message: "Title tidak boleh kosong" })
     .min(3, { message: "Title terlalu pendek" })
     .max(50, { message: "Title terlalu panjang" }),
+  category: z.string().optional(),
   body: z
     .string({ message: "Body tidak boleh kosong" })
     .min(3, { message: "Title terlalu pendek" }),
@@ -27,6 +37,8 @@ const formSchema = z.object({
 
 export default function CreatePostForm() {
   const { createPost, isPending } = useCreatePost();
+
+  const { data } = useCategory();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -50,6 +62,40 @@ export default function CreatePostForm() {
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input type="text" placeholder="Title" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Title</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Pilih kategori" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Kategori</SelectLabel>
+                      {data?.map((category) => (
+                        <SelectItem
+                          key={category.id}
+                          value={category.categoryName}
+                        >
+                          {category.categoryName}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
