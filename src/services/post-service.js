@@ -11,7 +11,7 @@ import {
 import auth from "@/lib/firebase/auth";
 import db from "@/lib/firebase/db";
 
-export const createPost = async ({ title, body }) => {
+export const createPost = async ({ title, body, category }) => {
   try {
     const postRef = collection(db, "posts");
     const createdAt = new Date().toISOString();
@@ -21,6 +21,7 @@ export const createPost = async ({ title, body }) => {
     await addDoc(postRef, {
       title,
       body,
+      category,
       createdAt,
       author: {
         id: uid,
