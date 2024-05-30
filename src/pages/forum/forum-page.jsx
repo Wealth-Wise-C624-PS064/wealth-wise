@@ -1,9 +1,16 @@
-import SearchThread from "@/components/search-thread";
-import { Button } from "@/components/ui/button";
-import BaseLayout from "@/layouts/base-layout";
 import { Link } from "react-router-dom";
 
+import { usePosts } from "@/hooks";
+
+import BaseLayout from "@/layouts/base-layout";
+
+import SearchThread from "@/components/search-thread";
+import { Button } from "@/components/ui/button";
+import { formatTimeAgo } from "@/lib/formatTimeAgo";
+
 export default function ForumPage() {
+  const { data: posts } = usePosts();
+
   return (
     <BaseLayout>
       <section className="bg-primary-blue">
@@ -39,7 +46,7 @@ export default function ForumPage() {
               asChild
               className="w-full rounded-full bg-primary-blue hover:bg-primary-blue/80"
             >
-              <Link>Buat Diskusi Baru</Link>
+              <Link to="/posts/create">Buat Diskusi Baru</Link>
             </Button>
           </div>
         </div>
@@ -49,33 +56,39 @@ export default function ForumPage() {
       </section>
       <section className="grid max-w-6xl grid-cols-1 gap-8 px-4 mx-auto mb-20 md:grid-cols-3">
         <div className="grid order-1 grid-cols-1 col-span-2 gap-3 md:order-0">
-          {[...Array(4)].map((_, index) => (
-            <div
-              key={index}
-              className="p-4 space-y-4 bg-white border rounded-lg shadow-md"
-            >
-              <div className="mb-3 space-y-2">
-                <h3 className="text-xl font-semibold transition-all duration-100 cursor-pointer hover:text-blue-500">
-                  Financial Freedom
-                </h3>
-                <p className="prose">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                </p>
-              </div>
-              <div className="flex flex-row items-center justify-between">
-                <div>
-                  <img
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                    loading="lazy"
-                    className="object-cover border-2 border-blue-200 rounded-full w-9 h-9"
-                  />
+          {posts &&
+            posts.map((post) => (
+              <div
+                key={post.id}
+                className="p-4 space-y-4 overflow-hidden break-words bg-white border rounded-lg shadow-md"
+              >
+                <div className="mb-3 space-y-2">
+                  <h3 className="text-xl font-semibold capitalize transition-all duration-100 cursor-pointer hover:text-blue-500">
+                    <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                  </h3>
+                  <p className="prose">{post.body}</p>
                 </div>
-                <p>2 hari yang lalu</p>
+                <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-row items-center gap-2">
+                    <img
+                      src={`${post.author.photoURL}`}
+                      alt={`${post.author.displayName}`}
+                      loading="lazy"
+                      className="object-cover border-2 border-blue-200 rounded-full w-9 h-9"
+                    />
+                    <p>
+                      Dibuat oleh{" "}
+                      <span className="text-primary-blue">
+                        {post.author.displayName}
+                      </span>
+                    </p>
+                  </div>
+                  <p>{formatTimeAgo(post.createdAt)}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
+
         <div className="col-span-1 order-0 md:order-1">
           <div className="flex flex-col gap-2 mb-4">
             <h2 className="text-xl font-semibold md:text-2xl">

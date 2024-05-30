@@ -1,6 +1,10 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
+
+import { useLogin } from "@/hooks";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,7 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useLogin } from "@/hooks/authentication";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -28,8 +31,8 @@ export default function LoginForm() {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (values) => {
-    await login(values);
+  const onSubmit = (values) => {
+    login(values);
   };
 
   return (
@@ -61,8 +64,13 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          {isPending ? "Loading..." : "Login"}
+        <Button
+          type="submit"
+          className="w-full bg-primary-blue hover:bg-primary-blue/80 disabled:bg-primary-blue/100"
+          disabled={isPending}
+        >
+          {isPending && <Loader2Icon className="animate-spin" />}
+          <span className={`${isPending && "ml-2"}`}>Masuk</span>
         </Button>
       </form>
     </Form>

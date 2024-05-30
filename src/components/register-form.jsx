@@ -1,8 +1,12 @@
 import { useForm } from "react-hook-form";
+import { updateProfile } from "firebase/auth";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
 
-import { useRegister } from "@/hooks/authentication";
+import { useRegister } from "@/hooks";
+
+import auth from "@/lib/firebase/auth";
 
 import {
   Form,
@@ -41,6 +45,7 @@ export default function RegisterForm() {
     register(values, {
       onSettled: async (data) => {
         await createUserFromAuth(data, { displayName: values.username });
+        await updateProfile(auth.currentUser, { displayName: values.username });
       },
     });
   };
@@ -104,8 +109,13 @@ export default function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          {isPending ? "Sedang membuat akun" : "Buat Akun"}
+        <Button
+          type="submit"
+          className="w-full bg-primary-blue hover:bg-primary-blue/80 disabled:bg-primary-blue/100"
+          disabled={isPending}
+        >
+          {isPending && <Loader2Icon className="animate-spin" />}
+          <span className={`${isPending && "ml-2"}`}>Buat Akun</span>
         </Button>
       </form>
     </Form>
