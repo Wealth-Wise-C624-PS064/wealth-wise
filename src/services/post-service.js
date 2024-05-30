@@ -63,7 +63,9 @@ export const getPost = async (postId) => {
 
     const commentsRef = collection(db, "posts", postId, "comments");
 
-    const commentsSnapshot = await getDocs(commentsRef);
+    const q = query(commentsRef, orderBy("createdAt", "desc"));
+
+    const commentsSnapshot = await getDocs(q);
 
     const comments = commentsSnapshot.docs.map((doc) => ({
       ...doc.data(),
@@ -74,29 +76,6 @@ export const getPost = async (postId) => {
       post: { id: postSnapshot.id, ...postSnapshot.data() },
       comments,
     };
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-export const createPostComment = async ({ postId, text }) => {
-  try {
-    const commentRef = collection(db, "posts", postId, "comments");
-
-    const createdAt = new Date().toISOString();
-
-    const { uid, displayName, email, photoURL } = auth.currentUser;
-
-    await addDoc(commentRef, {
-      text,
-      createdAt,
-      author: {
-        id: uid,
-        displayName,
-        email,
-        photoURL,
-      },
-    });
   } catch (error) {
     throw new Error(error);
   }

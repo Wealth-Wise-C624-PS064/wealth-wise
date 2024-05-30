@@ -1,5 +1,6 @@
-import db from "@/lib/firebase/db";
 import { collection, getDocs, query, where } from "@firebase/firestore";
+
+import db from "@/lib/firebase/db";
 
 export const getAllCategory = async () => {
   try {
