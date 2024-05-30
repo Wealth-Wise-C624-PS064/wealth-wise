@@ -1,18 +1,20 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
 
-import { usePost } from "@/hooks";
+import { useCurrentUser, usePost } from "@/hooks";
 
 import BaseLayout from "@/layouts/base-layout";
 
 import CreateCommentForm from "@/components/create-comment-form";
 import CommentList from "@/components/comment-list";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function PostsDetailPage() {
   const { postId } = useParams();
   const navigate = useNavigate();
 
+  const { currentUser } = useCurrentUser();
   const { data, isSuccess, isLoading, isError, error } = usePost(postId);
 
   return (
@@ -28,9 +30,8 @@ export default function PostsDetailPage() {
             <span className="ml-2">Back</span>
           </Button>
         </div>
-
         <div className="max-w-6xl px-4 mx-auto space-y-4 min-h-max">
-          <div className="mb-12">
+          <div className="my-12">
             {isLoading && (
               <div>
                 <Loader2Icon className="animate-spin" />
@@ -58,11 +59,32 @@ export default function PostsDetailPage() {
             </h3>
           </div>
 
-          <div className="p-3 border rounded-md shadow-sm">
-            <div className="space-y-4">
-              <div>
-                <CreateCommentForm />
-              </div>
+          <div className="p-4 border rounded-md shadow-sm">
+            <div className="space-y-8">
+              {currentUser ? (
+                <div className="flex flex-row gap-6">
+                  <Avatar>
+                    <AvatarFallback>{currentUser?.displayName}</AvatarFallback>
+                    <AvatarImage
+                      src={`${currentUser?.photoURL}`}
+                      alt={`${currentUser?.displayName}`}
+                    />
+                  </Avatar>
+                  <div className="w-full">
+                    <CreateCommentForm />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-1 p-4 border rounded-md">
+                  <p>Silahkan masuk untuk mengirim komentar.</p>
+                  <Link
+                    to="/login"
+                    className="underline underline-offset-2 text-primary-blue"
+                  >
+                    <strong>Masuk</strong>
+                  </Link>
+                </div>
+              )}
               <div>
                 {isLoading && (
                   <div>

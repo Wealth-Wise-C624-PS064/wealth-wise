@@ -48,10 +48,10 @@ export default function CreateCommentForm() {
           name="text"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Teks</FormLabel>
+              <FormLabel>Tambahkan Komentar</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tambahkan komentar..."
+                  placeholder="Tambahkan komentar disini..."
                   className="resize-none"
                   {...field}
                 />

@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 
-import { usePosts } from "@/hooks";
+import { useCurrentUser, usePosts } from "@/hooks";
 
 import BaseLayout from "@/layouts/base-layout";
 
 import SearchThread from "@/components/search-thread";
 import PostList from "@/components/post-list";
 import { Button } from "@/components/ui/button";
+import { SquarePlusIcon } from "lucide-react";
 
 export default function ForumPage() {
+  const { currentUser } = useCurrentUser();
   const { data: posts, isLoading, isSuccess, isError, error } = usePosts();
 
   let content;
@@ -56,12 +58,19 @@ export default function ForumPage() {
             <div className="h-[2px] w-36 bg-primary-blue"></div>
           </div>
           <div>
-            <Button
-              asChild
-              className="w-full rounded-full bg-primary-blue hover:bg-primary-blue/80"
-            >
-              <Link to="/posts/create">Buat Diskusi Baru</Link>
-            </Button>
+            {currentUser && (
+              <Button
+                asChild
+                className="w-full rounded-full bg-primary-blue hover:bg-primary-blue/80"
+              >
+                <Link to="/posts/create">
+                  <div className="flex flex-row items-center gap-1">
+                    <SquarePlusIcon className="w-5 h-5" />
+                    <span>Buat Diskusi Baru</span>
+                  </div>
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
         <div className="w-full">
