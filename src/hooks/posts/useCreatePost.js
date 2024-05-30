@@ -8,7 +8,8 @@ export const useCreatePost = () => {
   const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async ({ title, body }) => await createPost({ title, body }),
+    mutationFn: async ({ title, body, category }) =>
+      await createPost({ title, body, category }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
