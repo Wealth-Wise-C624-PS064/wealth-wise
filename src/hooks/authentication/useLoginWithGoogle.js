@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
-import { loginWithGoogle } from "@/services/authentication-service";
+import {
+  createUserFromAuth,
+  loginWithGoogle,
+} from "@/services/authentication-service";
 
 export const useLoginWithGoogle = () => {
   const navigate = useNavigate();
@@ -10,6 +13,9 @@ export const useLoginWithGoogle = () => {
     mutationFn: async () => await loginWithGoogle(),
     onSuccess: () => {
       navigate("/", { replace: true });
+    },
+    onSettled: async (data) => {
+      await createUserFromAuth(data);
     },
   });
 

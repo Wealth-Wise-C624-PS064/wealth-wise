@@ -12,7 +12,7 @@ export const useRegister = () => {
       await register({ email, password }),
     onSuccess: () => {
       toast.success("Register sukses");
-      navigate("/", { replace: true });
+      navigate("/login", { replace: true });
     },
     onError: (error) => {
       toast.error(error.message);

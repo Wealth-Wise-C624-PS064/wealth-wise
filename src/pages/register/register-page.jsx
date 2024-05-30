@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 
-import { useLoginWithGoogle } from "@/hooks/authentication";
+import { useLoginWithGoogle } from "@/hooks";
 
 import AuthLayout from "@/layouts/auth-layout";
 
