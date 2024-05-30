@@ -1,31 +1,23 @@
-export const formatTimeAgo = (timestamp) => {
-  const now = Date.now();
-  const delta = now - timestamp;
+export const formatTimeAgo = (date) => {
+  const now = new Date();
+  const posted = new Date(date);
+  const diff = now - posted;
+  const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const diffHours = Math.floor(diff / (1000 * 60 * 60));
+  const diffMinutes = Math.floor(diff / (1000 * 60));
+  const diffSeconds = Math.floor(diff / 1000);
 
-  const secondsInMinute = 60 * 1000;
-  const minutesInHour = 60;
-  const hoursInDay = 24;
-  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-  if (delta < 0) {
-    return "future date";
+  if (diffDays > 0) {
+    return `${diffDays} hari yang lalu`;
   }
-
-  const seconds = Math.floor(delta / secondsInMinute);
-  const minutes = Math.floor(seconds / minutesInHour);
-  const hours = Math.floor(minutes / hoursInDay);
-  const days = Math.floor(hours / daysInMonth[new Date().getMonth()]);
-  const years = Math.floor(days / 365);
-
-  if (years > 0) {
-    return years + " Tahun" + (years > 1 ? "s" : "") + " yang lalu";
-  } else if (days > 0) {
-    return days + " Hari" + (days > 1 ? "s" : "") + " yang lalu";
-  } else if (hours > 0) {
-    return hours + " Jam" + (hours > 1 ? "s" : "") + " yang lalu";
-  } else if (minutes > 0) {
-    return minutes + " Menit" + (minutes > 1 ? "s" : "") + " yang lalu";
-  } else {
-    return "Baru saja";
+  if (diffHours > 0) {
+    return `${diffHours} jam yang lalu`;
   }
+  if (diffMinutes > 0) {
+    return `${diffMinutes} menit yang lalu`;
+  }
+  if (diffSeconds > 0) {
+    return `${diffSeconds} detik yang lalu`;
+  }
+  return "baru saja";
 };
