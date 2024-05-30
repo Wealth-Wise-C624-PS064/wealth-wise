@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export default function Post({ post }) {
   return (
-    <div className="w-full p-4 space-y-5 border rounded-md shadow-sm">
+    <div className="w-full p-4 space-y-5 bg-white rounded-md shadow">
       <div className="flex flex-row gap-3 ">
         <Avatar>
           <AvatarFallback>{post.author.displayName}</AvatarFallback>
