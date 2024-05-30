@@ -1,17 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
-import { AlignJustifyIcon, XIcon } from "lucide-react";
+import { AlignJustifyIcon } from "lucide-react";
 
-import auth from "@/lib/firebase/auth";
-
-import { useMediaQuery } from "@/hooks";
+import { useCurrentUser, useLogout, useMediaQuery } from "@/hooks";
 
 import { Button } from "./ui/button";
-import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
 
 export default function Header() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  const currentUser = auth.currentUser;
+  const { currentUser } = useCurrentUser();
+
+  const { logout } = useLogout();
 
   return (
     <header className="sticky top-0 z-30 bg-white border-b">
@@ -27,8 +34,8 @@ export default function Header() {
                 to={`${link.path}`}
                 className={({ isActive }) =>
                   isActive
-                    ? "text-primary-blue font-semibold text-lg"
-                    : "text-lg font-semibold hover:text-primary-blue transition-all duration-150"
+                    ? "text-primary-blue font-semibold"
+                    : "font-semibold hover:text-primary-blue transition-all duration-150"
                 }
               >
                 {link.name}
@@ -36,9 +43,13 @@ export default function Header() {
             ))}
 
             {currentUser ? (
-              <div>
-                <p>{currentUser.displayName}</p>
-              </div>
+              <Button
+                type="button"
+                onClick={() => logout()}
+                className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
+              >
+                Logout
+              </Button>
             ) : (
               <Button
                 asChild
@@ -49,48 +60,49 @@ export default function Header() {
             )}
           </div>
         ) : (
-          <Drawer direction="right">
-            <DrawerTrigger>
-              <Button size="icon" variant="outline">
-                <AlignJustifyIcon className="w-5 h-5" />
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent className="p-4">
-              <DrawerTrigger className="text-right">
-                <Button size="icon" variant="outline">
-                  <XIcon className="w-5 h-5" />
-                </Button>
-              </DrawerTrigger>
-              <div className="flex flex-col gap-4">
-                {links.map((link) => (
-                  <NavLink
-                    key={link.id}
-                    to={`${link.path}`}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-primary-blue font-semibold"
-                        : "font-semibold hover:text-primary-blue transition-all duration-150"
-                    }
-                  >
-                    {link.name}
-                  </NavLink>
-                ))}
-
-                {currentUser ? (
-                  <div>
-                    <p>{currentUser.displayName}</p>
+          <Sheet>
+            <SheetTrigger>
+              <AlignJustifyIcon className="w-5 h-5" />
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle className="text-left">Wealth Wise</SheetTitle>
+                <SheetDescription className="text-left">
+                  <div className="flex flex-col gap-3">
+                    {links.map((link) => (
+                      <NavLink
+                        key={link.id}
+                        to={`${link.path}`}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-primary-blue font-medium"
+                            : "font-medium hover:text-primary-blue transition-all duration-150"
+                        }
+                      >
+                        <SheetTrigger>{link.name}</SheetTrigger>
+                      </NavLink>
+                    ))}
+                    {currentUser ? (
+                      <Button
+                        type="button"
+                        onClick={() => logout()}
+                        className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
+                      >
+                        Logout
+                      </Button>
+                    ) : (
+                      <Button
+                        asChild
+                        className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
+                      >
+                        <Link to="/login">Masuk</Link>
+                      </Button>
+                    )}
                   </div>
-                ) : (
-                  <Button
-                    asChild
-                    className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
-                  >
-                    <Link to="/login">Masuk</Link>
-                  </Button>
-                )}
-              </div>
-            </DrawerContent>
-          </Drawer>
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
         )}
       </nav>
     </header>

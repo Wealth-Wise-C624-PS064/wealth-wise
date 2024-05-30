@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import useInput from "@/hooks/useInput";
+import { useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 import { addInvestMent } from "@/services/calculator-service";
 
@@ -103,20 +103,20 @@ function InvestmentPage() {
   };
 
   return (
-    <div className="sm:border-2 p-4 sm:p-8 lg:p-16 rounded-2xl mb-8">
-      <h1 className="text-2xl font-bold mb-8">
+    <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
+      <h1 className="mb-8 text-2xl font-bold">
         Hitung Aset Masa Depan Anda dengan Nilai
         <span className="text-primary-blue"> Investasi</span> yang Anda Telah
         Terapkan
       </h1>
       <form onSubmit={calculateFutureValue}>
         <div className="flex flex-col mb-8">
-          <label htmlFor="" className="font-bold text-xl mb-3">
+          <label htmlFor="" className="mb-3 text-xl font-bold">
             Uang yang Anda miliki saat ini sebesar?{" "}
             <span className="text-primary-blue">(P)</span>
           </label>
           <div className="flex items-center">
-            <p className="font-bold text-xl mr-4">Rp</p>
+            <p className="mr-4 text-xl font-bold">Rp</p>
             <input
               type="text"
               value={currentAmount}
@@ -128,12 +128,12 @@ function InvestmentPage() {
         </div>
 
         <div className="flex flex-col mb-8">
-          <label htmlFor="" className="font-bold text-xl mb-3">
+          <label htmlFor="" className="mb-3 text-xl font-bold">
             Uang yang dapat Anda tabung per bulan?{" "}
             <span className="text-primary-blue">(PMT)</span>
           </label>
           <div className="flex items-center">
-            <p className="font-bold text-xl mr-4">Rp</p>
+            <p className="mr-4 text-xl font-bold">Rp</p>
             <input
               type="text"
               value={monthlySaving}
@@ -145,7 +145,7 @@ function InvestmentPage() {
         </div>
 
         <div className="flex flex-col mb-8">
-          <label htmlFor="" className="font-bold text-xl mb-3">
+          <label htmlFor="" className="mb-3 text-xl font-bold">
             Persen-an return investasi Anda per tahun?{" "}
             <span className="text-primary-blue">(r)</span>
           </label>
@@ -157,12 +157,12 @@ function InvestmentPage() {
               onChange={onChangeAnnualReturnHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
             />
-            <p className="font-bold text-xl ">%/ tahun</p>
+            <p className="text-xl font-bold ">%/ tahun</p>
           </div>
         </div>
 
         <div className="flex flex-col mb-8">
-          <label htmlFor="" className="font-bold text-xl mb-3">
+          <label htmlFor="" className="mb-3 text-xl font-bold">
             Berapa lama Anda konsisten menabung dan berinvestasi?{" "}
             <span className="text-primary-blue">(t)</span>
           </label>
@@ -174,16 +174,16 @@ function InvestmentPage() {
               onChange={onChangeYearsHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
             />
-            <p className="font-bold text-xl ">tahun</p>
+            <p className="text-xl font-bold ">tahun</p>
           </div>
         </div>
         <div className="mb-4">
-          <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-4">
+          <button className="px-8 py-2 mb-4 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl">
             Hitung
           </button>
           <button
             onClick={descFormulaHandler}
-            className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mb-4"
+            className="px-8 py-2 mb-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
           >
             Cara Kami Menghitung?
           </button>
@@ -191,18 +191,18 @@ function InvestmentPage() {
       </form>
 
       {futureValue && (
-        <h1 className="font-bold text-2xl mb-12">
+        <h1 className="mb-12 text-2xl font-bold">
           Uang yang akan Anda miliki pada {years} tahun lagi sebesar{" "}
           {toRupiah(futureValue)}
         </h1>
       )}
 
-      <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-8">
+      <button className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl">
         Simpan ke Tabel
       </button>
 
       <div className="mb-8">
-        <h1 className="font-bold text-2xl mb-4">Tabel Penyimpanan Data</h1>
+        <h1 className="mb-4 text-2xl font-bold">Tabel Penyimpanan Data</h1>
         <Table>
           <TableCaption>Daftar tersimpan perhitungan investasi.</TableCaption>
           <TableHeader>
