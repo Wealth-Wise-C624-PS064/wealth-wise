@@ -43,10 +43,13 @@ const descFormulaHandler = (event) => {
       <br />
 
       <b>
-      Berdasarkan Aturan 4% Rule, maka
+      Berdasarkan Aturan 4% Rule,
       </b>
       <h2>
-      Dana Pensiun = [100/(r- i)] * Y  
+      jika r > i, maka Dana Pensiun = [100/(r- i)] * Y
+      </h2>
+      <h2>
+      jika r <= i, maka Dana Pensiun = 25 * Y
       </h2>
       
       `,
@@ -90,7 +93,15 @@ function PensionFundPage() {
 
     const M_value = MEL_value * Math.pow(1 + i_value, t_value);
     const Y_value = M_value * 12;
-    const pensionFundAmount = (100 / (r_value * 100 - i_value * 100)) * Y_value;
+
+    let pensionFundAmount;
+
+    if (r_value > i_value) {
+      pensionFundAmount = (100 / (r_value * 100 - i_value * 100)) * Y_value;
+    } else {
+      pensionFundAmount = 25 * Y_value;
+    }
+
     console.log(pensionFundAmount);
     setPensionFund(pensionFundAmount.toFixed(2));
 
@@ -193,9 +204,8 @@ function PensionFundPage() {
 
       {pensionFund && (
         <h1 className="mb-12 text-2xl font-bold">
-          Berdasarkan 4% rule, Anda harus memiliki setidaknya
-          {toRupiah(pensionFund)}
-          sebagai Dana Pensiun
+          Berdasarkan 4% rule, Anda harus memiliki setidaknya{" "}
+          {toRupiah(pensionFund)} sebagai Dana Pensiun
         </h1>
       )}
 
