@@ -11,8 +11,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import useInput from "@/hooks/useInput";
+import { useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
+import { addEmergencyFund } from "@/services/calculator-service";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -56,7 +57,7 @@ function EmergencyFundPage() {
   // Menyimpan hasil perhitungan dana darurat
   const [emergencyFund, setEmergencyFund] = useState(null);
 
-  const calculateEmergencyFund = (event) => {
+  const calculateEmergencyFund = async (event) => {
     event.preventDefault();
     let fundMultiplier = 0;
     // Set the fundMultiplier based on status and dependents
@@ -74,17 +75,25 @@ function EmergencyFundPage() {
     const emergencyFundAmount = monthlyExpenses * fundMultiplier;
 
     setEmergencyFund(emergencyFundAmount);
+
+    // function add to firestore
+    await addEmergencyFund({
+      menikah: status,
+      tanggungan: dependents,
+      bulanan: Number(monthlyExpenses),
+      hasil: emergencyFundAmount,
+    });
   };
 
   return (
-    <div className="sm:border-2 p-4 sm:p-8 lg:p-16 rounded-2xl mb-8">
-      <h1 className="text-2xl font-bold mb-8">
+    <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
+      <h1 className="mb-8 text-2xl font-bold">
         Hitung <span className="text-primary-blue"> Dana Darurat</span> Minimal
         Yang Anda Butuhkan
       </h1>
       <form>
         <div className="flex flex-col mb-8">
-          <label htmlFor="" className="font-bold text-xl mb-3">
+          <label htmlFor="" className="mb-3 text-xl font-bold">
             Apa status Anda?
           </label>
           <div className="flex items-center">
@@ -114,7 +123,7 @@ function EmergencyFundPage() {
         </div>
 
         <div className="flex flex-col mb-8">
-          <label htmlFor="" className="font-bold text-xl mb-3">
+          <label htmlFor="" className="mb-3 text-xl font-bold">
             Apakah mungkin Anda punya tanggungan lain, seperti anak, orangtua,
             ataupun kerabat?
           </label>
@@ -145,16 +154,16 @@ function EmergencyFundPage() {
         </div>
 
         <div className="flex flex-col mb-8">
-          <label htmlFor="" className="font-bold text-xl mb-3">
+          <label htmlFor="" className="mb-3 text-xl font-bold">
             Berapa Pengeluaran Bulanan Anda?
           </label>
           <div className="flex items-center">
-            <p className="font-bold text-xl mr-4">Rp</p>
+            <p className="mr-4 text-xl font-bold">Rp</p>
             <input
               type="text"
               value={monthlyExpenses}
               onChange={onChangeMonthlyExpensesHandler}
-              placeholder="Contoh: 3.000.000"
+              placeholder="Contoh: 3000000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
@@ -163,13 +172,13 @@ function EmergencyFundPage() {
         <div className="mb-4">
           <button
             onClick={calculateEmergencyFund}
-            className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-4"
+            className="px-8 py-2 mb-4 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
           >
             Hitung
           </button>
           <button
             onClick={descFormulaHandler}
-            className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mb-4"
+            className="px-8 py-2 mb-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
           >
             Cara Kami Menghitung?
           </button>
@@ -177,17 +186,17 @@ function EmergencyFundPage() {
       </form>
 
       {emergencyFund && (
-        <h1 className="font-bold text-2xl mb-12">
+        <h1 className="mb-12 text-2xl font-bold">
           Dana Darurat Minimal Anda adalah {toRupiah(emergencyFund.toFixed(2))}
         </h1>
       )}
 
-      <button className="bg-primary-blue px-8 py-2 text-white rounded-2xl text-lg font-semibold mr-4 mb-8">
+      <button className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl">
         Simpan ke Tabel
       </button>
 
       <div className="mb-8">
-        <h1 className="font-bold text-2xl mb-4">Tabel Penyimpanan Data</h1>
+        <h1 className="mb-4 text-2xl font-bold">Tabel Penyimpanan Data</h1>
         <Table>
           <TableCaption>
             Daftar tersimpan perhitungan dana darurat.
