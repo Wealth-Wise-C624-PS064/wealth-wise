@@ -1,10 +1,10 @@
 import {
-  CalculatorIcon,
-  MessagesSquareIcon,
-  NewspaperIcon,
-  PersonStandingIcon,
-  TriangleAlertIcon,
-} from "lucide-react";
+  FaCalculator,
+  FaPersonCane,
+  FaRegComments,
+  FaNewspaper,
+} from "react-icons/fa6";
+import { GoAlertFill } from "react-icons/go";
 
 import BaseLayout from "@/layouts/base-layout";
 
@@ -39,31 +39,31 @@ export default function HomePage() {
                 <ul className="flex flex-col gap-3">
                   <li className="flex items-center gap-3">
                     <div className="p-2 bg-white border rounded-lg shadow-md">
-                      <CalculatorIcon className="w-6 h-6" />
+                      <FaCalculator className="w-6 h-6" />
                     </div>
                     <span className="text-white ">Kalkulator Investasi</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="p-2 bg-white border rounded-lg shadow-md">
-                      <PersonStandingIcon className="w-6 h-6" />
+                      <FaPersonCane className="w-6 h-6" />
                     </div>
                     <span className="text-white ">Hitung Dana Pensiun</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="p-2 bg-white border rounded-lg shadow-md">
-                      <TriangleAlertIcon className="w-6 h-6" />
+                      <GoAlertFill className="w-6 h-6" />
                     </div>
                     <span className="text-white ">Hitung Dana Darurat</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="p-2 bg-white border rounded-lg shadow-md">
-                      <MessagesSquareIcon className="w-6 h-6" />
+                      <FaRegComments className="w-6 h-6" />
                     </div>
                     <span className="text-white ">Forum Diskusi</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <div className="p-2 bg-white border rounded-lg shadow-md">
-                      <NewspaperIcon className="w-6 h-6" />
+                      <FaNewspaper className="w-6 h-6" />
                     </div>
                     <span className="text-white ">
                       Artikel Panduan untuk membantu Anda mencapai tujuan
@@ -84,21 +84,41 @@ export default function HomePage() {
               <div className="bg-primary-blue w-32 h-[2px]"></div>
             </div>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {[...Array(4)].map((_, index) => (
-                <div
-                  key={index}
-                  className="p-4 space-y-3 bg-white border rounded-lg"
-                >
-                  <h3 className="text-lg font-semibold">
-                    Lorem ipsum dolor sit amet consectetur.
-                  </h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Debitis possimus harum iusto necessitatibus nulla deserunt
-                    tenetur provident, ullam unde dolor.
-                  </p>
-                </div>
-              ))}
+              <div className="p-4 space-y-3 bg-white border rounded-lg">
+                <h3 className="text-lg font-semibold">Perencanaan Keuangan</h3>
+                <p>
+                  WealthWise menawarkan kalkulator investasi, hitung dana
+                  pensiun,dan hitung dana darurat yang sangat berguna untuk
+                  perencanaan keuangan Anda secara jangka panjang.
+                </p>
+              </div>
+              <div className="p-4 space-y-3 bg-white border rounded-lg">
+                <h3 className="text-lg font-semibold">Forum Diskusi</h3>
+                <p>
+                  WealthWise menyediakan forum diskusi di mana pengguna dapat
+                  berinteraksi, bertukar informasi, dan belajar dari pengalaman
+                  satu sama lain
+                </p>
+              </div>
+              <div className="p-4 space-y-3 bg-white border rounded-lg">
+                <h3 className="text-lg font-semibold">
+                  Artikel Panduan dan Edukasi
+                </h3>
+                <p>
+                  WealthWise memiliki koleksi artikel panduan yang membantu Anda
+                  untuk memahami berbagai aspek keuangan, dari dasar-dasar
+                  investasi hingga strategi perencanaan keuangan yang lebih
+                  kompleks.
+                </p>
+              </div>
+              <div className="p-4 space-y-3 bg-white border rounded-lg">
+                <h3 className="text-lg font-semibold">Kemudahan Akses</h3>
+                <p>
+                  WealthWise dapat diakses kapan pun dan dimana pun dengan mudah
+                  melalui halaman aplikasi Web WealthWise di berbagai perangkat
+                  seperti smartphone, tablet, desktop, hingga laptop.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -121,10 +141,11 @@ export default function HomePage() {
                   className="px-4 py-1 border rounded-md"
                 >
                   <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
-                    Is it accessible?
+                    Apakah WealthWise Gratis?
                   </AccordionTrigger>
                   <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
+                    Ya, segala fitur dan fungsi dari aplikasi WealthWise dapat
+                    Anda gunakan secara gratis tanpa biaya
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem
@@ -132,10 +153,12 @@ export default function HomePage() {
                   className="px-4 py-2 border rounded-md"
                 >
                   <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
-                    Is it accessible?
+                    Apakah saya harus login untuk menggunakan kalkulator?
                   </AccordionTrigger>
                   <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
+                    Tidak, Anda langsung dapat menggunakan kalkulator tanpa
+                    login. Namun, jika Anda ingin menyimpan ke tabel penyimpanan
+                    ataupun berdiskusi di forum, maka Anda perlu login.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem
@@ -143,10 +166,13 @@ export default function HomePage() {
                   className="px-4 py-1 border rounded-md"
                 >
                   <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
-                    Is it accessible?
+                    Saya ingin tahu formula WealthWise dalam menghitung
+                    Investasi, Dana Darurat, atau Dana Pensiun
                   </AccordionTrigger>
                   <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
+                    Tentu! Anda dapat menekan tombol “Cara Kami Menghitung”
+                    untuk menampilkan formula yang kami gunakan. Tentunya
+                    formulanya sudah kami riset dan dijamin benar.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem
@@ -154,10 +180,13 @@ export default function HomePage() {
                   className="px-4 py-2 border rounded-md"
                 >
                   <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
-                    Is it accessible?
+                    Apa saja topik yang dapat dibahas di Forum Diskusi?
                   </AccordionTrigger>
                   <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
+                    Anda dapat membahas Topik apa saja terkait investasi, dana
+                    darurat, dana pensiun, ataupun topik keuangan lainnya.
+                    Namun, perlu diingat diskusi tidak boleh mengandung unsur
+                    SARA ataupun yang dapat mengganggu kenyamanan publik
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
