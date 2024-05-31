@@ -35,7 +35,7 @@ export const createPost = async ({ title, body, category }) => {
   }
 };
 
-export const getAllPosts = async () => {
+export const getPosts = async () => {
   try {
     const postsRef = collection(db, "posts");
     const q = query(postsRef, orderBy("createdAt", "desc"));
@@ -61,42 +61,7 @@ export const getPost = async (postId) => {
       throw new Error("Post not found");
     }
 
-    const commentsRef = collection(db, "posts", postId, "comments");
-
-    const commentsSnapshot = await getDocs(commentsRef);
-
-    const comments = commentsSnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-
-    return {
-      post: { id: postSnapshot.id, ...postSnapshot.data() },
-      comments,
-    };
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-export const createPostComment = async ({ postId, text }) => {
-  try {
-    const commentRef = collection(db, "posts", postId, "comments");
-
-    const createdAt = new Date().toISOString();
-
-    const { uid, displayName, email, photoURL } = auth.currentUser;
-
-    await addDoc(commentRef, {
-      text,
-      createdAt,
-      author: {
-        id: uid,
-        displayName,
-        email,
-        photoURL,
-      },
-    });
+    return postSnapshot.data();
   } catch (error) {
     throw new Error(error);
   }

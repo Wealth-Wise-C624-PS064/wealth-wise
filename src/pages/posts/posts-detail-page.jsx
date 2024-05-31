@@ -1,55 +1,130 @@
-import { useRef } from "react";
-import { useParams } from "react-router-dom";
-import { Loader2Icon } from "lucide-react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
 
-import { usePost } from "@/hooks";
+import { useCurrentUser, useSharedPostComments } from "@/hooks";
 
 import BaseLayout from "@/layouts/base-layout";
 
+import CreateCommentForm from "@/components/create-comment-form";
+import CommentList from "@/components/comment-list";
+
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+
 export default function PostsDetailPage() {
   const { postId } = useParams();
+  const navigate = useNavigate();
 
-  const { data, isSuccess, isLoading, isError, error } = usePost(postId);
+  const { currentUser } = useCurrentUser();
+  const [
+    {
+      data: post,
+      isLoading: isLoadingPost,
+      isSuccess: isSuccessPost,
+      isError: isErrorPost,
+      error: errorPost,
+    },
+    {
+      data: comments,
+      isLoading: isLoadingComments,
+      isSuccess: isSuccessComments,
+      isError: isErrorComments,
+      error: errorComments,
+    },
+  ] = useSharedPostComments(postId);
 
   return (
     <BaseLayout>
-      <section className="bg-white">
-        <div className="max-w-6xl px-4 pt-8 pb-12 mx-auto space-y-4 min-h-dvh">
-          <div>
-            <div>
-              {isLoading && (
+      <section className="pt-10 pb-24 bg-white">
+        <div className="max-w-6xl px-4 mx-auto mb-6">
+          <Button
+            onClick={() => navigate(-1)}
+            variant="outline"
+            className="rounded-full"
+          >
+            <ArrowLeftIcon className="w-4 h-4" />
+            <span className="ml-2">Back</span>
+          </Button>
+        </div>
+        <div className="max-w-6xl px-4 mx-auto space-y-4 min-h-max">
+          <div className="my-12">
+            {isLoadingPost && (
+              <div>
+                <Loader2Icon className="animate-spin" />
+              </div>
+            )}
+            {isSuccessPost && (
+              <div className="p-4 space-y-4 border rounded-md">
+                <h2 className="text-3xl font-semibold capitalize">
+                  {post.title}
+                </h2>
+                <p>{post.body}</p>
                 <div>
-                  <Loader2Icon className="animate-spin" />
+                  <Badge className="bg-primary-blue hover:bg-primary-blue">
+                    {post.category}
+                  </Badge>
                 </div>
-              )}
-              {isSuccess && <pre>{JSON.stringify(data, null, 2)}</pre>}
-            </div>
+              </div>
+            )}
+            {isErrorPost && <div>Error: {errorPost.message}</div>}
           </div>
 
-          <div></div>
-
-          <div className="space-y-4">
+          <div>
             <h3 className="font-medium">
-              <div className="flex flex-row gap-1">
-                Comments:
-                {isLoading && <Loader2Icon className="animate-spin" />}
-                <span>{isSuccess && data.comments.length}</span>
+              <div className="flex flex-row items-center gap-1">
+                {isLoadingComments && (
+                  <Loader2Icon className="w-3 h-3 animate-spin" />
+                )}
+                {isSuccessComments && <span>{comments.length}</span>}
+                {isErrorComments && <span>Error: {errorComments.message}</span>}
+                <span>Komentar</span>
               </div>
             </h3>
-            <div>
-              {isLoading && (
-                <div>
-                  <Loader2Icon className="animate-spin" />
+          </div>
+
+          <div className="p-4 border rounded-md shadow-sm">
+            <div className="space-y-8">
+              {currentUser ? (
+                <div className="flex flex-row gap-2">
+                  <Avatar className="w-6 h-6 md:h-10 md:w-10">
+                    <AvatarFallback>{currentUser?.displayName}</AvatarFallback>
+                    <AvatarImage
+                      src={`${currentUser?.photoURL}`}
+                      alt={`${currentUser?.displayName}`}
+                    />
+                  </Avatar>
+                  <div className="w-full">
+                    <CreateCommentForm />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-1 p-4 border rounded-md">
+                  <p>Silahkan masuk untuk mengirim komentar.</p>
+                  <Link
+                    to="/login"
+                    className="underline underline-offset-2 text-primary-blue"
+                  >
+                    <strong>Masuk</strong>
+                  </Link>
                 </div>
               )}
-              {isSuccess &&
-                (data.comments.length > 0 ? (
-                  <div>{JSON.stringify(data.comments, null, 2)}</div>
-                ) : (
-                  <p>
-                    <i>Belum ada komentar</i>
-                  </p>
-                ))}
+              <div>
+                {isLoadingComments && (
+                  <div>
+                    <Loader2Icon className="animate-spin" />
+                  </div>
+                )}
+                {isSuccessComments &&
+                  (comments.length > 0 ? (
+                    <CommentList comments={comments} />
+                  ) : (
+                    <p>
+                      <i>Belum ada komentar</i>
+                    </p>
+                  ))}
+                {isErrorComments && <span>Error: {errorComments.message}</span>}
+              </div>
             </div>
           </div>
         </div>
