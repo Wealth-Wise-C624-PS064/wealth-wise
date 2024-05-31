@@ -40,7 +40,12 @@ export default function ArticlePage() {
       <section className="max-w-6xl px-4 mx-auto my-20">
         <div className="flex flex-col space-y-12">
           <div>
-            <h1 className="font-semibold text-xl mb-4">Tips Menabung</h1>
+            <div className="flex flex-col gap-2 mb-4">
+              <h2 className="text-xl font-semibold md:text-2xl">
+                Tips Menabung<span className="text-primary-blue">.</span>
+              </h2>
+              <div className="h-[2px] w-36 bg-primary-blue"></div>
+            </div>
             <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {tipsMenabungData.map((data) => (
                 <div
@@ -72,7 +77,12 @@ export default function ArticlePage() {
 
           {/* dasar investasi */}
           <div>
-            <h1 className="font-semibold text-xl mb-4">Dasar Investasi</h1>
+            <div className="flex flex-col gap-2 mb-4">
+              <h2 className="text-xl font-semibold md:text-2xl">
+                Dasar Investasi<span className="text-primary-blue">.</span>
+              </h2>
+              <div className="h-[2px] w-36 bg-primary-blue"></div>
+            </div>
             <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {dasarInvestasiData.map((data) => (
                 <div
@@ -104,7 +114,12 @@ export default function ArticlePage() {
 
           {/* lifestyle */}
           <div>
-            <h1 className="font-semibold text-xl mb-4">Gaya Hidup</h1>
+            <div className="flex flex-col gap-2 mb-4">
+              <h2 className="text-xl font-semibold md:text-2xl">
+                Gaya Hidup<span className="text-primary-blue">.</span>
+              </h2>
+              <div className="h-[2px] w-36 bg-primary-blue"></div>
+            </div>
             <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {lifestyleData.map((data) => (
                 <div
@@ -136,9 +151,12 @@ export default function ArticlePage() {
 
           {/* rumah tangga */}
           <div>
-            <h1 className="font-semibold text-xl mb-4">
-              Keuangan Rumah Tangga
-            </h1>
+            <div className="flex flex-col gap-2 mb-4">
+              <h2 className="text-xl font-semibold md:text-2xl">
+                Rumah Tangga<span className="text-primary-blue">.</span>
+              </h2>
+              <div className="h-[2px] w-36 bg-primary-blue"></div>
+            </div>
             <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {rumahTanggaData.map((data) => (
                 <div
