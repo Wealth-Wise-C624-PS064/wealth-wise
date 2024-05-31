@@ -38,7 +38,7 @@ export default function AboutPage() {
                   Wealth Wise
                 </span>
                 , kami ingin mengucapkan terima kasih yang sebesar-besarnya
-                karena telah menjadi bagian dari perjalanan menuju finalcial
+                karena telah menjadi bagian dari perjalanan menuju financial
                 freedom dan hidup bahagia. Katakan Hai 😻!
               </p>
             </div>
@@ -61,17 +61,23 @@ export default function AboutPage() {
                 <div className="font-medium">Universitas Gajah Mada</div>
                 <div className="flex space-x-3">
                   <Button size="icon" variant="outline" asChild>
-                    <Link target="_blank" to="/">
+                    <Link target="_blank" to="https://github.com/vitohartanto">
                       <GithubIcon className="w-5 h-5" />
                     </Link>
                   </Button>
                   <Button size="icon" variant="outline" asChild>
-                    <Link target="_blank" to="/">
+                    <Link
+                      target="_blank"
+                      to="https://www.linkedin.com/in/vito-hartanto/"
+                    >
                       <LinkedinIcon className="w-5 h-5" />
                     </Link>
                   </Button>
                   <Button size="icon" variant="outline" asChild>
-                    <Link target="_blank" to="/">
+                    <Link
+                      target="_blank"
+                      to="https://www.instagram.com/hartantovito/"
+                    >
                       <InstagramIcon className="w-5 h-5" />
                     </Link>
                   </Button>
@@ -82,7 +88,7 @@ export default function AboutPage() {
               <div>
                 <img
                   src="https://avatars.githubusercontent.com/Maulidin-Ilham"
-                  alt="vito-hartanto"
+                  alt="ilham-maulidin"
                   className="object-cover bg-cover rounded-md w-36 h-36"
                   loading="lazy "
                 />
@@ -116,7 +122,7 @@ export default function AboutPage() {
               <div>
                 <img
                   src="https://avatars.githubusercontent.com/nelanjoe"
-                  alt="vito-hartanto"
+                  alt="nelan-joe"
                   className="object-cover bg-cover rounded-md w-36 h-36"
                   loading="lazy "
                 />
@@ -158,3 +164,4 @@ export default function AboutPage() {
     </BaseLayout>
   );
 }
+
