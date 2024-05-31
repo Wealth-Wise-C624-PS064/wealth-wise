@@ -7,16 +7,14 @@ import { DotIcon } from "lucide-react";
 export default function Comment({ comment }) {
   return (
     <div className="flex flex-row gap-3">
-      <div>
-        <Avatar>
-          <AvatarFallback>{comment.author.displayName}</AvatarFallback>
-          <AvatarImage
-            src={`${comment.author.photoURL}`}
-            alt={`${comment.author.displayName}`}
-          />
-        </Avatar>
-      </div>
-      <div className="w-full p-3 space-y-3 border rounded-md shadow-sm">
+      <Avatar className="w-6 h-6 md:h-10 md:w-10">
+        <AvatarFallback>{comment.author.displayName}</AvatarFallback>
+        <AvatarImage
+          src={`${comment.author.photoURL}`}
+          alt={`${comment.author.displayName}`}
+        />
+      </Avatar>
+      <div className="w-full p-3 space-y-2 border rounded-md shadow-sm md:space-y-3">
         <div className="flex items-center text-sm">
           <p className="text-primary-blue">{comment.author.displayName}</p>
           <DotIcon />

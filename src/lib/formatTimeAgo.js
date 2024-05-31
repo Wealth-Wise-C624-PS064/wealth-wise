@@ -19,5 +19,5 @@ export const formatTimeAgo = (date) => {
   if (diffSeconds > 0) {
     return `${diffSeconds} detik yang lalu`;
   }
-  return "baru saja";
+  return "Baru saja";
 };

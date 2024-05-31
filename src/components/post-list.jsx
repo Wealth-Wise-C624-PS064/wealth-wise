@@ -4,7 +4,7 @@ import Post from "./post";
 
 export default function PostList({ posts }) {
   return (
-    <div className="grid order-1 grid-cols-1 col-span-2 gap-3 md:order-0">
+    <div className="grid grid-cols-1 gap-3">
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}

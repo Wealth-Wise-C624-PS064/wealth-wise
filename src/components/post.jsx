@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { formatTimeAgo } from "@/lib/formatTimeAgo";
 
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Badge } from "./ui/badge";
 
 export default function Post({ post }) {
   return (
@@ -28,9 +29,10 @@ export default function Post({ post }) {
           </h3>
           <p>{post.body}</p>
         </div>
-
         <div>
-          <p className="text-sm text-gray-500"></p>
+          <Badge className="bg-primary-blue hover:bg-primary-blue">
+            {post.category}
+          </Badge>
         </div>
       </div>
     </div>
