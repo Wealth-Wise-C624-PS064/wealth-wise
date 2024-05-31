@@ -1,21 +1,38 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
 
-import { useCurrentUser, usePost } from "@/hooks";
+import { useCurrentUser, useSharedPostComments } from "@/hooks";
 
 import BaseLayout from "@/layouts/base-layout";
 
 import CreateCommentForm from "@/components/create-comment-form";
 import CommentList from "@/components/comment-list";
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 export default function PostsDetailPage() {
   const { postId } = useParams();
   const navigate = useNavigate();
 
   const { currentUser } = useCurrentUser();
-  const { data, isSuccess, isLoading, isError, error } = usePost(postId);
+  const [
+    {
+      data: post,
+      isLoading: isLoadingPost,
+      isSuccess: isSuccessPost,
+      isError: isErrorPost,
+      error: errorPost,
+    },
+    {
+      data: comments,
+      isLoading: isLoadingComments,
+      isSuccess: isSuccessComments,
+      isError: isErrorComments,
+      error: errorComments,
+    },
+  ] = useSharedPostComments(postId);
 
   return (
     <BaseLayout>
@@ -32,28 +49,35 @@ export default function PostsDetailPage() {
         </div>
         <div className="max-w-6xl px-4 mx-auto space-y-4 min-h-max">
           <div className="my-12">
-            {isLoading && (
+            {isLoadingPost && (
               <div>
                 <Loader2Icon className="animate-spin" />
               </div>
             )}
-            {isSuccess && (
-              <div className="p-4 space-y-2 border rounded-md">
+            {isSuccessPost && (
+              <div className="p-4 space-y-4 border rounded-md">
                 <h2 className="text-3xl font-semibold capitalize">
-                  {data?.post.title}
+                  {post.title}
                 </h2>
-                <p>{data?.post.body}</p>
+                <p>{post.body}</p>
+                <div>
+                  <Badge className="bg-primary-blue hover:bg-primary-blue">
+                    {post.category}
+                  </Badge>
+                </div>
               </div>
             )}
-            {isError && <div>Error: {error.message}</div>}
+            {isErrorPost && <div>Error: {errorPost.message}</div>}
           </div>
 
           <div>
             <h3 className="font-medium">
               <div className="flex flex-row items-center gap-1">
-                {isLoading && <Loader2Icon className="w-3 h-3 animate-spin" />}
-                {isSuccess && <span>{data?.comments.length}</span>}
-                {isError && <span>Error: {error.message}</span>}
+                {isLoadingComments && (
+                  <Loader2Icon className="w-3 h-3 animate-spin" />
+                )}
+                {isSuccessComments && <span>{comments.length}</span>}
+                {isErrorComments && <span>Error: {errorComments.message}</span>}
                 <span>Komentar</span>
               </div>
             </h3>
@@ -62,8 +86,8 @@ export default function PostsDetailPage() {
           <div className="p-4 border rounded-md shadow-sm">
             <div className="space-y-8">
               {currentUser ? (
-                <div className="flex flex-row gap-6">
-                  <Avatar>
+                <div className="flex flex-row gap-2">
+                  <Avatar className="w-6 h-6 md:h-10 md:w-10">
                     <AvatarFallback>{currentUser?.displayName}</AvatarFallback>
                     <AvatarImage
                       src={`${currentUser?.photoURL}`}
@@ -86,20 +110,20 @@ export default function PostsDetailPage() {
                 </div>
               )}
               <div>
-                {isLoading && (
+                {isLoadingComments && (
                   <div>
                     <Loader2Icon className="animate-spin" />
                   </div>
                 )}
-                {isSuccess &&
-                  (data?.comments.length > 0 ? (
-                    <CommentList comments={data.comments} />
+                {isSuccessComments &&
+                  (comments.length > 0 ? (
+                    <CommentList comments={comments} />
                   ) : (
                     <p>
                       <i>Belum ada komentar</i>
                     </p>
                   ))}
-                {isError && <span>Error: {error.message}</span>}
+                {isErrorComments && <span>Error: {errorComments.message}</span>}
               </div>
             </div>
           </div>

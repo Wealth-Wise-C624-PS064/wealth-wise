@@ -22,7 +22,8 @@ import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCategory, useCreatePost } from "@/hooks";
+import { useCategories, useCreatePost } from "@/hooks";
+import { LoaderIcon } from "lucide-react";
 
 const formSchema = z.object({
   title: z
@@ -38,7 +39,7 @@ const formSchema = z.object({
 export default function CreatePostForm() {
   const { createPost, isPending } = useCreatePost();
 
-  const { data } = useCategory();
+  const { data: categories } = useCategories();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -67,7 +68,6 @@ export default function CreatePostForm() {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name="category"
@@ -79,18 +79,15 @@ export default function CreatePostForm() {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger>
                     <SelectValue placeholder="Pilih kategori" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Kategori</SelectLabel>
-                      {data?.map((category) => (
-                        <SelectItem
-                          key={category.id}
-                          value={category.categoryName}
-                        >
-                          {category.categoryName}
+                      {categories?.map((category) => (
+                        <SelectItem key={category.id} value={category.name}>
+                          {category.name}
                         </SelectItem>
                       ))}
                     </SelectGroup>
@@ -118,8 +115,14 @@ export default function CreatePostForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">
-          {isPending ? "Menambahkan post baru..." : "Tambahkan Post"}
+        <Button
+          type="submit"
+          variant="default"
+          className="bg-primary-blue hover:bg-primary-blue/80 disabled:bg-primary-blue/50"
+          disabled={isPending}
+        >
+          {isPending && <LoaderIcon className="w-4 h-4 animate-spin" />}
+          <span className={`${isPending && "ml-3"}`}>Tambahkan Post</span>
         </Button>
       </form>
     </Form>

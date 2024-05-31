@@ -1,31 +1,45 @@
-import { Link } from "react-router-dom";
+import { useMemo } from "react";
 
-import { useCurrentUser, usePosts } from "@/hooks";
+import { Link, useSearchParams } from "react-router-dom";
+import { SquarePlusIcon } from "lucide-react";
+
+import { useCurrentUser, useSharedPostsCategories } from "@/hooks";
 
 import BaseLayout from "@/layouts/base-layout";
 
 import SearchThread from "@/components/search-thread";
 import PostList from "@/components/post-list";
+
 import { Button } from "@/components/ui/button";
-import { SquarePlusIcon } from "lucide-react";
 
 export default function ForumPage() {
+  const [searchParams] = useSearchParams();
+
   const { currentUser } = useCurrentUser();
-  const { data: posts, isLoading, isSuccess, isError, error } = usePosts();
+  const [
+    {
+      data: posts,
+      isLoading: isLoadingPosts,
+      isSuccess: isSuccessPosts,
+      isError: isErrorPosts,
+      error: errorPosts,
+    },
+    {
+      data: categories,
+      isLoading: isLoadingCategories,
+      isSuccess: isSuccessCategories,
+      isError: isErrorCategories,
+      error: errorCatergories,
+    },
+  ] = useSharedPostsCategories();
 
-  let content;
-
-  if (isLoading) {
-    content = <div>Loading...</div>;
-  }
-
-  if (isSuccess) {
-    content = <PostList posts={posts} />;
-  }
-
-  if (isError) {
-    content = <div>Error: {error.message}</div>;
-  }
+  const filteredPosts = useMemo(() => {
+    return posts?.filter((post) =>
+      post?.title
+        ?.toLocaleLowerCase()
+        ?.includes(searchParams.get("search")?.toLocaleLowerCase() ?? "")
+    );
+  }, [posts, searchParams]);
 
   return (
     <BaseLayout>
@@ -77,24 +91,23 @@ export default function ForumPage() {
           <SearchThread />
         </div>
       </section>
-      <section className="grid max-w-6xl grid-cols-1 gap-8 px-4 mx-auto mb-20 md:grid-cols-3">
-        <div className="order-1 col-span-2 md:order-0">{content}</div>
-
-        <div className="col-span-1 order-0 md:order-1">
-          <div className="flex flex-col gap-2 mb-4">
-            <h2 className="text-xl font-semibold md:text-2xl">
-              Kategori Popular<span className="text-primary-blue"></span>
-            </h2>
-            <div className="h-[2px] w-48 bg-primary-blue"></div>
+      <section className="max-w-6xl px-4 mx-auto mb-20">
+        <div className="grid grid-cols-3 md:gap-6">
+          <div className="col-span-2">
+            {isLoadingPosts && <p>Loading...</p>}
+            {isSuccessPosts && <PostList posts={filteredPosts} />}
+            {isErrorPosts && <p>{errorPosts.message}</p>}
           </div>
-          <div className="flex flex-row gap-3 overflow-x-scroll md:overflow-auto md:flex-wrap">
-            {[...Array(4)].map((_, index) => (
-              <div key={index}>
-                <Button className="rounded-full bg-primary-blue hover:bg-primary-blue/80">
-                  Financial Freedom
-                </Button>
-              </div>
-            ))}
+          <div>
+            <div className="flex flex-col gap-3 mb-10">
+              <h2 className="text-2xl font-semibold">Kategori Popular</h2>
+              <div className="bg-primary-blue w-48 h-[2px]"></div>
+            </div>
+            {isLoadingCategories && <p>Loading...</p>}
+            {isSuccessCategories && (
+              <pre>{JSON.stringify(categories, null, 2)}</pre>
+            )}
+            {isErrorCategories && <p>{errorCatergories.message}</p>}
           </div>
         </div>
       </section>

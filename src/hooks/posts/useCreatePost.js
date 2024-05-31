@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { createPost } from "@/services/post-service";
+import { createPost } from "@/services/posts-service";
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient();

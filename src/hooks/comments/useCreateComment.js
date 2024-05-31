@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { createComment } from "@/services/comment-service";
+import { createComment } from "@/services/comments-service";
 import toast from "react-hot-toast";
 
 export const useCreateComment = () => {
@@ -10,7 +10,7 @@ export const useCreateComment = () => {
     mutationFn: async ({ postId, text }) =>
       await createComment({ postId, text }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["comments"] });
       toast.success("Komentar berhasil dibuat");
     },
   });
