@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import useInput from "@/hooks/useInput";
+import { useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 import { addInvestMent } from "@/services/calculator-service";
 
