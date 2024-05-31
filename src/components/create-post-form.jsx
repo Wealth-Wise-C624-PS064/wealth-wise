@@ -80,39 +80,6 @@ export default function CreatePostForm() {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Pilih kategori" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Kategori</SelectLabel>
-                      {categories?.map((category) => (
-                        <SelectItem
-                          key={category.id}
-                          value={category.categoryName}
-                        >
-                          {category.categoryName}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
                   <SelectTrigger>
                     <SelectValue placeholder="Pilih kategori" />
                   </SelectTrigger>
