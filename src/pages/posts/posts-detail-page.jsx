@@ -11,6 +11,7 @@ import CommentList from "@/components/comment-list";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { formatTimeAgo } from "@/lib/formatTimeAgo";
 
 export default function PostsDetailPage() {
   const { postId } = useParams();
@@ -56,6 +57,21 @@ export default function PostsDetailPage() {
             )}
             {isSuccessPost && (
               <div className="p-4 space-y-4 border rounded-md">
+                <div className="flex flex-row gap-3">
+                  <Avatar>
+                    <AvatarFallback>{post.author.displayName}</AvatarFallback>
+                    <AvatarImage
+                      src={`${post.author.photoURL}`}
+                      alt={`${post.author.displayName}`}
+                    />
+                  </Avatar>
+                  <div className="flex flex-col gap-1 text-sm">
+                    <p className="text-primary-blue">
+                      {post.author.displayName}
+                    </p>
+                    <p className="text-xs">{formatTimeAgo(post.createdAt)}</p>
+                  </div>
+                </div>
                 <h2 className="text-3xl font-semibold capitalize">
                   {post.title}
                 </h2>
