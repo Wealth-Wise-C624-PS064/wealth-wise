@@ -9,10 +9,12 @@ export const useSharedPostComments = (postId) => {
       {
         queryKey: ["posts", postId],
         queryFn: async () => await getPost(postId),
+        enabled: !!postId,
       },
       {
         queryKey: ["comments", postId],
         queryFn: async () => await getComments(postId),
+        enabled: !!postId,
       },
     ],
   });

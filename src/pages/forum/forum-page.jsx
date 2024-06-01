@@ -11,6 +11,7 @@ import SearchThread from "@/components/search-thread";
 import PostList from "@/components/post-list";
 
 import { Button } from "@/components/ui/button";
+import Categories from "@/components/categories";
 
 export default function ForumPage() {
   const [searchParams] = useSearchParams();
@@ -34,11 +35,17 @@ export default function ForumPage() {
   ] = useSharedPostsCategories();
 
   const filteredPosts = useMemo(() => {
-    return posts?.filter((post) =>
-      post?.title
-        ?.toLocaleLowerCase()
-        ?.includes(searchParams.get("search")?.toLocaleLowerCase() ?? "")
-    );
+    return posts?.filter((post) => {
+      if (searchParams.get("search") ?? "") {
+        return post?.title?.toLowerCase()?.includes(searchParams.get("search"));
+      } else if (searchParams.get("category") ?? "") {
+        return post?.category
+          ?.toLowerCase()
+          .includes(searchParams.get("category"));
+      } else {
+        return true;
+      }
+    });
   }, [posts, searchParams]);
 
   return (
@@ -92,22 +99,30 @@ export default function ForumPage() {
         </div>
       </section>
       <section className="max-w-6xl px-4 mx-auto mb-20">
-        <div className="grid grid-cols-3 md:gap-6">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
+          <div className="order-1 md:order-0 md:col-span-2">
             {isLoadingPosts && <p>Loading...</p>}
-            {isSuccessPosts && <PostList posts={filteredPosts} />}
+            {isSuccessPosts && posts.length > 0 ? (
+              <PostList posts={filteredPosts} />
+            ) : (
+              <div>
+                <p>
+                  <i>Tidak ada postingan</i>
+                </p>
+              </div>
+            )}
             {isErrorPosts && <p>{errorPosts.message}</p>}
           </div>
-          <div>
-            <div className="flex flex-col gap-3 mb-10">
-              <h2 className="text-2xl font-semibold">Kategori Popular</h2>
-              <div className="bg-primary-blue w-48 h-[2px]"></div>
+          <div className="order-0 md:order-1 md:col-span-1">
+            <div className="p-4 bg-white border rounded-md shadow-sm">
+              <div className="flex flex-col gap-2 mb-4">
+                <h2 className="text-xl font-semibold">Kategori Popular</h2>
+                <div className="bg-primary-blue w-40 h-[2px]"></div>
+              </div>
+              {isLoadingCategories && <p>Loading...</p>}
+              {isSuccessCategories && <Categories categories={categories} />}
+              {isErrorCategories && <p>{errorCatergories.message}</p>}
             </div>
-            {isLoadingCategories && <p>Loading...</p>}
-            {isSuccessCategories && (
-              <pre>{JSON.stringify(categories, null, 2)}</pre>
-            )}
-            {isErrorCategories && <p>{errorCatergories.message}</p>}
           </div>
         </div>
       </section>
