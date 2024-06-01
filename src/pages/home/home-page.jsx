@@ -25,8 +25,8 @@ export default function HomePage() {
           <div className="flex flex-col-reverse justify-between h-full max-w-6xl gap-16 px-4 py-20 mx-auto md:gap-20 item-center md:flex-row ">
             <div className="p-4 bg-white border rounded-lg">
               <img
-                src="/assets/saving-image.svg"
-                alt="saving-image"
+                src="/assets/calculator.svg"
+                alt="calculator"
                 className="w-[450px] h-fit object-cover"
                 loading="lazy"
               />

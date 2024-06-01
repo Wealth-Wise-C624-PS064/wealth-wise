@@ -60,9 +60,9 @@ export default function CreatePostForm() {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Judul</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="Title" {...field} />
+                <Input type="text" placeholder="Judul" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -74,7 +74,7 @@ export default function CreatePostForm() {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Kategori</FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
