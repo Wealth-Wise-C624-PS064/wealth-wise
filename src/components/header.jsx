@@ -24,7 +24,14 @@ export default function Header() {
     <header className="sticky top-0 z-30 bg-white border-b">
       <nav className="flex flex-row items-center justify-between max-w-6xl p-4 mx-auto">
         <h1 className="text-2xl font-semibold">
-          <Link to="/">Wealth Wise</Link>
+          <Link to="/">
+            <img
+              src="/assets/wealth-wise.png"
+              alt="wealth-wise-logo"
+              className="object-cover w-32"
+              loading="lazy"
+            />
+          </Link>
         </h1>
         {isDesktop ? (
           <div className="flex flex-row items-center gap-4">

@@ -140,7 +140,7 @@ export default function HomePage() {
                   value="item-1"
                   className="px-4 py-1 border rounded-md"
                 >
-                  <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
+                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
                     Apakah WealthWise Gratis?
                   </AccordionTrigger>
                   <AccordionContent>
@@ -152,7 +152,7 @@ export default function HomePage() {
                   value="item-2"
                   className="px-4 py-2 border rounded-md"
                 >
-                  <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
+                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
                     Apakah saya harus login untuk menggunakan kalkulator?
                   </AccordionTrigger>
                   <AccordionContent>
@@ -165,7 +165,7 @@ export default function HomePage() {
                   value="item-3"
                   className="px-4 py-1 border rounded-md"
                 >
-                  <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
+                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
                     Saya ingin tahu formula WealthWise dalam menghitung
                     Investasi, Dana Darurat, atau Dana Pensiun
                   </AccordionTrigger>
@@ -179,7 +179,7 @@ export default function HomePage() {
                   value="item-4"
                   className="px-4 py-2 border rounded-md"
                 >
-                  <AccordionTrigger className="text-lg font-semibold no-underline hover:no-underline">
+                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
                     Apa saja topik yang dapat dibahas di Forum Diskusi?
                   </AccordionTrigger>
                   <AccordionContent>
