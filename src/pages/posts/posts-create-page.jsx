@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 
+import { useCurrentUser } from "@/hooks";
+
 import BaseLayout from "@/layouts/base-layout";
 
 import CreatePostForm from "@/components/create-post-form";
@@ -8,6 +10,12 @@ import { Button } from "@/components/ui/button";
 
 export default function PostsCreatePage() {
   const navigate = useNavigate();
+
+  const currentUser = useCurrentUser();
+
+  if (!currentUser) {
+    navigate("/login", { replace: true });
+  }
 
   return (
     <BaseLayout>
@@ -20,7 +28,7 @@ export default function PostsCreatePage() {
           >
             <div className="flex items-center gap-3">
               <ArrowLeftIcon className="w-4 h-4" />
-              <span>Back</span>
+              <span>Kembali</span>
             </div>
           </Button>
         </div>
