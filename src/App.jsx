@@ -16,6 +16,8 @@ import EmergencyFundPage from "@/pages/calculator/emergency-fund-page";
 import PostsCreatePage from "@/pages/posts/posts-create-page";
 import PostsDetailPage from "@/pages/posts/posts-detail-page";
 
+import ProtectedRoute from "@/components/protected-route";
+
 export default function App() {
   return (
     <Router>
@@ -33,7 +35,14 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         <Route path="/posts">
-          <Route path="create" element={<PostsCreatePage />} />
+          <Route
+            path="create"
+            element={
+              <ProtectedRoute>
+                <PostsCreatePage />
+              </ProtectedRoute>
+            }
+          />
           <Route path=":postId" element={<PostsDetailPage />} />
         </Route>
       </Routes>

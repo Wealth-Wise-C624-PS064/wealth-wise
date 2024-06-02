@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -64,5 +65,14 @@ export const getPost = async (postId) => {
     return postSnapshot.data();
   } catch (error) {
     throw new Error(error);
+  }
+};
+
+export const deletePost = async (postId) => {
+  try {
+    const postRef = doc(db, "posts", postId);
+    await deleteDoc(postRef);
+  } catch (error) {
+    throw new Error();
   }
 };

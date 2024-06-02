@@ -23,7 +23,7 @@ export default function RegisterPage() {
         >
           <div className="flex items-center gap-3">
             <ArrowLeftIcon className="w-4 h-4" />
-            <span>Back</span>
+            <span>Kembali</span>
           </div>
         </Button>
       </div>

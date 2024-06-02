@@ -28,10 +28,10 @@ export default function Hero() {
       </div>
       <div>
         <img
-          src="assets/financial-freedom.svg"
-          alt="financial-freedom"
+          src="assets/banknote.svg"
+          alt="banknote"
           loading="lazy"
-          className="object-cover w-[500px] md:w-[780px] h-fit"
+          className="object-cover w-[300px] md:w-[580px] h-fit"
         />
       </div>
     </section>

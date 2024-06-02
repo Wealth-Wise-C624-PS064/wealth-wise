@@ -8,9 +8,11 @@ export const useCurrentUser = () => {
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       user ? setCurrentUser(user) : setCurrentUser(null);
     });
+
+    return () => unsubscribe();
   }, []);
 
   return { currentUser };
