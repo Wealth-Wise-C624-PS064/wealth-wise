@@ -9,10 +9,7 @@ export default function Footer() {
             <h2 className="text-lg font-semibold text-white md:text-2xl">
               Wealth Wise
             </h2>
-            <p className="text-sm text-white">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-              rem!
-            </p>
+            <p className="text-sm text-white">Calculate, Connect, Thrive!</p>
           </div>
           <div className="space-y-3">
             <div>

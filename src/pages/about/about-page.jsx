@@ -15,11 +15,17 @@ export default function AboutPage() {
           </h2>
           <div className="bg-primary-blue w-32 h-[2px]"></div>
         </div>
-        <p className="text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quis
-          sint itaque. Eaque minus asperiores corrupti deserunt ut beatae sequi
-          aut dolorum, magni cupiditate! Modi quidem dolorem asperiores esse
-          quisquam!
+        <p className="text-justify">
+          <span className="font-medium text-primary-blue">Wealth Wise</span>{" "}
+          adalah aplikasi perencanaan keuangan masa depan yang menawarkan
+          berbagai fitur, termasuk kalkulator penghitung investasi, dana
+          darurat, dan dana pensiun. Aplikasi ini juga dilengkapi dengan forum
+          diskusi serta artikel-artikel yang memberikan wawasan dan tips praktis
+          tentang berbagai aspek perencanaan keuangan. Dengan{" "}
+          <span className="font-medium text-primary-blue">Wealth Wise</span>,
+          pengguna diharapkan dapat lebih mudah mengelola keuangan mereka,
+          merencanakan masa depan yang lebih stabil, dan mencapai tujuan
+          finansial jangka panjang.
         </p>
       </section>
       <section className="bg-white">
@@ -164,4 +170,3 @@ export default function AboutPage() {
     </BaseLayout>
   );
 }
-
