@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
-import { addInvestMent } from "@/services/calculator-service";
+import { addInvestment } from "@/services/calculator-service";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -93,12 +93,14 @@ function InvestmentPage() {
     setFutureValue(futureValue.toFixed(2));
 
     // function add to firestore
-    await addInvestMent({
+    const createdAt = new Date().toISOString();
+    await addInvestment({
       P: P_value,
       PMT: PMT_value,
       r: r_value,
       t: t_value,
       hasil: futureValue,
+      createdAt: createdAt,
     });
   };
 
