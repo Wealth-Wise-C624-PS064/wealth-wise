@@ -101,7 +101,6 @@ function PensionFundPage() {
       pensionFundAmount = 25 * Y_value;
     }
 
-    console.log(pensionFundAmount);
     setPensionFund(pensionFundAmount.toFixed(2));
 
     // function add to firebase firestore

@@ -91,6 +91,13 @@ function EmergencyFundPage() {
       //   hasil: emergencyFundAmount,
       //   createdAt: createdAt,
       // });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silakan masukkan semua nilai dengan benar!",
+      });
+      return;
     }
   };
 
