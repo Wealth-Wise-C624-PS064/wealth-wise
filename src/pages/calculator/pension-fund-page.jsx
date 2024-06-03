@@ -133,7 +133,7 @@ function PensionFundPage() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="text"
+              type="number"
               placeholder="Contoh: 5000000"
               value={monthlyExpensesLater}
               onChange={onChangeMonthlyExpensesLaterHandler}
@@ -149,7 +149,7 @@ function PensionFundPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="2"
               value={yearsLater}
               onChange={onChangeYearsLaterHandler}
@@ -166,7 +166,7 @@ function PensionFundPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="5"
               value={inflation}
               onChange={onChangeInflationHandler}
@@ -183,7 +183,7 @@ function PensionFundPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="5"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
