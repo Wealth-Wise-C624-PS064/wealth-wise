@@ -121,7 +121,7 @@ function InvestmentPage() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="text"
+              type="number"
               value={currentAmount}
               onChange={onChangeCurrentAmountHandler}
               placeholder="Contoh: 5000000"
@@ -138,7 +138,7 @@ function InvestmentPage() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="text"
+              type="number"
               value={monthlySaving}
               onChange={onChangeMonthlySavingHandler}
               placeholder="Contoh: 1000000"
