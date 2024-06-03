@@ -11,9 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import { useInput } from "@/hooks";
+import { useInput, usePension } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
-import { addPensionFund } from "@/services/calculator-service";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -106,16 +105,18 @@ function PensionFundPage() {
     setPensionFund(pensionFundAmount.toFixed(2));
 
     // function add to firebase firestore
-    const createdAt = new Date().toISOString();
-    await addPensionFund({
-      P: MEL_value,
-      t: t_value,
-      i: i_value,
-      r: r_value,
-      hasil: pensionFundAmount,
-      createdAt: createdAt,
-    });
+    // const createdAt = new Date().toISOString();
+    // await addPensionFund({
+    //   P: MEL_value,
+    //   t: t_value,
+    //   i: i_value,
+    //   r: r_value,
+    //   hasil: pensionFundAmount,
+    //   createdAt: createdAt,
+    // });
   };
+
+  const { data: pensions } = usePension();
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
@@ -230,14 +231,18 @@ function PensionFundPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">1</TableCell>
-              <TableCell>Rp 5.000.000</TableCell>
-              <TableCell>2 tahun</TableCell>
-              <TableCell>7%</TableCell>
-              <TableCell>4%</TableCell>
-              <TableCell className="text-right">Rp 13.147.001.734</TableCell>
-            </TableRow>
+            {pensions?.map((pension, index = 0) => (
+              <TableRow key={pension.id}>
+                <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell>{toRupiah(pension.P)}</TableCell>
+                <TableCell>{pension.t} tahun</TableCell>
+                <TableCell>{pension.i * 100}%</TableCell>
+                <TableCell>{pension.r * 100}%</TableCell>
+                <TableCell className="text-right">
+                  {toRupiah(pension.hasil)}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
