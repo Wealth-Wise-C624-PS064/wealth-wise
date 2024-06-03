@@ -13,7 +13,8 @@ import {
 import { useState } from "react";
 import { useEmergency, useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
-import { addEmergencyFund } from "@/services/calculator-service";
+
+import { number } from "prop-types";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -71,20 +72,33 @@ function EmergencyFundPage() {
       fundMultiplier = 12;
     }
 
-    // Calculating emergencyFund
-    const emergencyFundAmount = monthlyExpenses * fundMultiplier;
+    if (
+      typeof monthlyExpenses === number &&
+      status !== null &&
+      dependents !== null
+    ) {
+      // Calculating emergencyFund
+      const emergencyFundAmount = monthlyExpenses * fundMultiplier;
 
-    setEmergencyFund(emergencyFundAmount);
+      setEmergencyFund(emergencyFundAmount);
 
-    // function add to firestore
-    const createdAt = new Date().toISOString();
-    await addEmergencyFund({
-      menikah: status,
-      tanggungan: dependents,
-      bulanan: Number(monthlyExpenses),
-      hasil: emergencyFundAmount,
-      createdAt: createdAt,
-    });
+      // function add to firestore
+      // const createdAt = new Date().toISOString();
+      // await addEmergencyFund({
+      //   menikah: status,
+      //   tanggungan: dependents,
+      //   bulanan: Number(monthlyExpenses),
+      //   hasil: emergencyFundAmount,
+      //   createdAt: createdAt,
+      // });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silakan masukkan semua nilai dengan benar!",
+      });
+      return;
+    }
   };
 
   const { data: emergencies } = useEmergency();
@@ -95,7 +109,7 @@ function EmergencyFundPage() {
         Hitung <span className="text-primary-blue"> Dana Darurat</span> Minimal
         Yang Anda Butuhkan
       </h1>
-      <form>
+      <form onSubmit={calculateEmergencyFund}>
         <div className="flex flex-col mb-8">
           <label htmlFor="" className="mb-3 text-xl font-bold">
             Apa status Anda?
@@ -164,7 +178,8 @@ function EmergencyFundPage() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="text"
+              type="number"
+              pattern="[0-9]"
               value={monthlyExpenses}
               onChange={onChangeMonthlyExpensesHandler}
               placeholder="Contoh: 3000000"
@@ -175,7 +190,7 @@ function EmergencyFundPage() {
 
         <div className="mb-4">
           <button
-            onClick={calculateEmergencyFund}
+            type="submit"
             className="px-8 py-2 mb-4 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
           >
             Hitung

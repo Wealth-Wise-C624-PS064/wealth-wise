@@ -101,7 +101,6 @@ function PensionFundPage() {
       pensionFundAmount = 25 * Y_value;
     }
 
-    console.log(pensionFundAmount);
     setPensionFund(pensionFundAmount.toFixed(2));
 
     // function add to firebase firestore
@@ -133,7 +132,7 @@ function PensionFundPage() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="text"
+              type="number"
               placeholder="Contoh: 5000000"
               value={monthlyExpensesLater}
               onChange={onChangeMonthlyExpensesLaterHandler}
@@ -149,7 +148,7 @@ function PensionFundPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="2"
               value={yearsLater}
               onChange={onChangeYearsLaterHandler}
@@ -166,7 +165,7 @@ function PensionFundPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="5"
               value={inflation}
               onChange={onChangeInflationHandler}
@@ -183,7 +182,7 @@ function PensionFundPage() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="5"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
