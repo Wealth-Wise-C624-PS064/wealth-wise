@@ -77,11 +77,13 @@ function EmergencyFundPage() {
     setEmergencyFund(emergencyFundAmount);
 
     // function add to firestore
+    const createdAt = new Date().toISOString();
     await addEmergencyFund({
       menikah: status,
       tanggungan: dependents,
       bulanan: Number(monthlyExpenses),
       hasil: emergencyFundAmount,
+      createdAt: createdAt,
     });
   };
 

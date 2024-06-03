@@ -106,12 +106,14 @@ function PensionFundPage() {
     setPensionFund(pensionFundAmount.toFixed(2));
 
     // function add to firebase firestore
+    const createdAt = new Date().toISOString();
     await addPensionFund({
       P: MEL_value,
       t: t_value,
       i: i_value,
       r: r_value,
       hasil: pensionFundAmount,
+      createdAt: createdAt,
     });
   };
 
