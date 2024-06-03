@@ -11,9 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useInput } from "@/hooks";
+import { useInput, useInvestment } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
-import { addInvestment } from "@/services/calculator-service";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -93,16 +92,18 @@ function InvestmentPage() {
     setFutureValue(futureValue.toFixed(2));
 
     // function add to firestore
-    const createdAt = new Date().toISOString();
-    await addInvestment({
-      P: P_value,
-      PMT: PMT_value,
-      r: r_value,
-      t: t_value,
-      hasil: futureValue,
-      createdAt: createdAt,
-    });
+    // const createdAt = new Date().toISOString();
+    // await addInvestment({
+    //   P: P_value,
+    //   PMT: PMT_value,
+    //   r: r_value,
+    //   t: t_value,
+    //   hasil: futureValue,
+    //   createdAt: createdAt,
+    // });
   };
+
+  const { data: investments } = useInvestment();
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
@@ -218,14 +219,16 @@ function InvestmentPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">1</TableCell>
-              <TableCell>Rp 5.000.000</TableCell>
-              <TableCell>Rp 1.000.000</TableCell>
-              <TableCell>5%</TableCell>
-              <TableCell>2 tahun</TableCell>
-              <TableCell className="text-right">Rp 52.556.993</TableCell>
-            </TableRow>
+            {investments?.map((investment, index = 0) => (
+              <TableRow key={investment.id}>
+                <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell>{toRupiah(investment.P)}</TableCell>
+                <TableCell>{toRupiah(investment.PMT)}</TableCell>
+                <TableCell>{investment.r * 100}%</TableCell>
+                <TableCell>{investment.t} tahun</TableCell>
+                <TableCell className="text-right">Rp 52.556.993</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

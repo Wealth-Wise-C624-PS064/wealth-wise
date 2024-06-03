@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
-import { useInput } from "@/hooks";
+import { useEmergency, useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 import { addEmergencyFund } from "@/services/calculator-service";
 
@@ -86,6 +86,8 @@ function EmergencyFundPage() {
       createdAt: createdAt,
     });
   };
+
+  const { data: emergencies } = useEmergency();
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
@@ -213,13 +215,25 @@ function EmergencyFundPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">1</TableCell>
-              <TableCell>Belum Menikah</TableCell>
-              <TableCell>Tidak/ Belum Punya</TableCell>
-              <TableCell>Rp 3.000.000</TableCell>
-              <TableCell className="text-right">Rp 18.000.000</TableCell>
-            </TableRow>
+            {emergencies?.map((emergency, index = 0) => (
+              <TableRow key={emergency.id}>
+                <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell>
+                  {emergency?.menikah === "sudahMenikah"
+                    ? "Sudah Menikah"
+                    : "Tidak / Belum Menikah"}
+                </TableCell>
+                <TableCell>
+                  {emergency?.tanggungan === "tidakPunya"
+                    ? "Tidak / Belum Punya"
+                    : "Punya"}
+                </TableCell>
+                <TableCell>{toRupiah(emergency.bulanan)}</TableCell>
+                <TableCell className="text-right">
+                  {toRupiah(emergency.hasil)}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
