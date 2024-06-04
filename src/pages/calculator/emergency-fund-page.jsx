@@ -14,7 +14,8 @@ import { useState } from "react";
 import { useEmergency, useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 
-import { number } from "prop-types";
+import { addEmergencyFund } from "@/services/calculator-service";
+import auth from "@/lib/firebase/auth";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -72,25 +73,23 @@ function EmergencyFundPage() {
       fundMultiplier = 12;
     }
 
-    if (
-      typeof monthlyExpenses === number &&
-      status !== null &&
-      dependents !== null
-    ) {
+    if (monthlyExpenses !== null && status && dependents) {
       // Calculating emergencyFund
       const emergencyFundAmount = monthlyExpenses * fundMultiplier;
 
       setEmergencyFund(emergencyFundAmount);
 
       // function add to firestore
-      // const createdAt = new Date().toISOString();
-      // await addEmergencyFund({
-      //   menikah: status,
-      //   tanggungan: dependents,
-      //   bulanan: Number(monthlyExpenses),
-      //   hasil: emergencyFundAmount,
-      //   createdAt: createdAt,
-      // });
+      const createdAt = new Date().toISOString();
+      const { uid } = auth.currentUser;
+      await addEmergencyFund({
+        menikah: status,
+        tanggungan: dependents,
+        bulanan: Number(monthlyExpenses),
+        hasil: emergencyFundAmount,
+        createdAt: createdAt,
+        authorId: uid,
+      });
     } else {
       Swal.fire({
         icon: "error",
@@ -102,6 +101,7 @@ function EmergencyFundPage() {
   };
 
   const { data: emergencies } = useEmergency();
+  console.log(emergencies);
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">

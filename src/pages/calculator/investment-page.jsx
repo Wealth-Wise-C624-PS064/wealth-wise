@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/table";
 import { useInput, useInvestment } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
+import { addInvestment } from "@/services/calculator-service";
+import auth from "@/lib/firebase/auth";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -92,18 +94,21 @@ function InvestmentPage() {
     setFutureValue(futureValue.toFixed(2));
 
     // function add to firestore
-    // const createdAt = new Date().toISOString();
-    // await addInvestment({
-    //   P: P_value,
-    //   PMT: PMT_value,
-    //   r: r_value,
-    //   t: t_value,
-    //   hasil: futureValue,
-    //   createdAt: createdAt,
-    // });
+    const createdAt = new Date().toISOString();
+    const { uid } = auth.currentUser;
+    await addInvestment({
+      P: P_value,
+      PMT: PMT_value,
+      r: r_value,
+      t: t_value,
+      hasil: futureValue,
+      createdAt: createdAt,
+      authorId: uid,
+    });
   };
 
   const { data: investments } = useInvestment();
+  console.log(investments);
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">

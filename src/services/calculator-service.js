@@ -4,9 +4,12 @@ import {
   query,
   orderBy,
   getDocs,
+  where,
 } from "firebase/firestore";
 
 import db from "@/lib/firebase/db";
+
+import { getAuth } from "firebase/auth";
 
 export const addPensionFund = async (data) => {
   try {
@@ -19,8 +22,14 @@ export const addPensionFund = async (data) => {
 
 export const getPensionFund = async () => {
   try {
+    const auth = getAuth();
+    const currentUser = auth?.currentUser;
     const pensionFundRef = collection(db, "pension-fund");
-    const q = query(pensionFundRef, orderBy("createdAt", "desc"));
+    const q = query(
+      pensionFundRef,
+      where("authorId", "==", currentUser.uid),
+      orderBy("createdAt", "desc")
+    );
 
     const pensionSnapshot = await getDocs(q);
 
@@ -44,8 +53,15 @@ export const addEmergencyFund = async (data) => {
 
 export const getEmergencyFund = async () => {
   try {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
     const emergencyRef = collection(db, "emergency-fund");
-    const q = query(emergencyRef, orderBy("createdAt", "desc"));
+
+    const q = query(
+      emergencyRef,
+      where("authorId", "==", currentUser?.uid),
+      orderBy("createdAt", "desc")
+    );
 
     const emergencySnapshot = await getDocs(q);
 
@@ -69,8 +85,15 @@ export const addInvestment = async (data) => {
 
 export const getInvestment = async () => {
   try {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
     const investmentRef = collection(db, "investment");
-    const q = query(investmentRef, orderBy("createdAt", "desc"));
+
+    const q = query(
+      investmentRef,
+      where("authorId", "==", currentUser?.uid),
+      orderBy("createdAt", "desc")
+    );
 
     const investmentSnapshot = await getDocs(q);
 
