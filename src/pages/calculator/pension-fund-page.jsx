@@ -13,6 +13,8 @@ import {
 import { useState } from "react";
 import { useInput, usePension } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
+import { addPensionFund } from "@/services/calculator-service";
+import auth from "@/lib/firebase/auth";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -104,15 +106,17 @@ function PensionFundPage() {
     setPensionFund(pensionFundAmount.toFixed(2));
 
     // function add to firebase firestore
-    // const createdAt = new Date().toISOString();
-    // await addPensionFund({
-    //   P: MEL_value,
-    //   t: t_value,
-    //   i: i_value,
-    //   r: r_value,
-    //   hasil: pensionFundAmount,
-    //   createdAt: createdAt,
-    // });
+    const createdAt = new Date().toISOString();
+    const { uid } = auth.currentUser;
+    await addPensionFund({
+      P: MEL_value,
+      t: t_value,
+      i: i_value,
+      r: r_value,
+      hasil: pensionFundAmount,
+      createdAt: createdAt,
+      authorId: uid,
+    });
   };
 
   const { data: pensions } = usePension();
