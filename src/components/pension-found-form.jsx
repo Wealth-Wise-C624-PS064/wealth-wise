@@ -9,9 +9,10 @@ import "sweetalert2/src/sweetalert2.scss";
 export default function PensionFoundForm() {
   const [monthlyExpensesLater, onChangeMonthlyExpensesLaterHandler] =
     useInput("");
-  const [yearsLater, onChangeYearsLaterHandler] = useInput("");
-  const [inflation, onChangeInflationHandler] = useInput("");
-  const [annualReturn, onChangeAnnualReturnHandler] = useInput("");
+  const [yearsLater, onChangeYearsLaterHandler, setYearsLater] = useInput("");
+  const [inflation, onChangeInflationHandler, setInflation] = useInput("");
+  const [annualReturn, onChangeAnnualReturnHandler, setAnnualReturn] =
+    useInput("");
   const [pensionFund, setPensionFund] = useState(null);
 
   const { addPensionFund, isPending } = useAddPensionFund();
@@ -132,13 +133,22 @@ export default function PensionFoundForm() {
     setPensionFund(pensionFundAmount.toFixed(2));
 
     // Save to firestore
-    addPensionFund({
-      P: MEL_value,
-      t: t_value,
-      i: i_value,
-      r: r_value,
-      hasil: pensionFundAmount,
-    });
+    addPensionFund(
+      {
+        P: MEL_value,
+        t: t_value,
+        i: i_value,
+        r: r_value,
+        hasil: pensionFundAmount,
+      },
+      {
+        onSettled: () => {
+          setAnnualReturn("");
+          setInflation("");
+          setYearsLater("");
+        },
+      }
+    );
   };
 
   return (
