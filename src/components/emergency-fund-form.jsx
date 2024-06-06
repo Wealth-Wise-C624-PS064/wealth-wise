@@ -3,7 +3,7 @@ import { useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
-import { useAddEmergencyFund, useInput } from "@/hooks";
+import { useAddEmergencyFund, useCurrentUser, useInput } from "@/hooks";
 
 import { toRupiah } from "@/lib/toRupiah";
 
@@ -126,6 +126,8 @@ export default function EmergencyFundForm() {
     }
   };
 
+  const { currentUser } = useCurrentUser();
+
   return (
     <>
       <form onSubmit={calculateEmergencyFund}>
@@ -229,13 +231,15 @@ export default function EmergencyFundForm() {
         </h1>
       )}
 
-      <button
-        onClick={handleAddEmergencyFund}
-        disabled={isPending}
-        className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
-      >
-        Simpan ke Tabel
-      </button>
+      {currentUser && (
+        <button
+          onClick={handleAddEmergencyFund}
+          disabled={isPending}
+          className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
+        >
+          Simpan ke Tabel
+        </button>
+      )}
     </>
   );
 }

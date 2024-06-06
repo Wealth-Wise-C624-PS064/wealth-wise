@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { usePension } from "@/hooks";
+import { useCurrentUser, usePension } from "@/hooks";
 
 import auth from "@/lib/firebase/auth";
 import { toRupiah } from "@/lib/toRupiah";
@@ -17,15 +17,14 @@ import {
 import PensionFoundForm from "@/components/pension-found-form";
 
 function PensionFundPage() {
-  const { data: pensions, isLoading, isError, error } = usePension();
+  const { currentUser } = useCurrentUser();
+  const { data: pensions } = usePension();
 
-  const currentUser = auth.currentUser;
+  const user = auth.currentUser;
 
   const pensionFilter = useMemo(() => {
-    return pensions?.filter(
-      (pension) => pension.author_id === currentUser?.uid
-    );
-  }, [pensions, currentUser]);
+    return pensions?.filter((pension) => pension.author_id === user?.uid);
+  }, [pensions, user]);
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
@@ -38,11 +37,9 @@ function PensionFundPage() {
         <PensionFoundForm />
       </div>
 
-      <div className="mb-8">
-        <h1 className="mb-4 text-2xl font-bold">Tabel Penyimpanan Data</h1>
-        {isLoading && <div>loading...</div>}
-        {isError && <div>{error.message}</div>}
-        {pensions && (
+      {currentUser && (
+        <div className="mb-8">
+          <h1 className="mb-4 text-2xl font-bold">Tabel Penyimpanan Data</h1>
           <Table>
             <TableCaption>Daftar tersimpan perhitungan investasi.</TableCaption>
             <TableHeader>
@@ -71,8 +68,8 @@ function PensionFundPage() {
                 ))}
             </TableBody>
           </Table>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
