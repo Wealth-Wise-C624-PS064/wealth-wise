@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
@@ -7,7 +7,7 @@ import { useAddInvesment, useCurrentUser, useInput } from "@/hooks";
 
 import { toRupiah } from "@/lib/toRupiah";
 
-export default function InvesmentForm() {
+export default function InvestmentForm() {
   const [currentAmount, onChangeCurrentAmountHandler, setCurrentAmount] =
     useInput("");
   const [monthlySaving, onChangeMonthlySavingHandler, setMonthlySaving] =
@@ -139,6 +139,10 @@ export default function InvesmentForm() {
 
   const { currentUser } = useCurrentUser();
 
+  useEffect(() => {
+    console.log(currentAmount * 2);
+  }, [currentAmount]);
+
   return (
     <>
       <form onSubmit={calculateFutureValue}>
@@ -150,10 +154,10 @@ export default function InvesmentForm() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="number"
+              type="text"
               value={currentAmount}
               onChange={onChangeCurrentAmountHandler}
-              placeholder="Contoh: 5000000"
+              placeholder="Contoh: 5.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
@@ -167,10 +171,10 @@ export default function InvesmentForm() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="number"
+              type="text"
               value={monthlySaving}
               onChange={onChangeMonthlySavingHandler}
-              placeholder="Contoh: 1000000"
+              placeholder="Contoh: 1.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
@@ -183,7 +187,7 @@ export default function InvesmentForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="5"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
@@ -200,7 +204,7 @@ export default function InvesmentForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="2"
               value={years}
               onChange={onChangeYearsHandler}
@@ -242,3 +246,4 @@ export default function InvesmentForm() {
     </>
   );
 }
+

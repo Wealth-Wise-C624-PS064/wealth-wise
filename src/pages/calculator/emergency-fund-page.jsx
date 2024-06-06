@@ -71,7 +71,12 @@ function EmergencyFundPage() {
                         ? "Tidak / Belum Punya"
                         : "Punya"}
                     </TableCell>
-                    <TableCell>{toRupiah(emergency.bulanan)}</TableCell>
+                    <TableCell>
+                      {emergency?.bulanan &&
+                        toRupiah(
+                          parseFloat(emergency.bulanan.replace(/[,.]/g, ""))
+                        )}
+                    </TableCell>
                     <TableCell className="text-right">
                       {toRupiah(emergency.hasil)}
                     </TableCell>
