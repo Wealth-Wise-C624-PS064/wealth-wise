@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useEmergency, useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 
-import { addEmergencyFund } from "@/services/calculator-service";
+import { addEmergencyFund } from "@/services/calculators-service";
 import auth from "@/lib/firebase/auth";
 
 const descFormulaHandler = (event) => {
@@ -101,6 +101,7 @@ function EmergencyFundPage() {
   };
 
   const { data: emergencies } = useEmergency();
+
   console.log(emergencies);
 
   return (

@@ -1,4 +1,4 @@
-import { getPensionFund } from "@/services/calculator-service";
+import { getPensionFund } from "@/services/calculators-service";
 import { useQuery } from "@tanstack/react-query";
 
 export const usePension = () => {

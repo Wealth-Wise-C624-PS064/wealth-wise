@@ -1,7 +1,7 @@
 import { useQueries } from "@tanstack/react-query";
 
 import { getPosts } from "@/services/posts-service";
-import { getCategories } from "@/services/category-service";
+import { getCategories } from "@/services/categories-service";
 
 export const useSharedPostsCategories = () => {
   return useQueries({
