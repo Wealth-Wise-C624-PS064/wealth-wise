@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import InvesmentForm from "@/components/invesment-form";
+import InvestmentForm from "@/components/investment-form";
 
 function InvestmentPage() {
   const { currentUser } = useCurrentUser();
@@ -36,7 +36,7 @@ function InvestmentPage() {
       </h1>
 
       <div>
-        <InvesmentForm />
+        <InvestmentForm />
       </div>
 
       {currentUser && (
@@ -63,7 +63,9 @@ function InvestmentPage() {
                     <TableCell>{toRupiah(investment.PMT)}</TableCell>
                     <TableCell>{investment.r * 100}%</TableCell>
                     <TableCell>{investment.t} tahun</TableCell>
-                    <TableCell className="text-right">Rp 52.556.993</TableCell>
+                    <TableCell className="text-right">
+                      {toRupiah(investment.hasil)}
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
@@ -32,9 +32,14 @@ export default function EmergencyFundForm() {
       fundMultiplier = 12;
     }
 
-    if (monthlyExpenses !== null && status && dependents) {
+    const monthlyExpensesValue = parseFloat(
+      monthlyExpenses.replace(/[,.]/g, "")
+    );
+
+    if (!isNaN(monthlyExpensesValue) && status && dependents) {
       // Calculating emergencyFund
-      const emergencyFundAmount = monthlyExpenses * fundMultiplier;
+
+      const emergencyFundAmount = monthlyExpensesValue * fundMultiplier;
 
       setEmergencyFund(emergencyFundAmount);
     } else {
@@ -94,9 +99,14 @@ export default function EmergencyFundForm() {
       fundMultiplier = 12;
     }
 
-    if (monthlyExpenses !== null && status && dependents) {
+    const monthlyExpensesValue = parseFloat(
+      monthlyExpenses.replace(/[,.]/g, "")
+    );
+
+    if (!isNaN(monthlyExpensesValue) && status && dependents) {
       // Calculating emergencyFund
-      const emergencyFundAmount = monthlyExpenses * fundMultiplier;
+
+      const emergencyFundAmount = monthlyExpensesValue * fundMultiplier;
 
       setEmergencyFund(emergencyFundAmount);
 
@@ -105,7 +115,7 @@ export default function EmergencyFundForm() {
         {
           menikah: status,
           tanggungan: dependents,
-          bulanan: Number(monthlyExpenses),
+          bulanan: monthlyExpensesValue,
           hasil: emergencyFundAmount,
         },
         {
@@ -127,6 +137,10 @@ export default function EmergencyFundForm() {
   };
 
   const { currentUser } = useCurrentUser();
+
+  useEffect(() => {
+    console.log(emergencyFund);
+  }, [emergencyFund]);
 
   return (
     <>
@@ -199,11 +213,10 @@ export default function EmergencyFundForm() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="number"
-              pattern="[0-9]"
+              type="text"
               value={monthlyExpenses}
               onChange={onChangeMonthlyExpensesHandler}
-              placeholder="Contoh: 3000000"
+              placeholder="Contoh: 3.000.000"
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
             />
           </div>
@@ -243,3 +256,4 @@ export default function EmergencyFundForm() {
     </>
   );
 }
+

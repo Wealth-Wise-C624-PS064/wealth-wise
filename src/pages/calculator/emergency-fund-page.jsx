@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 
 import { useCurrentUser, useEmergency } from "@/hooks";
 
@@ -58,7 +58,7 @@ function EmergencyFundPage() {
             </TableHeader>
             <TableBody>
               {emergencyFilter &&
-                emergencyFilter?.map((emergency, index = 0) => (
+                emergencyFilter?.map((emergency, index) => (
                   <TableRow key={emergency.id}>
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>
@@ -71,7 +71,12 @@ function EmergencyFundPage() {
                         ? "Tidak / Belum Punya"
                         : "Punya"}
                     </TableCell>
-                    <TableCell>{toRupiah(emergency.bulanan)}</TableCell>
+                    <TableCell>
+                      {emergency?.bulanan &&
+                        toRupiah(
+                          parseFloat(emergency.bulanan.replace(/[,.]/g, ""))
+                        )}
+                    </TableCell>
                     <TableCell className="text-right">
                       {toRupiah(emergency.hasil)}
                     </TableCell>
