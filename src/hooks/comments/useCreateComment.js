@@ -15,8 +15,5 @@ export const useCreateComment = () => {
     },
   });
 
-  return {
-    createComment: mutate,
-    isPending,
-  };
+  return { createComment: mutate, isPending };
 };

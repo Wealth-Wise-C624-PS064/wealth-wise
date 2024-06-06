@@ -1,3 +1,8 @@
+import { useMemo } from "react";
+
+import { usePension } from "@/hooks";
+
+import auth from "@/lib/firebase/auth";
 import { toRupiah } from "@/lib/toRupiah";
 
 import {
@@ -9,17 +14,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { usePension } from "@/hooks";
 import PensionFoundForm from "@/components/pension-found-form";
-import { getAuth } from "firebase/auth";
 
 function PensionFundPage() {
   const { data: pensions, isLoading, isError, error } = usePension();
-  const auth = getAuth();
+
   const currentUser = auth.currentUser;
-  const pensionFilter = pensions?.filter(
-    (pension) => pension.author_id === currentUser?.uid
-  );
+
+  const pensionFilter = useMemo(() => {
+    return pensions?.filter(
+      (pension) => pension.author_id === currentUser?.uid
+    );
+  }, [pensions, currentUser]);
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
@@ -50,18 +56,19 @@ function PensionFundPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {pensionFilter?.map((pension, index = 0) => (
-                <TableRow key={pension.id}>
-                  <TableCell className="font-medium">{index + 1}</TableCell>
-                  <TableCell>{toRupiah(pension.P)}</TableCell>
-                  <TableCell>{pension.t} tahun</TableCell>
-                  <TableCell>{pension.i * 100}%</TableCell>
-                  <TableCell>{pension.r * 100}%</TableCell>
-                  <TableCell className="text-right">
-                    {toRupiah(pension.hasil)}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {pensionFilter &&
+                pensionFilter?.map((pension, index = 0) => (
+                  <TableRow key={pension.id}>
+                    <TableCell className="font-medium">{index + 1}</TableCell>
+                    <TableCell>{toRupiah(pension.P)}</TableCell>
+                    <TableCell>{pension.t} tahun</TableCell>
+                    <TableCell>{pension.i * 100}%</TableCell>
+                    <TableCell>{pension.r * 100}%</TableCell>
+                    <TableCell className="text-right">
+                      {toRupiah(pension.hasil)}
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         )}

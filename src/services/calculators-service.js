@@ -55,7 +55,16 @@ export const addPensionFund = async (data) => {
 export const addEmergencyFund = async (data) => {
   try {
     const emergencyRef = collection(db, "emergency-fund");
-    await addDoc(emergencyRef, data);
+
+    const { uid } = auth.currentUser;
+
+    const createdAt = new Date().toISOString();
+
+    await addDoc(emergencyRef, {
+      ...data,
+      author_id: uid,
+      createdAt,
+    });
   } catch (error) {
     throw new Error(error);
   }
@@ -83,7 +92,16 @@ export const getEmergencyFund = async () => {
 export const addInvestment = async (data) => {
   try {
     const investment = collection(db, "investment");
-    await addDoc(investment, data);
+
+    const { uid } = auth.currentUser;
+
+    const createdAt = new Date().toISOString();
+
+    await addDoc(investment, {
+      ...data,
+      author_id: uid,
+      createdAt,
+    });
   } catch (error) {
     throw new Error(error);
   }
