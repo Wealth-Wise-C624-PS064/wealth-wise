@@ -15,7 +15,8 @@ import { useEmergency, useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 
 import { addEmergencyFund } from "@/services/calculators-service";
-import auth from "@/lib/firebase/auth";
+
+import { getAuth } from "firebase/auth";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -88,7 +89,7 @@ function EmergencyFundPage() {
         bulanan: Number(monthlyExpenses),
         hasil: emergencyFundAmount,
         createdAt: createdAt,
-        authorId: uid,
+        author_id: uid,
       });
     } else {
       Swal.fire({
@@ -101,6 +102,11 @@ function EmergencyFundPage() {
   };
 
   const { data: emergencies } = useEmergency();
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  const emergencyFilter = emergencies?.filter(
+    (emergency) => emergency.author_id === currentUser?.uid
+  );
 
   console.log(emergencies);
 
@@ -231,7 +237,7 @@ function EmergencyFundPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {emergencies?.map((emergency, index = 0) => (
+            {emergencyFilter?.map((emergency, index = 0) => (
               <TableRow key={emergency.id}>
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>
