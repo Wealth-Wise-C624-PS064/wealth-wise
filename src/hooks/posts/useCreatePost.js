@@ -18,8 +18,5 @@ export const useCreatePost = () => {
     },
   });
 
-  return {
-    createPost: mutate,
-    isPending,
-  };
+  return { createPost: mutate, isPending };
 };
