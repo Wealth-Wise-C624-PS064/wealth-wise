@@ -29,10 +29,6 @@ function EmergencyFundPage() {
     );
   }, [emergencies, user]);
 
-  useEffect(() => {
-    console.log(emergencyFilter);
-  }, [emergencyFilter]);
-
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
       <h1 className="mb-8 text-2xl font-bold">
