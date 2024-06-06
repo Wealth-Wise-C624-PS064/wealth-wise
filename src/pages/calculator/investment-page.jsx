@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { useInput, useInvestment } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
-import { addInvestment } from "@/services/calculator-service";
+import { addInvestment } from "@/services/calculators-service";
 import auth from "@/lib/firebase/auth";
 
 const descFormulaHandler = (event) => {

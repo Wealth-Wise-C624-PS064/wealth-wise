@@ -1,28 +1,51 @@
-import BaseLayout from "@/layouts/base-layout";
-import { Link, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import {
   FaMoneyBillTrendUp,
   FaPersonCane,
   FaTriangleExclamation,
 } from "react-icons/fa6";
 
-function CalculatorPage() {
+import BaseLayout from "@/layouts/base-layout";
+
+export default function CalculatorPage() {
+  const [links] = useState(() => [
+    {
+      id: "investasi",
+      path: "/kalkulator/investasi",
+      name: "Investasi",
+      icon: <FaMoneyBillTrendUp className="text-3xl lg:text-5xl" />,
+    },
+    {
+      id: "dana-darurat",
+      path: "/kalkulator/dana-darurat",
+      name: "Dana Darurat",
+      icon: <FaPersonCane className="text-3xl lg:text-5xl" />,
+    },
+    {
+      id: "dana-pensiun",
+      path: "/kalkulator/dana-pensiun",
+      name: "Dana Pensiun",
+      icon: <FaTriangleExclamation className="text-3xl lg:text-5xl" />,
+    },
+  ]);
+
   return (
     <BaseLayout>
-      <section className="bg-primary-blue ">
-        <div className="mx-auto flex flex-col items-center justify-center h-full max-w-6xl px-4 md:px-16 py-12 md:gap-20 md:flex-row min-h-96">
-          <div className="space-y-4">
-            <h2 className="text-5xl font-bold leading-snug text-white xl:text-6xl">
+      <section className="bg-primary-blue">
+        <div className="flex flex-col justify-between h-full max-w-6xl gap-8 px-4 py-12 mx-auto md:items-center md:gap-20 md:flex-row min-h-96">
+          <div className="space-y-3 md:space-y-4">
+            <h2 className="text-3xl font-semibold leading-normal text-white md:text-5xl">
               Kalkulator
             </h2>
             <div className="space-y-4">
-              <p className="text-4xl font-semibold text-white">
+              <p className="text-xl text-white md:text-2xl">
                 Untuk Hitung Investasi
               </p>
-              <p className="text-4xl font-semibold text-white">
+              <p className="text-xl text-white md:text-2xl">
                 Untuk Hitung Dana Darurat
               </p>
-              <p className="text-4xl font-semibold text-white pb-6">
+              <p className="text-xl text-white md:text-2xl">
                 Untuk Hitung Dana Pensiun
               </p>
             </div>
@@ -37,39 +60,29 @@ function CalculatorPage() {
           </div>
         </div>
       </section>
-      <section className="max-w-6xl mx-auto px-3  flex pt-8">
-        <div className="flex space-x-2 sm:space-x-6 lg:space-x-12 mb-8 mx-auto">
-          <Link to="/kalkulator/investasi">
-            <div className="border-2 border-black  rounded-2xl w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40 flex flex-col items-center justify-center px-1 md:px-4">
-              <FaMoneyBillTrendUp className="text-4xl md:text-5xl lg:text-6xl pb-1" />
-              <p className="text-base md:text-lg lg:text-xl font-bold text-center">
-                Investasi
+      <section className="max-w-6xl px-4 mx-auto my-14 md:my-20">
+        <div className="flex items-center justify-center gap-3 md:gap-8">
+          {links.map((link) => (
+            <NavLink
+              key={link.id}
+              to={`${link.path}`}
+              className={({ isActive }) =>
+                isActive
+                  ? "flex flex-col items-center justify-center gap-1 md:gap-3 rounded-lg border p-4 transition-all duration-150 ease-in-out shadow-sm text-primary-blue border-primary-blue w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40"
+                  : "flex flex-col items-center justify-center border-slate-600 gap-1 md:gap-3 rounded-lg border p-4 transition-all duration-150 ease-in-out shadow-md w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40"
+              }
+            >
+              {link.icon}
+              <p className="text-sm font-semibold text-center md:text-lg">
+                {link.name}
               </p>
-            </div>
-          </Link>
-          <Link to="/kalkulator/dana-darurat">
-            <div className="border-2 border-black  rounded-2xl w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40 flex flex-col items-center justify-center px-1 md:px-4">
-              <FaTriangleExclamation className="text-4xl md:text-5xl lg:text-6xl pb-1" />
-              <p className="text-base md:text-lg lg:text-xl font-bold text-center">
-                Dana Darurat
-              </p>
-            </div>
-          </Link>
-          <Link to="/kalkulator/dana-pensiun">
-            <div className="border-2 border-black  rounded-2xl w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40 flex flex-col items-center justify-center px-1 md:px-4">
-              <FaPersonCane className="text-4xl md:text-5xl lg:text-6xl pb-1" />
-              <p className="text-base md:text-lg lg:text-xl font-bold text-center">
-                Dana Pensiun
-              </p>
-            </div>
-          </Link>
+            </NavLink>
+          ))}
         </div>
       </section>
-      <section className="max-w-6xl mx-auto px-4 sm:px-8 md:px-24">
+      <section className="max-w-6xl px-4 mx-auto sm:px-8 md:px-24">
         <Outlet />
       </section>
     </BaseLayout>
   );
 }
-
-export default CalculatorPage;
