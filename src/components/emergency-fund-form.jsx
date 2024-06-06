@@ -115,7 +115,7 @@ export default function EmergencyFundForm() {
         {
           menikah: status,
           tanggungan: dependents,
-          bulanan: Number(monthlyExpenses),
+          bulanan: monthlyExpensesValue,
           hasil: emergencyFundAmount,
         },
         {
@@ -137,10 +137,6 @@ export default function EmergencyFundForm() {
   };
 
   const { currentUser } = useCurrentUser();
-
-  useEffect(() => {
-    console.log(emergencyFund);
-  }, [emergencyFund]);
 
   return (
     <>
