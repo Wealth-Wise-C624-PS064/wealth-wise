@@ -139,10 +139,6 @@ export default function InvestmentForm() {
 
   const { currentUser } = useCurrentUser();
 
-  useEffect(() => {
-    console.log(currentAmount * 2);
-  }, [currentAmount]);
-
   return (
     <>
       <form onSubmit={calculateFutureValue}>

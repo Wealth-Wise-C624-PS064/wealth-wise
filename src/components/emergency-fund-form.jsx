@@ -115,7 +115,7 @@ export default function EmergencyFundForm() {
         {
           menikah: status,
           tanggungan: dependents,
-          bulanan: Number(monthlyExpenses),
+          bulanan: monthlyExpensesValue,
           hasil: emergencyFundAmount,
         },
         {

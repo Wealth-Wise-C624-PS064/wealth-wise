@@ -164,8 +164,8 @@ export default function PensionFoundForm() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="number"
-              placeholder="Contoh: 5000000"
+              type="text"
+              placeholder="Contoh: 5.000.000"
               value={monthlyExpensesLater}
               onChange={onChangeMonthlyExpensesLaterHandler}
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
@@ -180,7 +180,7 @@ export default function PensionFoundForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="2"
               value={yearsLater}
               onChange={onChangeYearsLaterHandler}
@@ -197,7 +197,7 @@ export default function PensionFoundForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="5"
               value={inflation}
               onChange={onChangeInflationHandler}
@@ -214,7 +214,7 @@ export default function PensionFoundForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="5"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
@@ -255,9 +255,10 @@ export default function PensionFoundForm() {
           className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
           disabled={isPending}
         >
-          Simpan
+          Simpan ke Tabel
         </button>
       )}
     </>
   );
 }
+

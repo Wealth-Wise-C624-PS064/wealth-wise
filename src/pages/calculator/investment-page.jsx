@@ -63,7 +63,9 @@ function InvestmentPage() {
                     <TableCell>{toRupiah(investment.PMT)}</TableCell>
                     <TableCell>{investment.r * 100}%</TableCell>
                     <TableCell>{investment.t} tahun</TableCell>
-                    <TableCell className="text-right">Rp 52.556.993</TableCell>
+                    <TableCell className="text-right">
+                      {toRupiah(investment.hasil)}
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
