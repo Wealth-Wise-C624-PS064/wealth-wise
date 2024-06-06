@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useAddPensionFund, useInput } from "@/hooks";
+import { useAddPensionFund, useCurrentUser, useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -151,6 +151,8 @@ export default function PensionFoundForm() {
     );
   };
 
+  const { currentUser } = useCurrentUser();
+
   return (
     <>
       <form onSubmit={calculatePensionFund}>
@@ -245,14 +247,17 @@ export default function PensionFoundForm() {
           {toRupiah(pensionFund)} sebagai Dana Pensiun
         </h1>
       )}
-      <button
-        title="Simpan"
-        onClick={handleAddPensionFund}
-        className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
-        disabled={isPending}
-      >
-        Simpan
-      </button>
+
+      {currentUser && (
+        <button
+          title="Simpan"
+          onClick={handleAddPensionFund}
+          className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
+          disabled={isPending}
+        >
+          Simpan
+        </button>
+      )}
     </>
   );
 }
