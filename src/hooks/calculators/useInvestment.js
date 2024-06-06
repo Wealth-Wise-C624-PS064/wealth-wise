@@ -1,9 +1,9 @@
-import { getInvestment } from "@/services/calculator-service";
+import { getInvestment } from "@/services/calculators-service";
 import { useQuery } from "@tanstack/react-query";
 
 export const useInvestment = () => {
   return useQuery({
-    queryKey: ["investments"],
+    queryKey: ["investment"],
     queryFn: async () => await getInvestment(),
   });
 };

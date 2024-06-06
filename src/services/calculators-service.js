@@ -5,30 +5,24 @@ import {
   orderBy,
   getDocs,
   where,
-} from "firebase/firestore";
+} from "@firebase/firestore";
 
 import db from "@/lib/firebase/db";
+import auth from "@/lib/firebase/auth";
 
-import { getAuth } from "firebase/auth";
-
-export const addPensionFund = async (data) => {
-  try {
-    const pensiontRef = collection(db, "pension-fund");
-    await addDoc(pensiontRef, data);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+// PENSION FUND
 
 export const getPensionFund = async () => {
   try {
-    const auth = getAuth();
-    const currentUser = auth?.currentUser;
     const pensionFundRef = collection(db, "pension-fund");
+
+    if (!auth.currentUser.uid) {
+      throw new Error("User not authenticated");
+    }
+
     const q = query(
       pensionFundRef,
-      where("authorId", "==", currentUser.uid),
-      orderBy("createdAt", "desc")
+      where("author_id", "==", auth.currentUser.uid)
     );
 
     const pensionSnapshot = await getDocs(q);
@@ -42,6 +36,26 @@ export const getPensionFund = async () => {
   }
 };
 
+export const addPensionFund = async (data) => {
+  try {
+    const pensionsRef = collection(db, "pension-fund");
+
+    const { uid } = auth.currentUser;
+
+    const createdAt = new Date().toISOString();
+
+    await addDoc(pensionsRef, {
+      ...data,
+      author_id: uid,
+      createdAt,
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// EMERGENCY FUND
+
 export const addEmergencyFund = async (data) => {
   try {
     const emergencyRef = collection(db, "emergency-fund");
@@ -53,15 +67,9 @@ export const addEmergencyFund = async (data) => {
 
 export const getEmergencyFund = async () => {
   try {
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
     const emergencyRef = collection(db, "emergency-fund");
 
-    const q = query(
-      emergencyRef,
-      where("authorId", "==", currentUser?.uid),
-      orderBy("createdAt", "desc")
-    );
+    const q = query(emergencyRef, orderBy("createdAt", "desc"));
 
     const emergencySnapshot = await getDocs(q);
 
@@ -74,6 +82,8 @@ export const getEmergencyFund = async () => {
   }
 };
 
+// INVESTMENT FUND
+
 export const addInvestment = async (data) => {
   try {
     const investment = collection(db, "investment");
@@ -85,15 +95,9 @@ export const addInvestment = async (data) => {
 
 export const getInvestment = async () => {
   try {
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
     const investmentRef = collection(db, "investment");
 
-    const q = query(
-      investmentRef,
-      where("authorId", "==", currentUser?.uid),
-      orderBy("createdAt", "desc")
-    );
+    const q = query(investmentRef, orderBy("createdAt", "desc"));
 
     const investmentSnapshot = await getDocs(q);
 
