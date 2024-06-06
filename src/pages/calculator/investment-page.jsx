@@ -14,7 +14,8 @@ import {
 import { useInput, useInvestment } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 import { addInvestment } from "@/services/calculators-service";
-import auth from "@/lib/firebase/auth";
+
+import { getAuth } from "firebase/auth";
 
 const descFormulaHandler = (event) => {
   event.preventDefault();
@@ -103,12 +104,17 @@ function InvestmentPage() {
       t: t_value,
       hasil: futureValue,
       createdAt: createdAt,
-      authorId: uid,
+      author_id: uid,
     });
   };
 
   const { data: investments } = useInvestment();
-  console.log(investments);
+
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  const investmentFilter = investments?.filter(
+    (investment) => investment.author_id === currentUser?.uid
+  );
 
   return (
     <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
@@ -224,7 +230,7 @@ function InvestmentPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {investments?.map((investment, index = 0) => (
+            {investmentFilter?.map((investment, index = 0) => (
               <TableRow key={investment.id}>
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>{toRupiah(investment.P)}</TableCell>

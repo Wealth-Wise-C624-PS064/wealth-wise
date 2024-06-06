@@ -4,7 +4,6 @@ import {
   query,
   orderBy,
   getDocs,
-  where,
 } from "@firebase/firestore";
 
 import db from "@/lib/firebase/db";
@@ -20,10 +19,7 @@ export const getPensionFund = async () => {
       throw new Error("User not authenticated");
     }
 
-    const q = query(
-      pensionFundRef,
-      where("author_id", "==", auth.currentUser.uid)
-    );
+    const q = query(pensionFundRef, orderBy("createdAt", "desc"));
 
     const pensionSnapshot = await getDocs(q);
 
