@@ -9,6 +9,8 @@ import BaseLayout from "@/layouts/base-layout";
 
 import CreateCommentForm from "@/components/create-comment-form";
 import CommentList from "@/components/comment-list";
+import SkeletonLoaderPosts from "@/components/skeleton-loader-posts";
+import SkeletonLoaderComments from "@/components/skeleton-loader-comments";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +40,84 @@ export default function PostsDetailPage() {
 
   const { deletePost, isPending } = useDeletePost();
 
+  let contentPost;
+  let contentComments;
+
+  if (isLoadingPost) {
+    contentPost = <SkeletonLoaderPosts number={1} />;
+  }
+
+  if (isLoadingComments) {
+    contentComments = <SkeletonLoaderComments />;
+  }
+
+  if (isSuccessPost) {
+    contentPost = (
+      <>
+        <div className="p-4 mb-10 space-y-4 border rounded-md">
+          <div className="flex flex-row gap-3">
+            <Avatar>
+              <AvatarFallback>{post.author.displayName}</AvatarFallback>
+              <AvatarImage
+                src={`${post.author.photoURL}`}
+                alt={`${post.author.displayName}`}
+              />
+            </Avatar>
+            <div className="flex flex-col gap-1 text-sm">
+              <p className="text-primary-blue">{post.author.displayName}</p>
+              <p className="text-xs">{formatTimeAgo(post.createdAt)}</p>
+            </div>
+          </div>
+          <h2 className="text-3xl font-semibold capitalize">{post.title}</h2>
+          <p>{post.body}</p>
+          <div>
+            <Badge className="bg-primary-blue hover:bg-primary-blue">
+              {post.category}
+            </Badge>
+          </div>
+        </div>
+        {post?.author.id === currentUser?.uid && (
+          <div className="flex flex-row justify-end mb-6">
+            <Button
+              onClick={() => deletePost(postId)}
+              className="rounded-full"
+              variant="destructive"
+              disabled={isPending}
+            >
+              <div className="flex flex-row items-center gap-2">
+                {isPending ? (
+                  <Loader2Icon className="w-5 h-5 animate-spin" />
+                ) : (
+                  <XIcon className="w-5 h-5" />
+                )}
+                <span>Hapus Diskusi</span>
+              </div>
+            </Button>
+          </div>
+        )}
+      </>
+    );
+  }
+
+  if (isSuccessComments) {
+    contentComments =
+      comments.length > 0 ? (
+        <CommentList comments={comments} />
+      ) : (
+        <p>
+          <i>Belum ada komentar</i>
+        </p>
+      );
+  }
+
+  if (isErrorPost) {
+    contentPost = <p>Error: {errorPost.message}</p>;
+  }
+
+  if (errorComments) {
+    contentComments = <div>Error: {errorComments.message}</div>;
+  }
+
   return (
     <BaseLayout>
       <section className="pt-10 pb-24 bg-white">
@@ -52,64 +132,7 @@ export default function PostsDetailPage() {
           </Button>
         </div>
         <div className="max-w-6xl px-4 mx-auto space-y-4 min-h-max">
-          <div>
-            {isLoadingPost && (
-              <div>
-                <Loader2Icon className="animate-spin" />
-              </div>
-            )}
-            {isSuccessPost && (
-              <>
-                <div className="p-4 mb-10 space-y-4 border rounded-md">
-                  <div className="flex flex-row gap-3">
-                    <Avatar>
-                      <AvatarFallback>{post.author.displayName}</AvatarFallback>
-                      <AvatarImage
-                        src={`${post.author.photoURL}`}
-                        alt={`${post.author.displayName}`}
-                      />
-                    </Avatar>
-                    <div className="flex flex-col gap-1 text-sm">
-                      <p className="text-primary-blue">
-                        {post.author.displayName}
-                      </p>
-                      <p className="text-xs">{formatTimeAgo(post.createdAt)}</p>
-                    </div>
-                  </div>
-                  <h2 className="text-3xl font-semibold capitalize">
-                    {post.title}
-                  </h2>
-                  <p>{post.body}</p>
-                  <div>
-                    <Badge className="bg-primary-blue hover:bg-primary-blue">
-                      {post.category}
-                    </Badge>
-                  </div>
-                </div>
-                {post?.author.id === currentUser?.uid && (
-                  <div className="flex flex-row justify-end mb-6">
-                    <Button
-                      onClick={() => deletePost(postId)}
-                      className="rounded-full"
-                      variant="destructive"
-                      disabled={isPending}
-                    >
-                      <div className="flex flex-row items-center gap-2">
-                        {isPending ? (
-                          <Loader2Icon className="w-5 h-5 animate-spin" />
-                        ) : (
-                          <XIcon className="w-5 h-5" />
-                        )}
-                        <span>Hapus Diskusi</span>
-                      </div>
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
-            {isErrorPost && <div>Error: {errorPost.message}</div>}
-          </div>
-
+          <div>{contentPost}</div>
           <div>
             <h3 className="font-medium">
               <div className="flex flex-row items-center gap-1">
@@ -149,22 +172,7 @@ export default function PostsDetailPage() {
                   </Link>
                 </div>
               )}
-              <div>
-                {isLoadingComments && (
-                  <div>
-                    <Loader2Icon className="animate-spin" />
-                  </div>
-                )}
-                {isSuccessComments &&
-                  (comments.length > 0 ? (
-                    <CommentList comments={comments} />
-                  ) : (
-                    <p>
-                      <i>Belum ada komentar</i>
-                    </p>
-                  ))}
-                {isErrorComments && <span>Error: {errorComments.message}</span>}
-              </div>
+              <div>{contentComments}</div>
             </div>
           </div>
         </div>

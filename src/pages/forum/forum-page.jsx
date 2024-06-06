@@ -9,9 +9,11 @@ import BaseLayout from "@/layouts/base-layout";
 
 import SearchThread from "@/components/search-thread";
 import PostList from "@/components/post-list";
+import Categories from "@/components/categories";
+import SkeletonLoaderCategories from "@/components/skeleton-loader-categories";
 
 import { Button } from "@/components/ui/button";
-import Categories from "@/components/categories";
+import SkeletonLoaderPosts from "@/components/skeleton-loader-posts";
 
 export default function ForumPage() {
   const [searchParams] = useSearchParams();
@@ -34,6 +36,18 @@ export default function ForumPage() {
     },
   ] = useSharedPostsCategories();
 
+  let contentPosts;
+
+  let contentCategories;
+
+  if (isLoadingPosts) {
+    contentPosts = <SkeletonLoaderPosts number={2} />;
+  }
+
+  if (isLoadingCategories) {
+    contentCategories = <SkeletonLoaderCategories />;
+  }
+
   const filteredPosts = useMemo(() => {
     return posts?.filter((post) => {
       if (searchParams.get("search") ?? "") {
@@ -47,6 +61,31 @@ export default function ForumPage() {
       }
     });
   }, [posts, searchParams]);
+
+  if (isSuccessPosts) {
+    contentPosts =
+      posts.length > 0 ? (
+        <PostList posts={filteredPosts} />
+      ) : (
+        <div>
+          <p>
+            <i>Tidak ada postingan</i>
+          </p>
+        </div>
+      );
+  }
+
+  if (isSuccessCategories) {
+    contentCategories = <Categories categories={categories} />;
+  }
+
+  if (isErrorPosts) {
+    contentPosts = <div>{errorPosts.message}</div>;
+  }
+
+  if (isErrorCategories) {
+    contentCategories = <div>{errorCatergories.message}</div>;
+  }
 
   return (
     <BaseLayout>
@@ -100,28 +139,14 @@ export default function ForumPage() {
       </section>
       <section className="max-w-6xl px-4 mx-auto mb-20">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
-          <div className="order-1 md:order-0 md:col-span-2">
-            {isLoadingPosts && <p>Loading...</p>}
-            {isSuccessPosts && posts.length > 0 ? (
-              <PostList posts={filteredPosts} />
-            ) : (
-              <div>
-                <p>
-                  <i>Tidak ada postingan</i>
-                </p>
-              </div>
-            )}
-            {isErrorPosts && <p>{errorPosts.message}</p>}
-          </div>
+          <div className="order-1 md:order-0 md:col-span-2">{contentPosts}</div>
           <div className="order-0 md:order-1 md:col-span-1">
             <div className="p-4 bg-white border rounded-md shadow-sm">
               <div className="flex flex-col gap-2 mb-4">
                 <h2 className="text-xl font-semibold">Kategori Popular</h2>
                 <div className="bg-primary-blue w-40 h-[2px]"></div>
               </div>
-              {isLoadingCategories && <p>Loading...</p>}
-              {isSuccessCategories && <Categories categories={categories} />}
-              {isErrorCategories && <p>{errorCatergories.message}</p>}
+              {contentCategories}
             </div>
           </div>
         </div>
