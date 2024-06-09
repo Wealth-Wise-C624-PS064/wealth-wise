@@ -30,7 +30,7 @@ const formSchema = z.object({
     .string({ message: "Title tidak boleh kosong" })
     .min(3, { message: "Title terlalu pendek" })
     .max(50, { message: "Title terlalu panjang" }),
-  category: z.string().optional(),
+  category: z.string({ message: "Kategori harus dipilih" }),
   body: z
     .string({ message: "Body tidak boleh kosong" })
     .min(3, { message: "Title terlalu pendek" }),
