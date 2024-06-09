@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 
 import { useCurrentUser, useEmergency } from "@/hooks";
 
@@ -72,10 +72,7 @@ function EmergencyFundPage() {
                         : "Punya"}
                     </TableCell>
                     <TableCell>
-                      {emergency?.bulanan &&
-                        toRupiah(
-                          parseFloat(emergency.bulanan.replace(/[,.]/g, ""))
-                        )}
+                      {emergency?.bulanan && toRupiah(emergency.bulanan)}
                     </TableCell>
                     <TableCell className="text-right">
                       {toRupiah(emergency.hasil)}
