@@ -6,7 +6,10 @@ import App from "./App.jsx";
 
 import "./index.css";
 
-const queryClient = new QueryClient();
+// Supports weights 200-800
+import "@fontsource-variable/plus-jakarta-sans";
+
+const queryClient = new QueryClient({});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
