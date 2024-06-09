@@ -20,8 +20,5 @@ export const useDeletePost = () => {
     },
   });
 
-  return {
-    deletePost: mutate,
-    isPending,
-  };
+  return { deletePost: mutate, isPending };
 };

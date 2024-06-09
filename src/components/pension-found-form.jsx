@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useAddPensionFund, useInput } from "@/hooks";
+import { useAddPensionFund, useCurrentUser, useInput } from "@/hooks";
 import { toRupiah } from "@/lib/toRupiah";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -9,9 +9,10 @@ import "sweetalert2/src/sweetalert2.scss";
 export default function PensionFoundForm() {
   const [monthlyExpensesLater, onChangeMonthlyExpensesLaterHandler] =
     useInput("");
-  const [yearsLater, onChangeYearsLaterHandler] = useInput("");
-  const [inflation, onChangeInflationHandler] = useInput("");
-  const [annualReturn, onChangeAnnualReturnHandler] = useInput("");
+  const [yearsLater, onChangeYearsLaterHandler, setYearsLater] = useInput("");
+  const [inflation, onChangeInflationHandler, setInflation] = useInput("");
+  const [annualReturn, onChangeAnnualReturnHandler, setAnnualReturn] =
+    useInput("");
   const [pensionFund, setPensionFund] = useState(null);
 
   const { addPensionFund, isPending } = useAddPensionFund();
@@ -132,14 +133,25 @@ export default function PensionFoundForm() {
     setPensionFund(pensionFundAmount.toFixed(2));
 
     // Save to firestore
-    addPensionFund({
-      P: MEL_value,
-      t: t_value,
-      i: i_value,
-      r: r_value,
-      hasil: pensionFundAmount,
-    });
+    addPensionFund(
+      {
+        P: MEL_value,
+        t: t_value,
+        i: i_value,
+        r: r_value,
+        hasil: pensionFundAmount,
+      },
+      {
+        onSettled: () => {
+          setAnnualReturn("");
+          setInflation("");
+          setYearsLater("");
+        },
+      }
+    );
   };
+
+  const { currentUser } = useCurrentUser();
 
   return (
     <>
@@ -152,8 +164,8 @@ export default function PensionFoundForm() {
           <div className="flex items-center">
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
-              type="number"
-              placeholder="Contoh: 5000000"
+              type="text"
+              placeholder="Contoh: 5.000.000"
               value={monthlyExpensesLater}
               onChange={onChangeMonthlyExpensesLaterHandler}
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
@@ -168,7 +180,7 @@ export default function PensionFoundForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="2"
               value={yearsLater}
               onChange={onChangeYearsLaterHandler}
@@ -185,7 +197,7 @@ export default function PensionFoundForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="5"
               value={inflation}
               onChange={onChangeInflationHandler}
@@ -202,7 +214,7 @@ export default function PensionFoundForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="number"
+              type="text"
               placeholder="5"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
@@ -235,14 +247,18 @@ export default function PensionFoundForm() {
           {toRupiah(pensionFund)} sebagai Dana Pensiun
         </h1>
       )}
-      <button
-        title="Simpan"
-        onClick={handleAddPensionFund}
-        className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
-        disabled={isPending}
-      >
-        Simpan
-      </button>
+
+      {currentUser && (
+        <button
+          title="Simpan"
+          onClick={handleAddPensionFund}
+          className="px-8 py-2 mb-8 mr-4 text-lg font-semibold text-white bg-primary-blue rounded-2xl"
+          disabled={isPending}
+        >
+          Simpan ke Tabel
+        </button>
+      )}
     </>
   );
 }
+

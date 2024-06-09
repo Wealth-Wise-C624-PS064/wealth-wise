@@ -68,7 +68,7 @@ export default function CalculatorPage() {
               to={`${link.path}`}
               className={({ isActive }) =>
                 isActive
-                  ? "flex flex-col items-center justify-center gap-1 md:gap-3 rounded-lg border p-4 transition-all duration-150 ease-in-out shadow-sm text-primary-blue border-primary-blue w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40"
+                  ? "flex flex-col items-center justify-center gap-1 md:gap-3 rounded-lg  p-4 transition-all duration-150 ease-in-out shadow-sm text-primary-blue border-primary-blue border-[3px] w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40"
                   : "flex flex-col items-center justify-center border-slate-600 gap-1 md:gap-3 rounded-lg border p-4 transition-all duration-150 ease-in-out shadow-md w-28 h-28 md:w-[136px] md:h-[136px] lg:w-40 lg:h-40"
               }
             >
