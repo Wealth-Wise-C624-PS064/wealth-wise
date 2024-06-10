@@ -19,8 +19,8 @@ export default function SkeletonLoaderPosts({ number = 2 }) {
               </div>
             </div>
             <div className="space-y-3">
-              <Skeleton className="h-4 w-[400px] rounded-full" />
-              <Skeleton className="h-4 w-[450px] rounded-full" />
+              <Skeleton className="h-4 w-[320px] md:w-[400px] rounded-full" />
+              <Skeleton className="h-4 w-[350px] md:w-[450px] rounded-full" />
             </div>
             <div>
               <Skeleton className="h-4 w-[100px] rounded-full" />
