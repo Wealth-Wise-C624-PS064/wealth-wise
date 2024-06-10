@@ -51,11 +51,13 @@ export default function ForumPage() {
   const filteredPosts = useMemo(() => {
     return posts?.filter((post) => {
       if (searchParams.get("search") ?? "") {
-        return post?.title?.toLowerCase()?.includes(searchParams.get("search"));
+        return post?.title
+          ?.toLocaleLowerCase()
+          ?.includes(searchParams.get("search")?.toLocaleLowerCase());
       } else if (searchParams.get("category") ?? "") {
         return post?.category
-          ?.toLowerCase()
-          .includes(searchParams.get("category"));
+          ?.toLocaleLowerCase()
+          .includes(searchParams.get("category")?.toLocaleLowerCase());
       } else {
         return true;
       }
