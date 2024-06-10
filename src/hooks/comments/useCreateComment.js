@@ -11,8 +11,9 @@ export const useCreateComment = () => {
       await createComment({ postId, text }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments"] });
-      toast.success("Komentar berhasil dibuat");
+      toast.success("Komentar berhasil ditambahkan");
     },
+    onError: (err) => toast.error(err.message),
   });
 
   return { createComment: mutate, isPending };
