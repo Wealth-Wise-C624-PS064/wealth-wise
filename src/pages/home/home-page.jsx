@@ -154,71 +154,81 @@ export default function HomePage() {
         <section className="py-20 bg-white">
           <div className="max-w-6xl px-4 mx-auto">
             <div className="flex flex-col items-center justify-center gap-3 mb-10">
-              <h2 className="text-2xl font-semibold text-center ">
-                Frequently Asked Questions
-              </h2>
+              <Fade delay={1e2} triggerOnce={true} damping={1e-1}>
+                <h2 className="text-2xl font-semibold text-center ">
+                  Frequently Asked Questions
+                </h2>
+              </Fade>
               <div className="bg-primary-blue w-32 h-[2px]"></div>
             </div>
             <div>
-              <Accordion
-                type="single"
-                collapsible
-                className="flex flex-col w-full gap-3"
+              <Fade
+                delay={1e2}
+                direction={"up"}
+                triggerOnce={true}
+                damping={1e-1}
               >
-                <AccordionItem
-                  value="item-1"
-                  className="px-4 py-1 border rounded-md"
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="flex flex-col w-full gap-3"
                 >
-                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
-                    Apakah WealthWise Gratis?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Ya, segala fitur dan fungsi dari aplikasi WealthWise dapat
-                    Anda gunakan secara gratis tanpa biaya
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem
-                  value="item-2"
-                  className="px-4 py-2 border rounded-md"
-                >
-                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
-                    Apakah saya harus login untuk menggunakan kalkulator?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Tidak, Anda langsung dapat menggunakan kalkulator tanpa
-                    login. Namun, jika Anda ingin menyimpan ke tabel penyimpanan
-                    ataupun berdiskusi di forum, maka Anda perlu login.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem
-                  value="item-3"
-                  className="px-4 py-1 border rounded-md"
-                >
-                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
-                    Saya ingin tahu formula WealthWise dalam menghitung
-                    Investasi, Dana Darurat, atau Dana Pensiun
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Tentu! Anda dapat menekan tombol “Cara Kami Menghitung”
-                    untuk menampilkan formula yang kami gunakan. Tentunya
-                    formulanya sudah kami riset dan dijamin benar.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem
-                  value="item-4"
-                  className="px-4 py-2 border rounded-md"
-                >
-                  <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
-                    Apa saja topik yang dapat dibahas di Forum Diskusi?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Anda dapat membahas Topik apa saja terkait investasi, dana
-                    darurat, dana pensiun, ataupun topik keuangan lainnya.
-                    Namun, perlu diingat diskusi tidak boleh mengandung unsur
-                    SARA ataupun yang dapat mengganggu kenyamanan publik
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                  <AccordionItem
+                    value="item-1"
+                    className="px-4 py-1 border rounded-md"
+                  >
+                    <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
+                      Apakah WealthWise Gratis?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      Ya, segala fitur dan fungsi dari aplikasi WealthWise dapat
+                      Anda gunakan secara gratis tanpa biaya
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem
+                    value="item-2"
+                    className="px-4 py-2 border rounded-md"
+                  >
+                    <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
+                      Apakah saya harus login untuk menggunakan kalkulator?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      Tidak, Anda langsung dapat menggunakan kalkulator tanpa
+                      login. Namun, jika Anda ingin menyimpan ke tabel
+                      penyimpanan ataupun berdiskusi di forum, maka Anda perlu
+                      login.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem
+                    value="item-3"
+                    className="px-4 py-1 border rounded-md"
+                  >
+                    <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
+                      Saya ingin tahu formula WealthWise dalam menghitung
+                      Investasi, Dana Darurat, atau Dana Pensiun
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      Tentu! Anda dapat menekan tombol “Cara Kami Menghitung”
+                      untuk menampilkan formula yang kami gunakan. Tentunya
+                      formulanya sudah kami riset dan dijamin benar.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem
+                    value="item-4"
+                    className="px-4 py-2 border rounded-md"
+                  >
+                    <AccordionTrigger className="text-lg font-semibold text-left no-underline hover:no-underline">
+                      Apa saja topik yang dapat dibahas di Forum Diskusi?
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      Anda dapat membahas Topik apa saja terkait investasi, dana
+                      darurat, dana pensiun, ataupun topik keuangan lainnya.
+                      Namun, perlu diingat diskusi tidak boleh mengandung unsur
+                      SARA ataupun yang dapat mengganggu kenyamanan publik
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </Fade>
             </div>
           </div>
         </section>
