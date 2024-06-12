@@ -31,7 +31,7 @@ export default function Hero() {
       </div>
 
       <div>
-        <Fade delay={1e2} direction={"right"} triggerOnce={true} damping={1e-1}>
+        <Fade delay={1e2} triggerOnce={true} damping={1e-1}>
           <img
             src="assets/banknote.svg"
             alt="banknote"
