@@ -16,6 +16,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { Fade } from "react-awesome-reveal";
+
 export default function HomePage() {
   return (
     <BaseLayout>
@@ -197,3 +199,4 @@ export default function HomePage() {
     </BaseLayout>
   );
 }
+
