@@ -16,11 +16,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { Fade } from "react-awesome-reveal";
+
 export default function HomePage() {
   return (
     <BaseLayout>
       <main>
         <Hero />
+
         <section className="bg-primary-blue">
           <div className="flex flex-col-reverse justify-between h-full max-w-6xl gap-16 px-4 py-20 mx-auto md:gap-20 item-center md:flex-row ">
             <div className="p-4 bg-white border rounded-lg">
@@ -197,3 +200,4 @@ export default function HomePage() {
     </BaseLayout>
   );
 }
+
