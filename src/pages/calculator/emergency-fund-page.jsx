@@ -31,7 +31,7 @@ function EmergencyFundPage() {
   }, [emergencies, user]);
 
   return (
-    <Fade delay={1e1} direction={"up"} triggerOnce={true} damping={1e-1}>
+    <Fade delay={1e1} triggerOnce={true} damping={1e-1}>
       <div className="p-4 mb-8 sm:border-2 sm:p-8 lg:p-16 rounded-2xl">
         <h1 className="mb-8 text-2xl font-bold">
           Hitung <span className="text-primary-blue"> Dana Darurat</span>{" "}
