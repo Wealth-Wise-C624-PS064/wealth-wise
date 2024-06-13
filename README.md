@@ -20,13 +20,13 @@
 
 | Backend  |                                             |
 | -------- | ------------------------------------------- |
-| Name     | Link                                        |
+| Nama     | Tautan                                      |
 | Firebase | [Firebase ↗️](https://firebase.google.com/) |
 
 | Frontend             |                                                              |
 | -------------------- | ------------------------------------------------------------ |
-| Name                 | Link                                                         |
-| ReactJs              | [React ↗️](https://react.dev/)                               |
+| Nama                 | Tautan                                                       |
+| ReactJs              | [ReactJS ↗️](https://react.dev/)                             |
 | React Router Dom     | [React Router Dom ↗️](https://reactrouter.com)               |
 | Tanstack React Query | [Tanstack React Query ↗️](https://tanstack.com/query/latest) |
 | TailwindCSS          | [TailwindCSS ↗️](https://tailwindcss.com/)                   |
