@@ -17,6 +17,7 @@ import PostsCreatePage from "@/pages/posts/posts-create-page";
 import PostsDetailPage from "@/pages/posts/posts-detail-page";
 
 import ProtectedRoute from "@/components/protected-route";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export default function App() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
         </Route>
       </Routes>
       <Toaster position="top-right" />
+      <ScrollToTop />
     </Router>
   );
 }
