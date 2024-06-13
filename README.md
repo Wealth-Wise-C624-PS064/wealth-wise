@@ -33,6 +33,7 @@
 | Shadcn UI            | [Shadcn UI ↗️](https://ui.shadcn.com/)                       |
 | React Hook Form      | [React Hook Form ↗️](https://www.react-hook-form.com/)       |
 | React Hot Toast      | [React Hot Toast ↗️](https://react-hot-toast.com/)           |
+| SweetAlert 2         | [SweetAlert 2 ↗️](https://sweetalert2.github.io/)            |
 
 ### ✨ Cara berkontribusi
 
