@@ -104,10 +104,10 @@ export default function CreatePostForm() {
           name="body"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Body</FormLabel>
+              <FormLabel>Konten</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Body"
+                  placeholder="Konten"
                   className="resize-none"
                   {...field}
                 />
