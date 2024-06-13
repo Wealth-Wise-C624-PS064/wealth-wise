@@ -5,14 +5,15 @@ import { toRupiah } from "@/lib/toRupiah";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import useInputBasic from "@/hooks/useInputBasic";
 
 export default function PensionFoundForm() {
   const [monthlyExpensesLater, onChangeMonthlyExpensesLaterHandler] =
     useInput("");
   const [yearsLater, onChangeYearsLaterHandler, setYearsLater] = useInput("");
-  const [inflation, onChangeInflationHandler, setInflation] = useInput("");
+  const [inflation, onChangeInflationHandler, setInflation] = useInputBasic("");
   const [annualReturn, onChangeAnnualReturnHandler, setAnnualReturn] =
-    useInput("");
+    useInputBasic("");
   const [pensionFund, setPensionFund] = useState(null);
 
   const { addPensionFund, isPending } = useAddPensionFund();
@@ -166,7 +167,7 @@ export default function PensionFoundForm() {
             <p className="mr-4 text-xl font-bold">Rp</p>
             <input
               type="text"
-              placeholder="Contoh: 5.000.000"
+              placeholder="Contoh: 10.000.000"
               value={monthlyExpensesLater}
               onChange={onChangeMonthlyExpensesLaterHandler}
               className="w-3/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl"
@@ -182,7 +183,7 @@ export default function PensionFoundForm() {
           <div className="flex items-center">
             <input
               type="text"
-              placeholder="2"
+              placeholder="20"
               value={yearsLater}
               onChange={onChangeYearsLaterHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
@@ -194,12 +195,12 @@ export default function PensionFoundForm() {
         <div className="flex flex-col mb-8">
           <label htmlFor="" className="mb-3 text-xl font-bold">
             Asumsi Inflasi di Indonesia (Rerata inflasi 10 tahun terakhir yaitu
-            3,59%/tahun) <span className="text-primary-blue">(i)</span>
+            3.58%/tahun) <span className="text-primary-blue">(i)</span>
           </label>
           <div className="flex items-center">
             <input
-              type="text"
-              placeholder="5"
+              type="number"
+              placeholder="3.58"
               value={inflation}
               onChange={onChangeInflationHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
@@ -215,8 +216,8 @@ export default function PensionFoundForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
-              placeholder="5"
+              type="number"
+              placeholder="5.9"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
