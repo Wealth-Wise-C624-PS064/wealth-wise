@@ -57,7 +57,7 @@
 4. Buat branch baru
 
 ```bash
-git switch <branch_baru>
+  git switch <branch_baru>
 ```
 
 5. Install package
@@ -69,7 +69,7 @@ git switch <branch_baru>
 5. Jalankan aplikasi Wealth Wise
 
 ```bash
-npm run dev
+  npm run dev
 ```
 
 6. Buka `http://localhost:3000/`
