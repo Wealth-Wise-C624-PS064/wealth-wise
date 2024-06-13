@@ -28,9 +28,10 @@ export default function LoginPage() {
       </div>
       <div className="space-y-4">
         <div className="mb-6 space-y-2">
-          <h2 className="text-2xl font-semibold">Login ke akun anda.</h2>
+          <h2 className="text-2xl font-semibold">Masuk ke akun anda.</h2>
           <p className="text-sm prose">
-            Selamat datang kembali! Pilih salah satu metode untuk login:
+            Selamat datang kembali! Pilih salah satu metode untuk masuk akun
+            anda:
           </p>
         </div>
         <div className="flex flex-col">
