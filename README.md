@@ -42,30 +42,35 @@
 
 **Cara kontribusi**
 
-1. Clone Wealth Wise dengan command
+1. Clone Wealth Wise
 
 ```bash
+  # Menggunakah https
   git clone https://github.com/Wealth-Wise-C624-PS064/wealth-wise.git
+
+  # Menggunakan SSH
+  git@github.com:Wealth-Wise-C624-PS064/wealth-wise.git
 ```
 
 2. Buka aplikasi Wealth Wise menggunakan teks editor yang kamu sukai. Contoh `Visual Studio Code`
 3. Copy file `.env.example` dan ubah menjadi menjadi `.env` dan sesuaikan dengan konfigurasi firebase kamu
-4. Install package
-
-```bash
-  npm install
-```
-
-5. Buat branch baru
+4. Buat branch baru
 
 ```bash
 git switch <branch_baru>
 ```
 
-6. Jalankan aplikasi Wealth Wise
+5. Install package
+
+```bash
+  npm install
+```
+
+5. Jalankan aplikasi Wealth Wise
 
 ```bash
 npm run dev
 ```
 
-7. Buka `http://localhost:3000/`
+6. Buka `http://localhost:3000/`
+7. Mulai berkontribusi
