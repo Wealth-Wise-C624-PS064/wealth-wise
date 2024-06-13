@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
@@ -6,6 +6,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import { useAddInvesment, useCurrentUser, useInput } from "@/hooks";
 
 import { toRupiah } from "@/lib/toRupiah";
+import useInputBasic from "@/hooks/useInputBasic";
 
 export default function InvestmentForm() {
   const [currentAmount, onChangeCurrentAmountHandler, setCurrentAmount] =
@@ -13,7 +14,8 @@ export default function InvestmentForm() {
   const [monthlySaving, onChangeMonthlySavingHandler, setMonthlySaving] =
     useInput("");
   const [annualReturn, onChangeAnnualReturnHandler, setAnnualReturn] =
-    useInput("");
+    useInputBasic("");
+
   const [years, onChangeYearsHandler] = useInput("");
   const [futureValue, setFutureValue] = useState(null);
 
@@ -36,6 +38,7 @@ export default function InvestmentForm() {
         icon: "error",
         title: "Oops...",
         text: "Silakan masukkan semua nilai dengan benar!",
+        confirmButtonColor: "#2A9DF2",
       });
       return;
     }
@@ -183,7 +186,7 @@ export default function InvestmentForm() {
           </label>
           <div className="flex items-center">
             <input
-              type="text"
+              type="number"
               placeholder="5"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
