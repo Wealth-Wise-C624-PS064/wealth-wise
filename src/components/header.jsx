@@ -55,7 +55,7 @@ export default function Header() {
                 onClick={() => logout()}
                 className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
               >
-                Logout
+                Keluar
               </Button>
             ) : (
               <Button
@@ -95,7 +95,7 @@ export default function Header() {
                         onClick={() => logout()}
                         className="font-semibold rounded-full bg-primary-blue hover:bg-primary-blue"
                       >
-                        Logout
+                        Keluar
                       </Button>
                     ) : (
                       <Button
