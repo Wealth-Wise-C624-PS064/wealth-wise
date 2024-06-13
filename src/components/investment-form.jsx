@@ -187,7 +187,7 @@ export default function InvestmentForm() {
           <div className="flex items-center">
             <input
               type="number"
-              placeholder="5.9"
+              placeholder="5,9"
               value={annualReturn}
               onChange={onChangeAnnualReturnHandler}
               className="text-center w-1/5 px-4 py-2 border-primary-blue border-[3px] rounded-2xl mr-4"
