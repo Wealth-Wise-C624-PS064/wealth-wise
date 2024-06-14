@@ -1,5 +1,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/Wealth-Wise-C624-PS064/wealth-wise)](https://github.com/Wealth-Wise-C624-PS064/wealth-wise/commits/main)
 [![Last Issues](https://img.shields.io/github/issues/Wealth-Wise-C624-PS064/wealth-wise)](https://github.com/Wealth-Wise-C624-PS064/wealth-wise/issues)
+![Forks](https://img.shields.io/github/forks/Wealth-Wise-C624-PS064/wealth-wise)
+![Stars](https://img.shields.io/github/stars/Wealth-Wise-C624-PS064/wealth-wise)
 [![Visits](https://komarev.com/ghpvc/?username=Wealth-Wise-C624-PS064&repo=wealth-wise&label=Visits&color=brightgreen)](https://github.com/Wealth-Wise-C624-PS064/wealth-wise)
 
 <div align="center">
@@ -20,19 +22,20 @@
 
 | Backend  |                                             |
 | -------- | ------------------------------------------- |
-| Name     | Link                                        |
+| Nama     | Tautan                                      |
 | Firebase | [Firebase ↗️](https://firebase.google.com/) |
 
 | Frontend             |                                                              |
 | -------------------- | ------------------------------------------------------------ |
-| Name                 | Link                                                         |
-| ReactJs              | [React ↗️](https://react.dev/)                               |
+| Nama                 | Tautan                                                       |
+| ReactJs              | [ReactJS ↗️](https://react.dev/)                             |
 | React Router Dom     | [React Router Dom ↗️](https://reactrouter.com)               |
 | Tanstack React Query | [Tanstack React Query ↗️](https://tanstack.com/query/latest) |
 | TailwindCSS          | [TailwindCSS ↗️](https://tailwindcss.com/)                   |
 | Shadcn UI            | [Shadcn UI ↗️](https://ui.shadcn.com/)                       |
 | React Hook Form      | [React Hook Form ↗️](https://www.react-hook-form.com/)       |
 | React Hot Toast      | [React Hot Toast ↗️](https://react-hot-toast.com/)           |
+| SweetAlert 2         | [SweetAlert 2 ↗️](https://sweetalert2.github.io/)            |
 
 ### ✨ Cara berkontribusi
 
