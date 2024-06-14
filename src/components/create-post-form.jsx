@@ -123,7 +123,7 @@ export default function CreatePostForm() {
           disabled={isPending}
         >
           {isPending && <LoaderIcon className="w-4 h-4 animate-spin" />}
-          <span className={`${isPending && "ml-3"}`}>Tambahkan Post</span>
+          <span className={`${isPending && "ml-3"}`}>Tambahkan Diskusi</span>
         </Button>
       </form>
     </Form>
