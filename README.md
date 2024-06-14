@@ -1,5 +1,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/Wealth-Wise-C624-PS064/wealth-wise)](https://github.com/Wealth-Wise-C624-PS064/wealth-wise/commits/main)
 [![Last Issues](https://img.shields.io/github/issues/Wealth-Wise-C624-PS064/wealth-wise)](https://github.com/Wealth-Wise-C624-PS064/wealth-wise/issues)
+![Forks](https://img.shields.io/github/forks/Wealth-Wise-C624-PS064/wealth-wise)
+![Stars](https://img.shields.io/github/stars/Wealth-Wise-C624-PS064/wealth-wise)
 [![Visits](https://komarev.com/ghpvc/?username=Wealth-Wise-C624-PS064&repo=wealth-wise&label=Visits&color=brightgreen)](https://github.com/Wealth-Wise-C624-PS064/wealth-wise)
 
 <div align="center">
