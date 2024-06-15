@@ -23,10 +23,18 @@ export default function Categories({ categories }) {
 
   return (
     <div className="flex flex-row flex-wrap gap-2">
+      <Button
+        className="rounded-full bg-primary-blue hover:bg-primary-blue/80 "
+        onClick={() => handleChangeCategorySearch("")}
+      >
+        Semua
+      </Button>
       {categories.map((category) => (
         <Button
           key={category.id}
-          className="rounded-full bg-primary-blue hover:bg-primary-blue/80"
+          className={`rounded-full bg-primary-blue hover:bg-primary-blue/80 ${
+            category.name === currentCategory && "bg-primary-blue/60"
+          }`}
           onClick={() => handleChangeCategorySearch(category.name)}
         >
           {category.name}
