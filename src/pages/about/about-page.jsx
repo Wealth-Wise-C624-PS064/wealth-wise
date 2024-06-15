@@ -136,7 +136,7 @@ export default function AboutPage() {
                     <Button size="icon" variant="outline" asChild>
                       <Link
                         target="_blank"
-                        to="www.linkedin.com/in/ilham-maulidin"
+                        to="https://www.linkedin.com/in/ilham-maulidin/"
                       >
                         <LinkedinIcon className="w-5 h-5" />
                       </Link>
