@@ -47,6 +47,7 @@ export default function EmergencyFundForm() {
         icon: "error",
         title: "Oops...",
         text: "Silakan masukkan semua nilai dengan benar!",
+        confirmButtonColor: "#2A9DF2",
       });
       return;
     }

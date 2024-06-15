@@ -30,7 +30,7 @@ const formSchema = z.object({
     .string({ message: "Title tidak boleh kosong" })
     .min(3, { message: "Title terlalu pendek" })
     .max(50, { message: "Title terlalu panjang" }),
-  category: z.string().optional(),
+  category: z.string({ message: "Kategori harus dipilih" }),
   body: z
     .string({ message: "Body tidak boleh kosong" })
     .min(3, { message: "Title terlalu pendek" }),
@@ -104,10 +104,10 @@ export default function CreatePostForm() {
           name="body"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Body</FormLabel>
+              <FormLabel>Konten</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Body"
+                  placeholder="Konten"
                   className="resize-none"
                   {...field}
                 />
@@ -123,7 +123,7 @@ export default function CreatePostForm() {
           disabled={isPending}
         >
           {isPending && <LoaderIcon className="w-4 h-4 animate-spin" />}
-          <span className={`${isPending && "ml-3"}`}>Tambahkan Post</span>
+          <span className={`${isPending && "ml-3"}`}>Tambahkan Diskusi</span>
         </Button>
       </form>
     </Form>

@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 export default function PostsCreatePage() {
   const navigate = useNavigate();
 
-  const currentUser = useCurrentUser();
+  const { currentUser } = useCurrentUser();
 
   if (!currentUser) {
     navigate("/login", { replace: true });
