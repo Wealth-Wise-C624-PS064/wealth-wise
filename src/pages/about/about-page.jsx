@@ -126,17 +126,26 @@ export default function AboutPage() {
                   <div className="font-medium">Politeknik Negeri Malang</div>
                   <div className="flex space-x-3">
                     <Button size="icon" variant="outline" asChild>
-                      <Link target="_blank" to="/">
+                      <Link
+                        target="_blank"
+                        to="https://github.com/Maulidin-Ilham"
+                      >
                         <GithubIcon className="w-5 h-5" />
                       </Link>
                     </Button>
                     <Button size="icon" variant="outline" asChild>
-                      <Link target="_blank" to="/">
+                      <Link
+                        target="_blank"
+                        to="https://www.linkedin.com/in/ilham-maulidin/"
+                      >
                         <LinkedinIcon className="w-5 h-5" />
                       </Link>
                     </Button>
                     <Button size="icon" variant="outline" asChild>
-                      <Link target="_blank" to="/">
+                      <Link
+                        target="_blank"
+                        to="https://www.instagram.com/maulidinilham__/"
+                      >
                         <InstagramIcon className="w-5 h-5" />
                       </Link>
                     </Button>
