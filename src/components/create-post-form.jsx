@@ -104,10 +104,10 @@ export default function CreatePostForm() {
           name="body"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Body</FormLabel>
+              <FormLabel>Konten</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Body"
+                  placeholder="Konten"
                   className="resize-none"
                   {...field}
                 />
@@ -123,7 +123,7 @@ export default function CreatePostForm() {
           disabled={isPending}
         >
           {isPending && <LoaderIcon className="w-4 h-4 animate-spin" />}
-          <span className={`${isPending && "ml-3"}`}>Tambahkan Post</span>
+          <span className={`${isPending && "ml-3"}`}>Tambahkan Diskusi</span>
         </Button>
       </form>
     </Form>
