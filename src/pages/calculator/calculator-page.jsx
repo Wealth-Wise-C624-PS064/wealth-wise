@@ -21,13 +21,13 @@ export default function CalculatorPage() {
       id: "dana-darurat",
       path: "/kalkulator/dana-darurat",
       name: "Dana Darurat",
-      icon: <FaPersonCane className="text-3xl lg:text-5xl" />,
+      icon: <FaTriangleExclamation className="text-3xl lg:text-5xl" />,
     },
     {
       id: "dana-pensiun",
       path: "/kalkulator/dana-pensiun",
       name: "Dana Pensiun",
-      icon: <FaTriangleExclamation className="text-3xl lg:text-5xl" />,
+      icon: <FaPersonCane className="text-3xl lg:text-5xl" />,
     },
   ]);
 
