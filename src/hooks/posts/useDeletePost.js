@@ -13,11 +13,10 @@ export const useDeletePost = () => {
     mutationFn: async (postId) => await deletePost(postId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-    onSettled: () => {
-      navigate("/forum", { replace: true });
       toast.success("Berhasil menghapus diskusi");
+      navigate("/forum", { replace: true });
     },
+    onError: (err) => toast.err(err.message),
   });
 
   return { deletePost: mutate, isPending };
