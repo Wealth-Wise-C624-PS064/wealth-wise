@@ -65,7 +65,7 @@ function InvestmentPage() {
                       <TableCell className="font-medium">{index + 1}</TableCell>
                       <TableCell>{toRupiah(investment.P)}</TableCell>
                       <TableCell>{toRupiah(investment.PMT)}</TableCell>
-                      <TableCell>{investment.r * 100}%</TableCell>
+                      <TableCell>{(investment.r * 100).toFixed(2)}%</TableCell>
                       <TableCell>{investment.t} tahun</TableCell>
                       <TableCell className="text-right">
                         {toRupiah(investment.hasil)}

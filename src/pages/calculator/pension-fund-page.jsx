@@ -63,8 +63,8 @@ function PensionFundPage() {
                       <TableCell className="font-medium">{index + 1}</TableCell>
                       <TableCell>{toRupiah(pension.P)}</TableCell>
                       <TableCell>{pension.t} tahun</TableCell>
-                      <TableCell>{pension.i * 100} %</TableCell>
-                      <TableCell>{pension.r * 100} %</TableCell>
+                      <TableCell>{(pension.i * 100).toFixed(2)} %</TableCell>
+                      <TableCell>{(pension.r * 100).toFixed(2)} %</TableCell>
                       <TableCell className="text-right">
                         {toRupiah(pension.hasil)}
                       </TableCell>
