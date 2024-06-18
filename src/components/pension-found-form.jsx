@@ -18,6 +18,10 @@ export default function PensionFoundForm() {
 
   const { addPensionFund, isPending } = useAddPensionFund();
 
+  // const truncateToTwoDecimals = (num) => {
+  //   return Math.floor(num * 100) / 100;
+  // };
+
   const calculatePensionFund = async (event) => {
     event.preventDefault();
 
