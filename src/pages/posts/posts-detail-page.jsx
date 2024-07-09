@@ -108,7 +108,7 @@ export default function PostsDetailPage() {
                   <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
                       <Button type="button" variant="secondary">
-                        Close
+                        Tidak
                       </Button>
                     </DialogClose>
                     <Button
@@ -119,7 +119,7 @@ export default function PostsDetailPage() {
                       {isPending ? (
                         <Loader2Icon className="w-4 h-4 animate-spin" />
                       ) : (
-                        "Hapus"
+                        "Ya"
                       )}
                     </Button>
                   </DialogFooter>
