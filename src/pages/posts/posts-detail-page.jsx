@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeftIcon, Loader2Icon, XIcon } from "lucide-react";
+import { ArrowLeftIcon, Loader2Icon } from "lucide-react";
 
 import { useCurrentUser, useDeletePost, useSharedPostComments } from "@/hooks";
 
@@ -11,6 +11,17 @@ import CreateCommentForm from "@/components/create-comment-form";
 import CommentList from "@/components/comment-list";
 import SkeletonLoaderPosts from "@/components/skeleton-loader-posts";
 import SkeletonLoaderComments from "@/components/skeleton-loader-comments";
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -78,21 +89,43 @@ export default function PostsDetailPage() {
         </div>
         {post?.author.id === currentUser?.uid && (
           <div className="flex flex-row justify-end mb-6">
-            <Button
-              onClick={() => deletePost(postId)}
-              className="rounded-full"
-              variant="destructive"
-              disabled={isPending}
-            >
-              <div className="flex flex-row items-center gap-2">
-                {isPending ? (
-                  <Loader2Icon className="w-5 h-5 animate-spin" />
-                ) : (
-                  <XIcon className="w-5 h-5" />
-                )}
-                <span>Hapus Diskusi</span>
-              </div>
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="destructive" className="rounded-full">
+                  <div className="flex items-center gap-2">
+                    <span>Hapus Diskusi</span>
+                  </div>
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>
+                    Apakah kamu yakin ingin menghapus diskusi ini?
+                  </DialogTitle>
+                  <DialogDescription>
+                    Diskusi ini akan dihapus secara permanen.
+                  </DialogDescription>
+                  <DialogFooter className="sm:justify-start">
+                    <DialogClose asChild>
+                      <Button type="button" variant="secondary">
+                        Close
+                      </Button>
+                    </DialogClose>
+                    <Button
+                      variant="destructive"
+                      onClick={() => deletePost(postId)}
+                      disabled={isPending}
+                    >
+                      {isPending ? (
+                        <Loader2Icon className="w-4 h-4 animate-spin" />
+                      ) : (
+                        "Hapus"
+                      )}
+                    </Button>
+                  </DialogFooter>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         )}
       </>
